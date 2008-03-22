@@ -1,0 +1,339 @@
+/* Main Mia CSS file */
+
+a:link {
+	color: blue;
+}  /* unvisited links */
+a:visited {
+	color: purple;
+} /* visited links */
+a:hover {
+	color: blue;
+}  /* user hovers */
+a:active {
+	color: red;
+}  /* active links */
+
+h1 {
+	font-size: 138.5%;
+}
+
+/* Login/Registration/Reset */
+.errorMessage {
+	border: medium dashed #007600;
+	background-color: #e6e6e6;
+	color: black;
+	width: 265px;
+	padding: 5px;
+	margin-top: 10px;
+	text-align: left;
+}
+
+#regFrm fieldset img {
+    margin-top: 5px;
+}
+
+.login {
+	margin: 5% 25% 0 35%;
+	width: 350px;
+}
+
+.login label {
+	display: block;
+	padding-top: 5px;
+}
+
+.login fieldset {
+	background-color: #f5ffb6;
+	padding: 10px;
+}
+
+.login fieldset p {
+	padding-top: 5px;
+}
+
+.loginButton {
+	margin-top: 8px;
+}
+
+.regButton {
+	margin-top: 8px;
+}
+
+.error {
+	color: red;
+	font-weight: bold;
+}
+/* End Login/Registration/Reset */
+
+/* Start Buddylist */
+.rightnav {
+	margin-top: 3%;
+	border: medium black solid;
+	background-color: #f5ffb6;
+	font-size: 123.1%;
+	padding: 5px;
+}
+
+.rightnav h2 {
+	padding: 3px 0 3px 35px;
+	background-color: black;
+	font-size: 138.5%;
+ 	font-weight: bold;
+	color: white;
+	margin: 5px 0 5px 0;
+}
+
+#buddylist {
+	overflow: auto;
+	height: 300px;
+}
+
+#buddylist a {
+	text-decoration: none;
+    color : #000;
+}
+
+.rightnav ul {
+	list-style-type: none;
+	position: relative;
+}
+
+.rightnav ul li {
+	padding: 0 0 5px 20px;
+	cursor: pointer;
+}
+
+.rightnav ul li:hover {
+	background-color: orange;
+	border: thin black dotted;
+	padding: 5px 5px 5px 20px;
+}
+
+.online {
+	background: url(../images/famfamfam_silk_icons/status_online.png) no-repeat;
+}
+
+.away {
+	background: url(../images/famfamfam_silk_icons/status_away.png) no-repeat;
+}
+
+.busy {
+	background: url(../images/famfamfam_silk_icons/status_busy.png) no-repeat;
+}
+
+.offline {
+	background: url(../images/famfamfam_silk_icons/status_offline.png) no-repeat;
+}
+
+#manageBuddylist {
+	border-top: thin black solid;
+	padding-top: 5px;
+}
+/* End Buddylist */
+
+/* Add Buddy */
+#addBuddyFrm {
+	padding-top: 5px;
+}
+
+#addBuddyFrm label {
+	display: block;
+	padding-top: 5px;
+}
+
+#addBuddyFrm fieldset {
+	background-color: #f5ffb6;
+	width: auto;
+	padding: 10px;
+}
+
+/* Manage Profile */
+#manageProfileFrm {
+	padding-top: 5px;
+}
+
+#manageProfileFrm label {
+	display: block;
+	padding-top: 5px;
+}
+
+#manageProfileFrm fieldset {
+	background-color: #f5ffb6;
+	width: auto;
+	padding: 10px;
+}
+
+#manageProfileFrm #profUserName {
+    
+    font-weight: bold;
+    color: #F00;
+}
+
+#searchResults {
+	margin-top: 10px;
+}
+
+#searchResults table {
+	width: 100%;
+}
+
+#searchResults table th {
+	background-color: #e6e6e6;
+}
+
+.addContact {
+	text-align: center;
+}
+/* End Add Buddy */
+
+/* Start Remove Buddy */
+#activeBuddyList {
+	margin-top: 10px;
+}
+
+#activeBuddyList table {
+	width: 100%;
+}
+
+#activeBuddyList table th {
+	background-color: #e6e6e6;
+}
+
+.removeContact {
+	text-align: center;
+}
+/* End Remove Buddy */
+
+/* Start chat window styling */
+.gridmaster {
+	padding: 3%;
+}
+
+.chatWindow {
+	
+}
+
+.innerChatWindow {
+	border: medium black solid;
+	height: 220px;
+	overflow-y: scroll;
+	padding: 5px 3px 5px 3px;
+	background-color: #f8f8f8;
+}
+
+.innerChatWindow ul {
+	list-style-type: none;
+}
+
+#emoticon {
+	padding-left: 4%;
+}
+
+#emoticon li {
+	display: inline;
+	padding: 5px 2px 0 3px;
+}
+
+.emoButton {
+	cursor: pointer;
+}
+
+.chatInput {
+	background-color: #f5ffb6;
+	margin: 3px 0 3px 25px;
+	width: 92%;
+}
+
+.containerFooter {
+	border: black medium solid;
+	margin-bottom: 10px;
+	padding: 5px 0 10px 0;
+}
+
+.messageHeaderOwner {
+	color: white;
+	background-color: #d06200;
+	margin: 0 3% 0 3%;
+}
+
+.messageBodyOwner {
+	color: black;
+	background-color: #ffc77b;
+	padding: 3px;
+	margin: 0 3% 1% 3%;
+}
+
+.messageHeaderFriend {
+	color: white;
+	background-color: #007600;
+	padding: 5px;
+	margin: 0 3% 0 3%;
+}
+
+.messageBodyFriend {
+	color: black;
+	background-color: #69faa8;
+	padding: 3px;
+	margin: 0 3% 1% 3%;
+}
+
+.chatWindowClose {
+	cursor: pointer;
+	margin-left: 5px;
+}
+
+.newMessageIndicator {
+	color: red;
+}
+/* End chat window styling */
+
+/* Used to fill/hide elements that can't have an empty on on page load per XHMTL validation (ex) ul */
+.filler {
+	display: none;
+}
+
+.hideme {
+	display: none;
+}
+
+#mia-splitter {
+	height: 540px;
+	margin: 1em 3em;
+	border: 1px solid #000;
+	/* No padding allowed */
+}
+
+#split-right {
+    min-width : 228px;
+    max-width : 400px;
+}
+
+/* 
+ * Splitter bar style; the .active class is added when the
+ * mouse is over the splitter or the splitter is focused
+ * via the keyboard taborder or an accessKey. 
+ */
+#mia-splitter .vsplitbar {
+	width: 16px;
+	background: #000 url(../images/tango/smiles/face-devilish.png) no-repeat center;
+}
+#mia-splitter .vsplitbar.active, #mia-splitter .vsplitbar:hover {
+	background: #000 url(../images/tango/smiles/face-devilish.png) no-repeat center;
+}
+
+
+
+.blinker {
+    color : #ff0000;
+    font-weight: bold;
+    text-decoration : blink;
+}
+
+#rightnav-top {
+}
+
+#nav-logout {
+}
+
+#who-am-i {
+}
