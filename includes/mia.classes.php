@@ -465,26 +465,24 @@ class MiaDb {
 		                WHERE username={$username}
 		                AND email={$email}";
 		$user = $this->executeSQL($userIdSQL);
-		if ($user!==false) {
-		    $userID = intval($user->fields[0]);
-    	    if ($userID>0) {
-    		    //Generate a new password
-    		    $salt = $this->getSalt();
-    		    $passwordResetKey = $this->buildPassword($salt);
-    		    $updateSQL = "UPDATE mia_users
-    		                    SET password_reset_key='{$passwordResetKey['password']}'
-    		                    WHERE id={$userID}";
-    		    if ($this->executeSQL($updateSQL)===false) {
-                    return false;
-                } else if ($this->emailPassword($username, $passwordResetKey, $email)) {
-                    return true; //Reset email sent
-                } else {
-                    return false; //Unable to send email
-                }
-            } else {
-                return false; //Invalid username and/or email
-            }
-        } //end if
+		$userID = intval($user->fields[0]);
+	    if ($userID>0) {
+		    //Generate a new password
+		    $salt = $this->getSalt();
+		    $passwordResetKey = $this->buildPassword($salt);
+		    $updateSQL = "UPDATE mia_users
+		                    SET password_reset_key='{$passwordResetKey['password']}'
+		                    WHERE id={$userID}";
+		    if ($this->executeSQL($updateSQL)===false) {
+                return false;
+            } 
+            
+            if ($this->emailPassword($username, $passwordResetKey, $email)===false) {
+                return false; //Unable to send email
+            } 
+        } else {
+            return false; //Invalid username and/or email
+        }
 	}
 	
 	function updatePassword($username, $email, $newPassword, $activationCode) {
@@ -541,7 +539,7 @@ class MiaDb {
                     "Reply-To: $adminEmail" . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
         //Send
-        if(!mail($email, 'Mia Password Reset Request', $message, $headers)) {
+        if (mail($email, 'Mia Password Reset Request', $message, $headers)===false) {
            return false;
         }
 	}
