@@ -47,9 +47,8 @@ if (isset($_SESSION['showoffline'])) {
             </div>
             <div id="bd">
                 <noscript>  
-                    <p>You really need javascript turned on for "mia" to run. Please turn it on and refresh this page.</p>
+                    <p>Mia requires JavaScript to function. Please turn it on and refresh this page.</p>
                 </noscript>             
-
                 <div class="yui-ge" id="mia-splitter">
                     <div id="gridmaster" class="yui-u first gridmaster">
                         <ul>
