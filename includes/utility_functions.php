@@ -73,6 +73,13 @@ function getServerTimeOffset() {
     return ($server_time_offset == null) ? -8 : $server_time_offset;
 }
 
+function getWelcomeMessage() {
+    // Parse the Mia config file
+	$ini_array = parse_ini_file("config.ini.php", true);
+	$custom_welcome_message = $ini_array['global_info']['custom_welcome_message'];
+    return $custom_welcome_message;
+}
+
 //Sanity check for a secure installation
 function installationCheck() {
     //file path is relative to the index.php that includes this

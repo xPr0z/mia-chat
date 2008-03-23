@@ -102,6 +102,7 @@ if (isset($_SESSION['showoffline'])) {
         
         <form action="main.php" method="get">
             <p><input type="hidden" id="activeChat" value="" /></p>
+            <p><input type="hidden" id="welcomeMessage" value="<?php echo stripslashes(getWelcomeMessage()); ?>" /></p>
         </form>
     </body>
 </html>
