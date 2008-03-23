@@ -5,6 +5,7 @@
 * @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
 session_start();
+require('includes/utility_functions.php');
 require('includes/mia.classes.php');
 $mia = MiaDb::getInstance();
 if ($mia->sessionHijackCheck()===false) {
