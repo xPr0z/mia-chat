@@ -1,4 +1,9 @@
 <?php
+/**
+* @package Mia
+* @copyright Brilaps, LLC (http://brilaps.com)
+* @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
+*/
 
 /**
 * Recursive stripslashes function for arrays
