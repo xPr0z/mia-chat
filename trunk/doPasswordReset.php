@@ -16,7 +16,7 @@ if (isset($_POST['resetUsername']) && isset($_POST['resetEmail'])) {
     $config = HTMLPurifier_Config::createDefault();
     $config->set('HTML', 'Doctype', 'XHTML 1.0 Strict');
     $purifier = new HTMLPurifier($config);
-    $clnUsername =  $purifier->purify($_POST['resetUsername']);
+    $clnUsername =  trim($purifier->purify($_POST['resetUsername']));
     $clnEmail =  trim($purifier->purify($_POST['resetEmail']));
     
     if ($mia->passwordReset($clnUsername, $clnEmail)===false) {
