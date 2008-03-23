@@ -22,16 +22,16 @@ if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
 <head>
 	<link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" />
 	<link rel="stylesheet" href="css/mia.css" type="text/css" media="screen" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <noscript>  
-        <meta http-equiv="refresh" content="0; URL=noscript.html" />
-    </noscript>     
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
 	<title>Mia Login Page</title>
 </head>
 <body>
 <div id="doc3" class="yui-t7">
 	<div id="hd"><img src="images/mia_logo.png" alt="Mia Logo" /></div>
 	<div id="bd">
+	    <noscript>  
+            <p>Mia requires JavaScript to function. Please turn it on and refresh this page.</p>
+        </noscript>
 		<div id="login" class="login yui-g">
 			<h1>Mia: Login</h1>
 			<form id="loginFrm" method="post" action="doLogin.php">
@@ -119,7 +119,7 @@ if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
 
                     echo $terms_and_conditions;
                  ?></textarea>
-				<label for="regAcceptTermsConditions">Please check to accept the Terms & Conditions</label>
+				<label for="regAcceptTermsConditions">Please check to accept the Terms &amp; Conditions</label>
                 <input type="checkbox" name="regAcceptTermsConditions" id="regAcceptTermsConditions"/>
                      
                 <p><input class="regButton" type="submit" value="Register" /></p>
