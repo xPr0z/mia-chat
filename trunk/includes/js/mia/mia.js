@@ -121,12 +121,10 @@ $(document).ready(function() {
 
 }); //end doc ready
 
-
 function addWelcomeTab() {
-        $('.first > ul').tabs('add', '#welcome', 'Welcome'); 
-        var containerDiv='<div id="welcome-tab">we welcome you!!! <br/><br/><br/><br/><br/>....</div>';
-        $('div#welcome.ui-tabs-panel').append(containerDiv);
-    
+    $('.first > ul').tabs('add', '#welcome', 'Welcome'); 
+    var containerDiv='<div id="welcome-tab">'+$('#welcomeMessage').val()+'</div>';
+    $('div#welcome.ui-tabs-panel').append(containerDiv);   
 }
 
 function getBuddies() {
@@ -310,7 +308,6 @@ function emoClicked() {
 	$('#'+chatWindow).attr("value", crtChatText+this.title); //Replace text with emo symbol
 	$('textarea#'+chatWindow+'.chatInput').focus();
 }
-
 
 function resetDocumentTitle(title) {
     if (title === '')
