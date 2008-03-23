@@ -8,7 +8,10 @@
  * jQuery Plugins:
  * - splitter: http://methvin.com/jquery/splitter/
  * - timer - http://www.mattptr.net
- * - greybox redux - written by: John Resig, based on code by: 4mir Salihefendic (http://amix.dk)
+ * - greybox redux - http://jquery.com/demo/grey/
+ * - dimensions - http://plugins.jquery.com/project/dimensions
+ * - ui - http://ui.jquery.com/
+ * - validation - http://bassistance.de/jquery-plugins/jquery-plugin-validation/
  * HTMLPurifier - http://htmlpurifier.org/
  * ADOdb PHP - http://adodb.sourceforge.net/
  * PHP5 CAPTCHA - http://sourceforge.net/projects/php5captcha/
