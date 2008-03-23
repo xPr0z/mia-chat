@@ -73,4 +73,16 @@ function getServerTimeOffset() {
     return ($server_time_offset == null) ? -8 : $server_time_offset;
 }
 
+//Sanity check for a secure installation
+function installationCheck() {
+    //file path is relative to the index.php that includes this
+    if (@file_exists('config.ini.php')===false) {
+        die('ERROR: Installation not complete. Please follow the installation instructions found in the "/installation/installation_notes.php" file.');
+    } else if (@is_dir('installation')) {
+        die('ERROR: Installation not complete.  Please remove the "installation" directory and refresh.');
+    } else if (@is_dir('installer')) {
+        die('ERROR: Installation not complete.  Please remove the "installer" directory and refresh.');
+    }
+}
+
 ?>

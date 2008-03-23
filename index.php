@@ -7,6 +7,8 @@
 session_start(); 
 include('mia.gzip.php'); //Compress page if possible
 include('includes/utility_functions.php');
+//Do secure installation check
+installationCheck();
 
 $errorMessage = '';
 if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
