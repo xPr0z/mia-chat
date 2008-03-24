@@ -1,4 +1,4 @@
-#summary Mia is a web based peer to peer Ajax chat application.
+#summary Mia is a web based Ajax chat application.
 #labels Featured
 
 = Introduction =
