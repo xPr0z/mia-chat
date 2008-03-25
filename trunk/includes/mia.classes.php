@@ -458,12 +458,10 @@ class MiaDb {
 	}
 	
 	function passwordReset($username, $email) {
-	    $username = $this->escapeForDb($username);
-	    $email = $this->escapeForDb($email);
 		$userIdSQL = "SELECT id 
 		                FROM mia_users 
-		                WHERE username={$username}
-		                AND email={$email}";
+		                WHERE username={$this->escapeForDb($username)}
+		                AND email={$this->escapeForDb($email)}";
 		$user = $this->executeSQL($userIdSQL);
 		$userID = intval($user->fields[0]);
 	    if ($userID>0) {
@@ -477,7 +475,7 @@ class MiaDb {
                 return false;
             } 
             
-            if ($this->emailPassword($username, $passwordResetKey, $email)===false) {
+            if ($this->emailPassword($username, $passwordResetKey['password'], $email)===false) {
                 return false; //Unable to send email
             } 
         } else {
@@ -485,14 +483,12 @@ class MiaDb {
         }
 	}
 	
-	function updatePassword($username, $email, $newPassword, $activationCode) {
-	    $username = $this->escapeForDb($username);
-	    $email = $this->escapeForDb($email);
+	function updatePassword($username, $email, $newPassword, $activationCode) {	   
 	    $activationCode = $this->escapeForDb($activationCode);
 		$userIdSQL = "SELECT id 
 		                FROM mia_users 
-		                WHERE username={$username}
-		                AND email={$email}
+		                WHERE username={$this->escapeForDb($username)}
+		                AND email={$this->escapeForDb($email)}
 		                AND password_reset_key={$activationCode}";
 		$user = $this->executeSQL($userIdSQL);
 		if ($user!==false) {
@@ -526,19 +522,19 @@ class MiaDb {
 		    //Add a trailing slash of not setup in the configuration file
 		    $siteUrl .= '/';
 		}
-		$siteUrl .= 'doPasswordReset.php?user='.$username.'&email='.$email.'&activiation_code='.$passwordResetKey;
+		$siteUrl .= "doPasswordReset.php?user=$username&email=$email&activiation_code=$passwordResetKey";
 		
         //The message
         $message = "A Mia password reset request has been requested for this email address
         at $siteUrl. If this was not you then simply ignore this request.  If you did make 
-        this request then click on the link below to finish the reset of this process: \r\n\r\n
+        this request then click on the link below to finish the reset of this process: \n\n
         $siteUrl";
         //In case any of our lines are larger than 70 characters, we should use wordwrap()
         $message = wordwrap($message, 70);
-        $headers = "From: $adminEmail" . "\r\n" .
-                    "Reply-To: $adminEmail" . "\r\n" .
-                    'X-Mailer: PHP/' . phpversion();
-        //Send
+        $headers = "From:". $adminEmail . "\n" .
+                    "Reply-To:". $adminEmail . "\n" .
+                    "X-Mailer: PHP/" . phpversion();
+        //Send          
         if (mail($email, 'Mia Password Reset Request', $message, $headers)===false) {
            return false;
         }
