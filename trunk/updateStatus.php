@@ -8,7 +8,6 @@ session_start();
 require('includes/mia.classes.php');
 $mia = MiaDb::getInstance();
 if ($mia->sessionHijackCheck()===false) {
-    //die('Invalid session, operation not permitted! Please <a href="index.php">login</a>.');
     header('Location: index.php');
 }
 include('mia.gzip.php'); //Compress page if possible
