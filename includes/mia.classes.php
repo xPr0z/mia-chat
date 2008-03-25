@@ -483,30 +483,33 @@ class MiaDb {
         }
 	}
 	
-	function updatePassword($username, $email, $newPassword, $activationCode) {	   
+	function updatePassword($username, $email, $newPassword, $activationCode) {	  
+	    $clnUsername =  $this->escapeForDb($username);
+	    $clnEmail =  $this->escapeForDb($email);
 	    $activationCode = $this->escapeForDb($activationCode);
 		$userIdSQL = "SELECT id 
 		                FROM mia_users 
-		                WHERE username={$this->escapeForDb($username)}
-		                AND email={$this->escapeForDb($email)}
+		                WHERE username={$clnUsername}
+		                AND email={$clnEmail}
 		                AND password_reset_key={$activationCode}";
 		$user = $this->executeSQL($userIdSQL);
-		if ($user!==false) {
-		    $userID = intval($user->fields[0]);
-    	    if ($userID>0) {
-    		    //Update password
-    		    $hashedPassword = $this->buildPassword($newPassword);
-    		    $updateSQL = "UPDATE mia_users
-    		                    SET password={$hashedPassword},
-    		                    password_reset_key=''
-    		                    WHERE id={$userID}";
-    		    if ($this->executeSQL($updateSQL)===false) {
-                    return false;
-                }
-            } else {
-                return false; //Invalid username, email, and/or activation code
+		$userID = intval($user->fields[0]);
+	    if ($userID>0) {
+		    //Update password
+		    $passwordArray = $this->buildPassword($newPassword);
+		    $salt = $passwordArray['salt'];
+		    $password = $passwordArray['password'];
+		    $updateSQL = "UPDATE mia_users
+		                    SET salt='{$salt}',
+		                    password='{$password}',
+		                    password_reset_key=''
+		                    WHERE id={$userID}";
+		    if ($this->executeSQL($updateSQL)===false) {
+                return false;
             }
-        } //end if
+        } else {
+            return false; //Invalid username, email, and/or activation code
+        }
 	}
 	
 	function emailPassword($username, $passwordResetKey, $email) {   
@@ -522,19 +525,19 @@ class MiaDb {
 		    //Add a trailing slash of not setup in the configuration file
 		    $siteUrl .= '/';
 		}
-		$siteUrl .= "doPasswordReset.php?user=$username&email=$email&activiation_code=$passwordResetKey";
+		$siteResetUrl .= "changePassword.php?user=$username&email=$email&activation_code=$passwordResetKey";
 		
         //The message
-        $message = "A Mia password reset request has been requested for this email address
-        at $siteUrl. If this was not you then simply ignore this request.  If you did make 
-        this request then click on the link below to finish the reset of this process: \n\n
-        $siteUrl";
+        $message = "A Mia password reset request has been requested for this email address at $siteUrl. ";
+        $message .= "If this was not you then simply ignore this request.  If you did make this request ";
+        $message .= "then click the link below to finish the reset of this process:\n\n ";
+        $message .= $siteUrl.$siteResetUrl;
         //In case any of our lines are larger than 70 characters, we should use wordwrap()
         $message = wordwrap($message, 70);
         $headers = "From:". $adminEmail . "\n" .
                     "Reply-To:". $adminEmail . "\n" .
                     "X-Mailer: PHP/" . phpversion();
-        //Send          
+        //Send email
         if (mail($email, 'Mia Password Reset Request', $message, $headers)===false) {
            return false;
         }

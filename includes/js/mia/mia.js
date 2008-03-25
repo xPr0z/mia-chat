@@ -72,7 +72,7 @@ $(document).ready(function() {
         }).trigger("resize");
         
         //Setup the message routines
-        $.timer(5000, function() {
+        $.timer(7500, function() {
 		$.getJSON("getMessages.php", function(json) {
 			$.each(json,function(i,item) {
 				var messageid=json[i].mid;
