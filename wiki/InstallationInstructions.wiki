@@ -33,7 +33,7 @@ Or move the cache directory somewhere else (no trailing slash):
 $config->set('Cache', 'SerializerPath', '/home/user/absolute/path');
 }}}	    
 
-That's it.  Browse to [http://path_to_mia/index.php].  Enjoy :)
+That's it.  Browse to http://path_to_your_mia/index.php.  Enjoy :)
 
 = Wait, what about non-MySQL databases? =
 
