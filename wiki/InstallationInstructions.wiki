@@ -3,13 +3,13 @@
 
 = MIA Installation Notes =
 
-1) Create a new database and database user for Mia
-2) Make sure the new database user has the permissions needed to create and manage the database
-3) Run the SQL statements contained in the mia.sql file against your MySQL database (if you are not using MySQL find more information below)
-4) Create a Mia configuration file called config.ini.php in the root of your Mia installation.  Use the included config.ini.sample.php file as your guide.
-5) After setting up the configuration file make sure it is no longer writeable by the server (ex) chmod 444 config.ini.php
-6) Remove the installation folder from your server
-7) Mia uses HTMLPurifier (http://htmlpurifier.org) to help with input filtering and security issues like xss attacks, etc.  HTMLPurifier uses caching an its cache folder needs special permission to function properly.  Below you will find the documentation on setting this up.
+* Create a new database and database user for Mia
+* Make sure the new database user has the permissions needed to create and manage the database
+* Run the SQL statements contained in the mia.sql file against your MySQL database (if you are not using MySQL find more information below)
+* Create a Mia configuration file called config.ini.php in the root of your Mia installation.  Use the included config.ini.sample.php file as your guide.
+* After setting up the configuration file make sure it is no longer writeable by the server (ex) chmod 444 config.ini.php
+* Remove the installation folder from your server
+* Mia uses HTMLPurifier (http://htmlpurifier.org) to help with input filtering and security issues like xss attacks, etc.  HTMLPurifier uses caching an its cache folder needs special permission to function properly.  Below you will find the documentation on setting this up.
 
 Caching: HTML Purifier generates some cache files (generally one or two) to speed up its execution. For maximum performance, make sure that includes/htmlpurifier/HTMLPurifier/DefinitionCache/Serializer is writeable by the webserver.
 
