@@ -167,6 +167,7 @@ function getBuddies() {
 function chatSubmit() {
 	var sendMessageTo=$('#activeChat').val();
 	var chattext=$('#'+sendMessageTo+'Input').val();
+	$('#'+sendMessageTo+'Input').val('');
         //do not attempt to send if blank.
 	if ((sendMessageTo!=='') && ($.trim(chattext) !== '')) {            
             var now = new Date();
