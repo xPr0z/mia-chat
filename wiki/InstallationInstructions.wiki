@@ -2,6 +2,7 @@
 #This page aims to help users install Mia.
 
 = Mia Installation Notes =
+
   # Create a new database and database user for Mia
   # Make sure the new database user has the permissions needed to create and manage the database
   # Run the SQL statements contained in the mia.sql file against your MySQL database (if you are not using MySQL find more information below)
