@@ -16,7 +16,7 @@ Mia will require the following to function:
 
   * PHP 5
   * Apache Web Server 1.3+
-  * One of the following databases; MySQL 4, MySQL 5 IBM DB2, Oracle 8+, MS SQL Server 2000+, SQLite 2+, PostgreSQL 7+ . Please contact us for non-MySQL databases.
+  * One of the following databases; MySQL 4, MySQL 5 IBM DB2, Oracle 8+, MS SQL Server 2000+, SQLite 2+, PostgreSQL 7+ . Please [http://brilaps.com/contact_us.php contact us] for non-MySQL databases.
 
 
 = Details =
