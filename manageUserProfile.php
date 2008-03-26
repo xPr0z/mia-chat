@@ -83,6 +83,7 @@ include('mia.gzip.php'); //Compress page if possible
 <div id="profUpdateProcess" class="hideme">Updating profile</div>
 </div>
 </div>
+<br />
 <div id="ft">Copyright &copy; 2008 Brilaps, LLC. All rights reserved.</div>
 </div>
 <script type="text/javascript" src="includes/js/jquery/jquery.js"></script>

@@ -43,6 +43,7 @@ include('mia.gzip.php'); //Compress page if possible
 			<div id="activeBuddyList"></div>
 		</div>
 	</div>
+	<br />
      <div id="ft">Copyright &copy; 2008 Brilaps, LLC. All rights reserved.</div>
 </div>
 </body>
