@@ -6,7 +6,7 @@
 Key intentions and achievements Mia are: 
 
   * Simple setup 
-  * Easy of use 
+  * Ease of use 
   * Secure 
   * Platform independant 
   * Cross database platform support.
