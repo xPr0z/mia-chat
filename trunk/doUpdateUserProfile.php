@@ -42,7 +42,7 @@ if (empty($clnUserId) || empty($clnFullName) || empty($clnUsername) || empty($cl
         //check if the given password matches the users pass.
         $error = "Wrong credentials.";
     } else if ($mia->updateUserProfile($clnUserId, $clnFullName, $clnEmail, $clnTimeOffset) === false) {
-            $error = "Profile update failed.";
+        $error = "Profile update failed.";
     }
 }
 echo $error;

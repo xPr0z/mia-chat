@@ -118,9 +118,7 @@ class MiaDb {
 		$userSQL = "INSERT INTO mia_users (full_name, username, password, salt, email, usergroup, time_offset, create_date)
              VALUES ({$clnFullname}, {$clnUsername}, {$clnPasswordHash}, {$clnSalt}, {$clnEmail}, 1, {$timeoffset}, now())";
 		$result = $this->executeSQL($userSQL);
-		if ($result) {
-			return true;
-		} else {
+		if (!$result) {
 			return false;
 		}
 	}
@@ -175,9 +173,7 @@ class MiaDb {
 						WHERE id = {$crtUserID}";
 		
 		$result = $this->executeSQL($statusSQL);
-		if ($result) {
-			return true;
-		} else {
+		if (!$result) {
 			return false;
 		}
 	}
@@ -241,9 +237,7 @@ class MiaDb {
     					AND userid_to={$crtUserID}";
 
     	$result = $this->executeSQL($removalSQL);
-    	if ($result) {
-    		return true;
-    	} else {
+    	if (!$result) {
     		return false;
     	}
     }
@@ -336,10 +330,9 @@ class MiaDb {
 			$clnEmail = $this->escapeForDb($email);
 		}
 		
-         
-        // Parse the Mia config file
+        //Parse the Mia config file
         $ini_array = parse_ini_file("config.ini.php", true);
-        //do we want to show the user emails or not ?
+        //Do we want to show the user emails or not ?
         $show_user_emails = $ini_array['global_info']['show_user_emails'];
         
         if ($show_user_emails === true) {
@@ -413,8 +406,6 @@ class MiaDb {
 		
 		if ($crtUserGroup<$minAllowedGroup) {
 			return false;
-		} else {
-			return true; //permitted
 		}
 	}
 	
@@ -430,9 +421,7 @@ class MiaDb {
 		$crtEnv = sha1($_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']);
 		
 		//Same browser and IP address?
-		if ($loginEnv===$crtEnv) {
-			return true;
-		} else {
+		if ($loginEnv!==$crtEnv) {
 			return false;
 		}
 	}
@@ -590,7 +579,9 @@ class MiaDb {
     * Check the userid, username and password trio 
     */
     function checkUser($userid, $username, $password) {
-        $userSQL = "SELECT id, username, password, salt FROM mia_users WHERE id ={$userid} AND username='{$username}'";
+        $clnUserid = intval($userid);
+        $clnUsername =  $this->escapeForDb($username);
+        $userSQL = "SELECT id, username, password, salt FROM mia_users WHERE id={$clnUserid} AND username={$clnUsername}";
 		$user = $this->executeSQL($userSQL);
 		if (empty($user)) {
 			return false;
@@ -604,10 +595,7 @@ class MiaDb {
 		//Test db password against the one entered on the form
 		if ($inputHashedPassword !== $dbPassword) {
 			return false;
-		} else {
-             return true;
-         }
-         return false;
+		}
     }
     
     
@@ -615,14 +603,16 @@ class MiaDb {
     * Update the full and the email
     */
     function updateUserProfile($userid, $fullname, $email, $timeoffset) {
-  		
         if ($userid !== $this->getCrtUserID()) {
             return false;
-        } else  {
+        } else {
+            $clnFullname =  $this->escapeForDb($fullname);
+            $clnEmail =  $this->escapeForDb($email);
+            $clnTimeOffset =  $this->escapeForDb($timeoffset);
             $profileSQL = "UPDATE mia_users 
-                                SET full_name = '{$fullname}', 
-                                email = '{$email}',
-                                time_offset = '{$timeoffset}'  
+                                SET full_name = {$clnFullname}, 
+                                email = {$clnEmail},
+                                time_offset = {$clnTimeOffset}  
                                 WHERE id={$userid}";                                
             if ($this->executeSQL($profileSQL)===false) {
                 return false;
