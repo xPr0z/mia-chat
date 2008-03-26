@@ -8,53 +8,53 @@ $(document).ready(function() {
         });
 
         $("#uStatus").change(function () {
-                var selectedStatus=$("#uStatus option:selected").val();
+            var selectedStatus=$("#uStatus option:selected").val();
 
-                $.ajax({
-                   type: "POST",
-                   url: "updateStatus.php",
-                   data: 'ustatus='+selectedStatus
-                }); //end ajax
+            $.ajax({
+               type: "POST",
+               url: "updateStatus.php",
+               data: 'ustatus='+selectedStatus
+            }); //end ajax
         });
 
         $(".showoffline").change(function () {
-                var showoffline=$('input[name=showoffline]:checked').val();
-                $.ajax({
-                   type: "POST",
-                   url: "updatePreferences.php",
-                   data: 'showoffline='+showoffline
-                }); //end ajax
+            var showoffline=$('input[name=showoffline]:checked').val();
+            $.ajax({
+               type: "POST",
+               url: "updatePreferences.php",
+               data: 'showoffline='+showoffline
+            }); //end ajax
 
-                //Clear and run full buddylist refresh
-                $('#buddylist').empty(function() {
-                        getBuddies();
-                });
+            //Clear and run full buddylist refresh
+            $('#buddylist').empty(function() {
+                    getBuddies();
+            });
         });
 
         //Allow the budy list to be minimized and maximized
         $('#minmax').bind("click", {}, function(){
-                $('#nav').slideToggle("slow");
+            $('#nav').slideToggle("slow");
         });
 
         //Hide user preferences by default and allow user to toggle as needed
         $('#userPreferences').hide();
         $('#preferences').bind("click", {}, function(){
-                $('#userPreferences').slideToggle("slow");
+            $('#userPreferences').slideToggle("slow");
         });
 
         //Startup the tabs interface
         $('.first > ul').tabs()
                 .bind('select.ui-tabs', function(e, ui) {
                 //Event select
-                        //alert('event: ' + e.type);
-        })
-                .bind('show.ui-tabs', function(e, ui) {
-                    //Push the scrollbar to the bottom
-                        var chatSelected = $('.ui-tabs-selected > a > span').text();
-                        //@@TODO It might be better that we try to grab the id of the first tab, instead of text
-                        if (chatSelected !== 'Welcome')
-                            scrollToBottom(chatSelected+'Inner');
+                //alert('event: ' + e.type);
+        }).bind('show.ui-tabs', function(e, ui) {
+                //Push the scrollbar to the bottom
+                var chatSelected = $('.ui-tabs-selected > a > span').text();
+                //@@TODO It might be better that we try to grab the id of the first tab, instead of text
+                if (chatSelected !== 'Welcome') {
+                    scrollToBottom(chatSelected+'Inner');
                 }
+            }
         );
                 
         //well, add the first tab for news, updates, etc etc etc...
@@ -96,13 +96,6 @@ $(document).ready(function() {
 				$('#'+usernameFrom+'Inner ul li.messageBodyFriend a').attr("target", "_blank"); //Make any urls open in a new window
 				
 				scrollToBottom(usernameFrom+'Inner'); //Push the scrollbar to the bottom
-				
-				//Remove the message after it has been delivered
-				$.ajax({
-				   type: "POST",
-				   url: "removeMessage.php",
-				   data: 'message_id='+messageid+'&insert_key='+rand_insert_key
-				}); //end ajax
 			}); //end each
 		}); //end getJSON
 	}); //end timer
@@ -252,6 +245,7 @@ function startChat(username, isBuddyClick) {
                                 '</div>';
 
                 $('div#'+username+'.ui-tabs-panel').append(containerDiv);
+                $('textarea#'+username+'Input.chatInput').focus(); //Set focus on new window for immediate typing
                 $('.emoButton').bind("click", {username: username}, emoClicked); //Setup an onclick event handler
                 $('#'+username+'Close').bind("click", {username: username}, chatClose); //Setup a close event handler
                 //bind the keyup event ONLY to the input box to avoid unwanted send on #13
@@ -260,7 +254,7 @@ function startChat(username, isBuddyClick) {
                                                                     chatSubmit();
                                                                     resetDocumentTitle('');
                                                                 }
-                                                        });                 
+                                                        });
 	} 
     else {
                 //Determine if user is on the tab with the new message
@@ -285,13 +279,12 @@ function startChat(username, isBuddyClick) {
         //select the buddy tab no matter what 
         $('.first > ul').tabs('select', '#'+username); //select the activated chat tab
         $('textarea#'+username+'Input.chatInput').focus(function () {
-                $('#activeChat').attr({"value": username}); //Set as active chat window var
+            $('#activeChat').attr({"value": username}); //Set as active chat window var
         });
         $('textarea#'+username+'Input.chatInput').click(function () {
-                resetDocumentTitle('');
+            resetDocumentTitle('');
         });
         $('textarea#'+username+'Input.chatInput').focus(); //Set focus on new window for immediate typing
-
 }
 
 //To be used by the buddy management interface (child window)
@@ -310,8 +303,9 @@ function emoClicked() {
 }
 
 function resetDocumentTitle(title) {
-    if (title === '')
-        top.document.title = 'Mia'; 
-    else 
+    if (title === '') {
+        top.document.title = 'Mia';
+    } else {
         top.document.title = title; 
+    }
 }

@@ -195,6 +195,12 @@ class MiaDb {
 						AND m.userid_to = {$crtUserID}";
 		
 		$messages = $this->executeGetAssocSQL($messageSQL);
+		if ($messages) { 
+            foreach($messages as $key=>$value) {
+        		$this->removeMessage($crtUserID, $value['mid']);
+        	}
+        }
+        
 		return $messages;
 	}
 	
@@ -226,25 +232,21 @@ class MiaDb {
 	}
 	
 	/**
-	* Removes a message after it has been successfully delivered
-	* @param messageID
-	* @param randInsertKey - random string delivered with message used to callback for delete after delivery
-	*/
-	function removeMessage($messageID, $randInsertKey) {
-		$clnRandInsertKey = $this->escapeForDb($randInsertKey); //Confirms the message was displayed
-		$userTo = $this->getCrtUserID();	
-		$removalSQL = "DELETE FROM mia_messages 
-						WHERE id={$messageID} 
-						AND rand_insert_key={$clnRandInsertKey} 
-						AND userid_to={$userTo}";
-		
-		$result = $this->executeSQL($removalSQL);
-		if ($result) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    * Removes a message after it has been successfully retrieved
+    * @param messageID
+    */
+    function removeMessage($crtUserID, $messageID) {	
+    	$removalSQL = "DELETE FROM mia_messages 
+    					WHERE id={$messageID} 
+    					AND userid_to={$crtUserID}";
+
+    	$result = $this->executeSQL($removalSQL);
+    	if ($result) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
 	
 	/**
 	* Get buddies associated with a user
