@@ -1,4 +1,5 @@
 #summary Official Wiki of Brilaps can be found at [http://wiki.brilaps.com]
+#labels Featured
 
 = Introduction =
 
@@ -8,5 +9,3 @@ After a while, it will be pretty difficult for us to maintain two wikis anytime 
 
 Thanks, 
 Brilaps Crew
-
-
