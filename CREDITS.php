@@ -16,6 +16,7 @@
  * ADOdb PHP - http://adodb.sourceforge.net/
  * PHP5 CAPTCHA - http://sourceforge.net/projects/php5captcha/
  * Services_JSON - http://pear.php.net/pepr/pepr-proposal-show.php?id=198
+ * YUI-CSS (reset-fonts-grids) - http://developer.yahoo.com/yui/grids/
  *
  * Graphics:
  * Tango - http://tango.freedesktop.org/Tango_Desktop_Project
