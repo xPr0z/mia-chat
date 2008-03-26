@@ -1,7 +1,7 @@
 #labels Featured,Phase-Deploy
 #This page aims to help users install Mia.
 
-= Mia Installation Notes =
+= InstallationInstructions =
 
   # Create a new database and database user for Mia
   # Make sure the new database user has the permissions needed to create and manage the database
