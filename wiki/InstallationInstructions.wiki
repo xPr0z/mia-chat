@@ -1,5 +1,5 @@
+#summary this page aims to help users install Mia.
 #labels Featured,Phase-Deploy
-#this page aims to help users install Mia.
 
 = Mia Installation Instructions =
 
