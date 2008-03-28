@@ -8,8 +8,8 @@ Key intentions and achievements Mia are:
   * Simple setup 
   * Ease of use 
   * Secure (in addition to our own auditing we scan with [http://www.fortify.com/security-resources/rats.jsp RATS] and the  [http://www.acunetix.com/vulnerability-scanner/ Acunetix (XSS) Web Vulnerability Scanner])
-  * Platform independant 
-  * Cross database platform support.
+  * Platform independent 
+  * Database platform agnostic
 
 = Requirements =
 Mia will require the following to function:
