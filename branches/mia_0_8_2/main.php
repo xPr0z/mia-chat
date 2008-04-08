@@ -36,6 +36,7 @@ if (isset($_SESSION['showoffline'])) {
         <script type="text/javascript" src="includes/js/mia/chatscroll.js"></script>
         <script type="text/javascript" src="includes/js/jquery/jquery.timer.js"></script>
         <script type="text/javascript" src="includes/js/jquery/plugins/dimensions/jquery.dimensions.js"></script>
+        <script type="text/javascript" src="includes/js/jquery/ui/ui.base.js"></script>
         <script type="text/javascript" src="includes/js/jquery/ui/ui.tabs.js"></script>
         <script type="text/javascript" src="includes/js/mia/date.format.js"></script>
         <script type="text/javascript" src="includes/js/mia/mia.js"></script>
