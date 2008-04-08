@@ -109,7 +109,7 @@ if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
 				}
 				?>
                  <label for="regTermsConditions">Terms and Conditions</label>
-                 <textarea id="regTermsConditions" cols="50" rows="8" readonly="readonly"><?php
+                 <textarea id="regTermsConditions" cols="40" rows="8" readonly="readonly"><?php
                     $handle = fopen("./termsandconditions.txt.php", "r") or die("Can't open Terms and Conditions file");
                     $terms_and_conditions = "";
                     while (!feof($handle)) {

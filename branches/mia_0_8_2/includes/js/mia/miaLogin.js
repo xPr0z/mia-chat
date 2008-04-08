@@ -30,7 +30,7 @@ $(document).ready(function() {
                 minLength: 5,
                 maxLength:50 
 			},
-			password: "required",
+			password: "required"
 		}
 	}); //end login form validation
 	
