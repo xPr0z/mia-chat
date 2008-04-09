@@ -89,6 +89,10 @@ function installationCheck() {
         die('ERROR: Installation not complete.  Please remove the "installation" directory and refresh.');
     } else if (@is_dir('installer')) {
         die('ERROR: Installation not complete.  Please remove the "installer" directory and refresh.');
+    } else if (!is_writable('includes/htmlpurifier/HTMLPurifier/DefinitionCache/Serializer')) {
+        $message = 'ERROR: Installation not complete.  Please review the HTMLPurifier section of the installation instructions found in';
+        $message .= ' the "/installation/installation_notes.php" file for assistance with proper server permission configurations.';
+        die($message);
     }
 }
 

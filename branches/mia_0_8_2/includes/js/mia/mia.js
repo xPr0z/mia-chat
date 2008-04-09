@@ -205,7 +205,7 @@ function scrollToBottom(chatWindowToScroll) {
 
 function getSelectedTab() {
 	var tabs = $('.first > ul').tabs();
-	var selected = tabs.data('selected.ui-tabs');
+	var selected = tabs.data('selected.tabs');
 	return selected;
 }
 
@@ -218,7 +218,7 @@ function chatClose() {
 function buddyClick(event) {
     //reset the document title back to mia. 
     resetDocumentTitle('');
-	startChat(event.data.username, true);	
+	startChat(event.data.username, true);
 }
 
 function startChat(username, isBuddyClick) {
@@ -266,8 +266,8 @@ function startChat(username, isBuddyClick) {
                         if ((index != 0) && ($(this).text() === username)) {
                             $(this).attr({"class" : "blinker"});
                             $(this).bind('click', function() {
-                                    $(this).removeAttr("class");
-                                    resetDocumentTitle('')
+                                        $(this).removeAttr("class");
+                                        resetDocumentTitle('');
                                     })
                         }
                         //@@TODO it'd be nice to break out the .each
