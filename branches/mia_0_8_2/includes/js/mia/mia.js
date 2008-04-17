@@ -205,7 +205,7 @@ function scrollToBottom(chatWindowToScroll) {
 
 function getSelectedTab() {
 	var tabs = $('.first > ul').tabs();
-	var selected = tabs.data('selected.tabs');
+	var selected = tabs.data('selected.ui-tabs');
 	return selected;
 }
 

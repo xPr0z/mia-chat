@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `mia_buddies` (
   `buddy_userid` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `userid` (`userid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `mia_messages` (
   PRIMARY KEY  (`id`),
   KEY `userid_to` (`userid_to`),
   KEY `rand_insert_key` (`rand_insert_key`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=184 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -56,4 +56,4 @@ CREATE TABLE IF NOT EXISTS `mia_users` (
   `time_offset` varchar(4) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
