@@ -42,13 +42,11 @@ $(document).ready(function() {
             $('#userPreferences').slideToggle("slow");
         });
 
-        
         //Startup the tabs interface
-      $('#gridmaster > ul').tabs()
+      $('.first > ul').tabs()
         .bind('select.ui-tabs', function(e, ui) {
-                //Event select
+            //Nothing here
         }).bind('show.ui-tabs', function(e, ui) {
-                selected = ui.options.selected;
                 //Push the scrollbar to the bottom
                 var chatSelected = $('.ui-tabs-selected > a > span').text();
                 //@@TODO It might be better that we try to grab the id of the first tab, instead of text
@@ -116,7 +114,7 @@ $(document).ready(function() {
 }); //end doc ready
 
 function addWelcomeTab() {
-    $('#gridmaster > ul').tabs('add', '#welcome', 'Welcome'); 
+    $('.first > ul').tabs('add', '#welcome', 'Welcome'); 
     var containerDiv='<div id="welcome-tab">'+$('#welcomeMessage').val()+'</div>';
     $('div#welcome.ui-tabs-panel').append(containerDiv);   
 }
@@ -205,8 +203,16 @@ function scrollToBottom(chatWindowToScroll) {
 }
 
 
-function chatClose() {
-	$('#gridmaster > ul').tabs("remove", selected);
+function chatClose(event) {
+    
+    $('.first > ul > li > a > span').each(function(index) {
+        if ((index != 0) && ($(this).text() === event.data.username)) {
+            $('.first > ul').tabs("select", index - 1); 
+            $('.first > ul').tabs("remove", index); 
+        }
+        //@@TODO it'd be nice to break out the .each
+    });    
+    return;
 }
 
 function buddyClick(event) {
@@ -221,7 +227,7 @@ function startChat(username, isBuddyClick) {
 	var chatwindowExists=$('div#'+username+'.ui-tabs-panel').length;
 
 	if (chatwindowExists===0) {
-                $('#gridmaster > ul').tabs('add', '#'+username, username); //Activate tab for new chat
+                $('.first > ul').tabs('add', '#'+username, username); //Activate tab for new chat
                 var containerDiv='<span class="chatWindowClose"><a id="'+username+'Close" title="Close"><img src="images/famfamfam_silk_icons/cancel.png" alt="Close"/></a></span>' +
                         '<div id="'+username+'Inner" class="innerChatWindow"></div>' +
                                 '<div id="'+username+'Footer" class="containerFooter">' +
@@ -256,7 +262,7 @@ function startChat(username, isBuddyClick) {
                 //If not, change the inactive tabs class for notification
                 //bind a click event so that the style will reset back to normal
                 if ((username !== $('.ui-tabs-selected > a > span').text()) && (!isBuddyClick) ) {
-                    $('#gridmaster > ul > li > a > span').each(function(index) {
+                    $('.first > ul > li > a > span').each(function(index) {
                         if ((index != 0) && ($(this).text() === username)) {
                             $(this).attr({"class" : "blinker"});
                             $(this).bind('click', function() {
@@ -272,7 +278,7 @@ function startChat(username, isBuddyClick) {
         }
 
         //select the buddy tab no matter what 
-        $('#gridmaster > ul').tabs('select', '#'+username); //select the activated chat tab
+        $('.first > ul').tabs('select', '#'+username); //select the activated chat tab
         $('textarea#'+username+'Input.chatInput').focus(function () {
             $('#activeChat').attr({"value": username}); //Set as active chat window var
         });
