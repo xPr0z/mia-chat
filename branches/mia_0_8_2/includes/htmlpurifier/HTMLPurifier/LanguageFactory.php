@@ -1,11 +1,21 @@
 <?php
 
+require_once 'HTMLPurifier/Language.php';
+require_once 'HTMLPurifier/AttrDef/Lang.php';
+
+HTMLPurifier_ConfigSchema::define(
+    'Core', 'Language', 'en', 'string', '
+ISO 639 language code for localizable things in HTML Purifier to use,
+which is mainly error reporting. There is currently only an English (en)
+translation, so this directive is currently useless.
+This directive has been available since 2.0.0.
+');
+
 /**
  * Class responsible for generating HTMLPurifier_Language objects, managing
  * caching and fallbacks.
  * @note Thanks to MediaWiki for the general logic, although this version
  *       has been entirely rewritten
- * @todo Serialized cache for languages
  */
 class HTMLPurifier_LanguageFactory
 {
@@ -15,46 +25,47 @@ class HTMLPurifier_LanguageFactory
      * Structure is: $factory->cache[$language_code][$key] = $value
      * @value array map
      */
-    public $cache;
+    var $cache;
     
     /**
      * Valid keys in the HTMLPurifier_Language object. Designates which
      * variables to slurp out of a message file.
      * @value array list
      */
-    public $keys = array('fallback', 'messages', 'errorNames');
+    var $keys = array('fallback', 'messages', 'errorNames');
     
     /**
      * Instance of HTMLPurifier_AttrDef_Lang to validate language codes
      * @value object HTMLPurifier_AttrDef_Lang
      */
-    protected $validator;
+    var $validator;
     
     /**
      * Cached copy of dirname(__FILE__), directory of current file without
      * trailing slash
      * @value string filename
      */
-    protected $dir;
+    var $dir;
     
     /**
      * Keys whose contents are a hash map and can be merged
      * @value array lookup
      */
-    protected $mergeable_keys_map = array('messages' => true, 'errorNames' => true);
+    var $mergeable_keys_map = array('messages' => true, 'errorNames' => true);
     
     /**
      * Keys whose contents are a list and can be merged
      * @value array lookup
      */
-    protected $mergeable_keys_list = array();
+    var $mergeable_keys_list = array();
     
     /**
      * Retrieve sole instance of the factory.
+     * @static
      * @param $prototype Optional prototype to overload sole instance with,
      *                   or bool true to reset to default factory.
      */
-    public static function instance($prototype = null) {
+    static function &instance($prototype = null) {
         static $instance = null;
         if ($prototype !== null) {
             $instance = $prototype;
@@ -69,7 +80,7 @@ class HTMLPurifier_LanguageFactory
      * Sets up the singleton, much like a constructor
      * @note Prevents people from getting this outside of the singleton
      */
-    public function setup() {
+    function setup() {
         $this->validator = new HTMLPurifier_AttrDef_Lang();
         $this->dir = HTMLPURIFIER_PREFIX . '/HTMLPurifier';
     }
@@ -78,43 +89,41 @@ class HTMLPurifier_LanguageFactory
      * Creates a language object, handles class fallbacks
      * @param $config Instance of HTMLPurifier_Config
      * @param $context Instance of HTMLPurifier_Context
-     * @param $code Code to override configuration with. Private parameter.
      */
-    public function create($config, $context, $code = false) {
+    function create($config, &$context) {
         
         // validate language code
-        if ($code === false) {
-            $code = $this->validator->validate(
-              $config->get('Core', 'Language'), $config, $context
-            );
-        } else {
-            $code = $this->validator->validate($code, $config, $context);
-        }
+        $code = $this->validator->validate(
+          $config->get('Core', 'Language'), $config, $context
+        );
         if ($code === false) $code = 'en'; // malformed code becomes English
         
         $pcode = str_replace('-', '_', $code); // make valid PHP classname
         static $depth = 0; // recursion protection
         
         if ($code == 'en') {
-            $lang = new HTMLPurifier_Language($config, $context);
+            $class = 'HTMLPurifier_Language';
+            $file  = $this->dir . '/Language.php';
         } else {
             $class = 'HTMLPurifier_Language_' . $pcode;
             $file  = $this->dir . '/Language/classes/' . $code . '.php';
-            if (file_exists($file) || class_exists($class, false)) {
-                $lang = new $class($config, $context);
-            } else {
-                // Go fallback
-                $raw_fallback = $this->getFallbackFor($code);
-                $fallback = $raw_fallback ? $raw_fallback : 'en';
-                $depth++;
-                $lang = $this->create($config, $context, $fallback);
-                if (!$raw_fallback) {
-                    $lang->error = true;
-                }
-                $depth--;
-            }
+            // PHP5/APC deps bug workaround can go here
+            // you can bypass the conditional include by loading the
+            // file yourself
+            if (file_exists($file) && !class_exists($class)) {
+                include_once $file;
+         			}
         }
         
+        if (!class_exists($class)) {
+            // go fallback
+            $fallback = HTMLPurifier_LanguageFactory::getFallbackFor($code);
+            $depth++;
+            $lang = HTMLPurifier_LanguageFactory::factory( $fallback );
+            $depth--;
+        } else {
+            $lang = new $class($config, $context);
+        }
         $lang->code = $code;
         
         return $lang;
@@ -126,7 +135,7 @@ class HTMLPurifier_LanguageFactory
      * @note Loads the original language into cache
      * @param $code string language code
      */
-    public function getFallbackFor($code) {
+    function getFallbackFor($code) {
         $this->loadLanguage($code);
         return $this->cache[$code]['fallback'];
     }
@@ -135,7 +144,7 @@ class HTMLPurifier_LanguageFactory
      * Loads language into the cache, handles message file and fallbacks
      * @param $code string language code
      */
-    public function loadLanguage($code) {
+    function loadLanguage($code) {
         static $languages_seen = array(); // recursion guard
         
         // abort if we've already loaded it

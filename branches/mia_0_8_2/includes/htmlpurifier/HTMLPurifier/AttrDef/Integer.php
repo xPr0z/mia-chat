@@ -1,5 +1,7 @@
 <?php
 
+require_once 'HTMLPurifier/AttrDef.php';
+
 /**
  * Validates an integer.
  * @note While this class was modeled off the CSS definition, no currently
@@ -13,24 +15,24 @@ class HTMLPurifier_AttrDef_Integer extends HTMLPurifier_AttrDef
     /**
      * Bool indicating whether or not negative values are allowed
      */
-    protected $negative = true;
+    var $negative = true;
     
     /**
      * Bool indicating whether or not zero is allowed
      */
-    protected $zero = true;
+    var $zero = true;
     
     /**
      * Bool indicating whether or not positive values are allowed
      */
-    protected $positive = true;
+    var $positive = true;
     
     /**
      * @param $negative Bool indicating whether or not negative values are allowed
      * @param $zero Bool indicating whether or not zero is allowed
      * @param $positive Bool indicating whether or not positive values are allowed
      */
-    public function __construct(
+    function HTMLPurifier_AttrDef_Integer(
         $negative = true, $zero = true, $positive = true
     ) {
         $this->negative = $negative;
@@ -38,7 +40,7 @@ class HTMLPurifier_AttrDef_Integer extends HTMLPurifier_AttrDef
         $this->positive = $positive;
     }
     
-    public function validate($integer, $config, $context) {
+    function validate($integer, $config, &$context) {
         
         $integer = $this->parseCDATA($integer);
         if ($integer === '') return false;

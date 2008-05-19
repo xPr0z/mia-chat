@@ -11,40 +11,40 @@ class HTMLPurifier_Doctype
     /**
      * Full name of doctype
      */
-    public $name;
+    var $name;
     
     /**
      * List of standard modules (string identifiers or literal objects)
      * that this doctype uses
      */
-    public $modules = array();
+    var $modules = array();
     
     /**
      * List of modules to use for tidying up code
      */
-    public $tidyModules = array();
+    var $tidyModules = array();
     
     /**
      * Is the language derived from XML (i.e. XHTML)?
      */
-    public $xml = true;
+    var $xml = true;
     
     /**
      * List of aliases for this doctype
      */
-    public $aliases = array();
+    var $aliases = array();
     
     /**
      * Public DTD identifier
      */
-    public $dtdPublic;
+    var $dtdPublic;
     
     /**
      * System DTD identifier
      */
-    public $dtdSystem;
+    var $dtdSystem;
     
-    public function __construct($name = null, $xml = true, $modules = array(),
+    function HTMLPurifier_Doctype($name = null, $xml = true, $modules = array(),
         $tidyModules = array(), $aliases = array(), $dtd_public = null, $dtd_system = null
     ) {
         $this->name         = $name;
@@ -54,6 +54,13 @@ class HTMLPurifier_Doctype
         $this->aliases      = $aliases;
         $this->dtdPublic    = $dtd_public;
         $this->dtdSystem    = $dtd_system;
+    }
+    
+    /**
+     * Clones the doctype, use before resolving modes and the like
+     */
+    function copy() {
+        return unserialize(serialize($this));
     }
 }
 

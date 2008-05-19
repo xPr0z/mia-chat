@@ -1,5 +1,22 @@
 <?php
 
+require_once 'HTMLPurifier/AttrDef.php';
+
+HTMLPurifier_ConfigSchema::define(
+    'Attr', 'AllowedRel', array(), 'lookup',
+    'List of allowed forward document relationships in the rel attribute. '.
+    'Common values may be nofollow or print. By default, this is empty, '.
+    'meaning that no document relationships are allowed. This directive '.
+    'was available since 1.6.0.'
+);
+
+HTMLPurifier_ConfigSchema::define(
+    'Attr', 'AllowedRev', array(), 'lookup',
+    'List of allowed reverse document relationships in the rev attribute. '.
+    'This attribute is a bit of an edge-case; if you don\'t know what it '.
+    'is for, stay away. This directive was available since 1.6.0.'
+);
+
 /**
  * Validates a rel/rev link attribute against a directive of allowed values
  * @note We cannot use Enum because link types allow multiple
@@ -10,9 +27,9 @@ class HTMLPurifier_AttrDef_HTML_LinkTypes extends HTMLPurifier_AttrDef
 {
     
     /** Name config attribute to pull. */
-    protected $name;
+    var $name;
     
-    public function __construct($name) {
+    function HTMLPurifier_AttrDef_HTML_LinkTypes($name) {
         $configLookup = array(
             'rel' => 'AllowedRel',
             'rev' => 'AllowedRev'
@@ -25,7 +42,7 @@ class HTMLPurifier_AttrDef_HTML_LinkTypes extends HTMLPurifier_AttrDef
         $this->name = $configLookup[$name];
     }
     
-    public function validate($string, $config, $context) {
+    function validate($string, $config, &$context) {
         
         $allowed = $config->get('Attr', $this->name);
         if (empty($allowed)) return false;

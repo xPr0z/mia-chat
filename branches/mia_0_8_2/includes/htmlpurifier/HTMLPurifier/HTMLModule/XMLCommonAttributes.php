@@ -1,10 +1,12 @@
 <?php
 
+require_once 'HTMLPurifier/HTMLModule.php';
+
 class HTMLPurifier_HTMLModule_XMLCommonAttributes extends HTMLPurifier_HTMLModule
 {
-    public $name = 'XMLCommonAttributes';
+    var $name = 'XMLCommonAttributes';
     
-    public $attr_collections = array(
+    var $attr_collections = array(
         'Lang' => array(
             'xml:lang' => 'LanguageCode',
         )

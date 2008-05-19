@@ -1,5 +1,8 @@
 <?php
 
+require_once 'HTMLPurifier/AttrDef.php';
+require_once 'HTMLPurifier/Config.php';
+
 /**
  * Validates contents based on NMTOKENS attribute type.
  * @note The only current use for this is the class attribute in HTML
@@ -10,7 +13,7 @@
 class HTMLPurifier_AttrDef_HTML_Nmtokens extends HTMLPurifier_AttrDef
 {
     
-    public function validate($string, $config, $context) {
+    function validate($string, $config, &$context) {
         
         $string = trim($string);
         

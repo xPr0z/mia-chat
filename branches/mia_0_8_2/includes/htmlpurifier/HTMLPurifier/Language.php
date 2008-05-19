@@ -1,60 +1,51 @@
 <?php
 
-/**
- * Represents a language and defines localizable string formatting and
- * other functions, as well as the localized messages for HTML Purifier.
- */
+require_once 'HTMLPurifier/LanguageFactory.php';
+
 class HTMLPurifier_Language
 {
     
     /**
      * ISO 639 language code of language. Prefers shortest possible version
      */
-    public $code = 'en';
+    var $code = 'en';
     
     /**
      * Fallback language code
      */
-    public $fallback = false;
+    var $fallback = false;
     
     /**
      * Array of localizable messages
      */
-    public $messages = array();
+    var $messages = array();
     
     /**
      * Array of localizable error codes
      */
-    public $errorNames = array();
-    
-    /**
-     * True if no message file was found for this language, so English
-     * is being used instead. Check this if you'd like to notify the
-     * user that they've used a non-supported language.
-     */
-    public $error = false;
+    var $errorNames = array();
     
     /**
      * Has the language object been loaded yet?
-     * @todo Make it private, fix usage in HTMLPurifier_LanguageTest
+     * @private
      */
-    public $_loaded = false;
+    var $_loaded = false;
     
     /**
      * Instances of HTMLPurifier_Config and HTMLPurifier_Context
      */
-    protected $config, $context;
+    var $config, $context;
     
-    public function __construct($config, $context) {
+    function HTMLPurifier_Language($config, &$context) {
         $this->config  = $config;
-        $this->context = $context;
+        $this->context =& $context;
     }
     
     /**
      * Loads language object with necessary info from factory cache
      * @note This is a lazy loader
      */
-    public function load() {
+    function load() {
         if ($this->_loaded) return;
         $factory = HTMLPurifier_LanguageFactory::instance();
         $factory->loadLanguage($this->code);
@@ -69,7 +60,7 @@ class HTMLPurifier_Language
      * @param $key string identifier of message
      * @return string localised message
      */
-    public function getMessage($key) {
+    function getMessage($key) {
         if (!$this->_loaded) $this->load();
         if (!isset($this->messages[$key])) return "[$key]";
         return $this->messages[$key];
@@ -81,7 +72,7 @@ class HTMLPurifier_Language
      *             reporting
      * @return string localised message
      */
-    public function getErrorName($int) {
+    function getErrorName($int) {
         if (!$this->_loaded) $this->load();
         if (!isset($this->errorNames[$int])) return "[Error: $int]";
         return $this->errorNames[$int];
@@ -90,7 +81,7 @@ class HTMLPurifier_Language
     /**
      * Converts an array list into a string readable representation
      */
-    public function listify($array) {
+    function listify($array) {
         $sep      = $this->getMessage('Item separator');
         $sep_last = $this->getMessage('Item separator last');
         $ret = '';
@@ -114,7 +105,7 @@ class HTMLPurifier_Language
      * @todo Implement conditionals? Right now, some messages make
      *     reference to line numbers, but those aren't always available
      */
-    public function formatMessage($key, $args = array()) {
+    function formatMessage($key, $args = array()) {
         if (!$this->_loaded) $this->load();
         if (!isset($this->messages[$key])) return "[$key]";
         $raw = $this->messages[$key];
@@ -133,7 +124,7 @@ class HTMLPurifier_Language
                     // could be introduced for all types of tokens. This
                     // may need to be factored out into a dedicated class
                     if (!empty($value->attr)) {
-                        $stripped_token = clone $value;
+                        $stripped_token = $value->copy();
                         $stripped_token->attr = array();
                         $subst['$'.$i.'.Compact'] = $generator->generateFromToken($stripped_token);
                     }

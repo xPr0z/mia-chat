@@ -14,9 +14,6 @@
  * named 1, 2 and 3, the order of execution should go 1->preFilter,
  * 2->preFilter, 3->preFilter, purify, 3->postFilter, 2->postFilter,
  * 1->postFilter.
- * 
- * @note Methods are not declared abstract as it is perfectly legitimate
- *       for an implementation not to want anything to happen on a step
  */
 
 class HTMLPurifier_Filter
@@ -25,21 +22,17 @@ class HTMLPurifier_Filter
     /**
      * Name of the filter for identification purposes
      */
-    public $name;
+    var $name;
     
     /**
      * Pre-processor function, handles HTML before HTML Purifier 
      */
-    public function preFilter($html, $config, $context) {
-        return $html;
-    }
+    function preFilter($html, $config, &$context) {}
     
     /**
      * Post-processor function, handles HTML after HTML Purifier
      */
-    public function postFilter($html, $config, $context) {
-        return $html;
-    }
+    function postFilter($html, $config, &$context) {}
     
 }
 

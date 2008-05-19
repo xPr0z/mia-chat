@@ -1,7 +1,10 @@
 <?php
 
+require_once 'HTMLPurifier/Generator.php';
+require_once 'HTMLPurifier/Token.php';
+require_once 'HTMLPurifier/Encoder.php';
+
 // OUT OF DATE, NEEDS UPDATING!
-// USE XMLWRITER!
 
 class HTMLPurifier_Printer
 {
@@ -9,27 +12,26 @@ class HTMLPurifier_Printer
     /**
      * Instance of HTMLPurifier_Generator for HTML generation convenience funcs
      */
-    protected $generator;
+    var $generator;
     
     /**
      * Instance of HTMLPurifier_Config, for easy access
      */
-    protected $config;
+    var $config;
     
     /**
      * Initialize $generator.
      */
-    public function __construct() {
+    function HTMLPurifier_Printer() {
         $this->generator = new HTMLPurifier_Generator();
     }
     
     /**
      * Give generator necessary configuration if possible
      */
-    public function prepareGenerator($config) {
+    function prepareGenerator($config) {
         // hack for smoketests/configForm.php
-        $all = $config->getAll();
-        if (empty($all['HTML'])) return;
+        if (empty($config->conf['HTML'])) return;
         $context = new HTMLPurifier_Context();
         $this->generator->generateFromTokens(array(), $config, $context);
     }
@@ -45,7 +47,7 @@ class HTMLPurifier_Printer
      * @param $tag Tag name
      * @param $attr Attribute array
      */
-    protected function start($tag, $attr = array()) {
+    function start($tag, $attr = array()) {
         return $this->generator->generateFromToken(
                     new HTMLPurifier_Token_Start($tag, $attr ? $attr : array())
                );
@@ -55,7 +57,7 @@ class HTMLPurifier_Printer
      * Returns an end teg
      * @param $tag Tag name
      */
-    protected function end($tag) {
+    function end($tag) {
         return $this->generator->generateFromToken(
                     new HTMLPurifier_Token_End($tag)
                );
@@ -68,19 +70,19 @@ class HTMLPurifier_Printer
      * @param $attr Tag attributes
      * @param $escape Bool whether or not to escape contents
      */
-    protected function element($tag, $contents, $attr = array(), $escape = true) {
+    function element($tag, $contents, $attr = array(), $escape = true) {
         return $this->start($tag, $attr) .
                ($escape ? $this->escape($contents) : $contents) .
                $this->end($tag);
     }
     
-    protected function elementEmpty($tag, $attr = array()) {
+    function elementEmpty($tag, $attr = array()) {
         return $this->generator->generateFromToken(
             new HTMLPurifier_Token_Empty($tag, $attr)
         );
     }
     
-    protected function text($text) {
+    function text($text) {
         return $this->generator->generateFromToken(
             new HTMLPurifier_Token_Text($text)
         );
@@ -91,7 +93,7 @@ class HTMLPurifier_Printer
      * @param $name Key
      * @param $value Value
      */
-    protected function row($name, $value) {
+    function row($name, $value) {
         if (is_bool($value)) $value = $value ? 'On' : 'Off';
         return
             $this->start('tr') . "\n" .
@@ -105,7 +107,7 @@ class HTMLPurifier_Printer
      * Escapes a string for HTML output.
      * @param $string String to escape
      */
-    protected function escape($string) {
+    function escape($string) {
         $string = HTMLPurifier_Encoder::cleanUTF8($string);
         $string = htmlspecialchars($string, ENT_COMPAT, 'UTF-8');
         return $string;
@@ -116,7 +118,7 @@ class HTMLPurifier_Printer
      * @param $array List of strings
      * @param $polite Bool whether or not to add an end before the last
      */
-    protected function listify($array, $polite = false) {
+    function listify($array, $polite = false) {
         if (empty($array)) return 'None';
         $ret = '';
         $i = count($array);
@@ -134,7 +136,7 @@ class HTMLPurifier_Printer
      * @param $obj Object to determine class of
      * @param $prefix Further prefix to remove
      */
-    protected function getClass($obj, $sec_prefix = '') {
+    function getClass($obj, $sec_prefix = '') {
         static $five = null;
         if ($five === null) $five = version_compare(PHP_VERSION, '5', '>=');
         $prefix = 'HTMLPurifier_' . $sec_prefix;
@@ -150,14 +152,14 @@ class HTMLPurifier_Printer
                 }
                 $class .= implode(', ', $values);
                 break;
-            case 'css_composite':
+            case 'composite':
                 $values = array();
                 foreach ($obj->defs as $def) {
                     $values[] = $this->getClass($def, $sec_prefix);
                 }
                 $class .= implode(', ', $values);
                 break;
-            case 'css_multiple':
+            case 'multiple':
                 $class .= $this->getClass($obj->single, $sec_prefix) . ', ';
                 $class .= $obj->max;
                 break;

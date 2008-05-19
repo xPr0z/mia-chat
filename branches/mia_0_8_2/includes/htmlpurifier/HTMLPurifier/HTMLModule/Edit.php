@@ -1,5 +1,8 @@
 <?php
 
+require_once 'HTMLPurifier/HTMLModule.php';
+require_once 'HTMLPurifier/ChildDef/Chameleon.php';
+
 /**
  * XHTML 1.1 Edit Module, defines editing-related elements. Text Extension
  * Module.
@@ -7,16 +10,16 @@
 class HTMLPurifier_HTMLModule_Edit extends HTMLPurifier_HTMLModule
 {
     
-    public $name = 'Edit';
+    var $name = 'Edit';
     
-    public function __construct() {
+    function HTMLPurifier_HTMLModule_Edit() {
         $contents = 'Chameleon: #PCDATA | Inline ! #PCDATA | Flow';
         $attr = array(
             'cite' => 'URI',
             // 'datetime' => 'Datetime', // not implemented
         );
-        $this->addElement('del', 'Inline', $contents, 'Common', $attr);
-        $this->addElement('ins', 'Inline', $contents, 'Common', $attr);
+        $this->addElement('del', true, 'Inline', $contents, 'Common', $attr);
+        $this->addElement('ins', true, 'Inline', $contents, 'Common', $attr);
     }
     
     // HTML 4.01 specifies that ins/del must not contain block
@@ -26,8 +29,8 @@ class HTMLPurifier_HTMLModule_Edit extends HTMLPurifier_HTMLModule
     // Inline context ! Block context (exclamation mark is
     // separator, see getChildDef for parsing)
     
-    public $defines_child_def = true;
-    public function getChildDef($def) {
+    var $defines_child_def = true;
+    function getChildDef($def) {
         if ($def->content_model_type != 'chameleon') return false;
         $value = explode('!', $def->content_model);
         return new HTMLPurifier_ChildDef_Chameleon($value[0], $value[1]);

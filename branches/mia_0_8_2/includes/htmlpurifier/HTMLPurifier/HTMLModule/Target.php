@@ -1,17 +1,19 @@
 <?php
 
+require_once 'HTMLPurifier/AttrDef/HTML/FrameTarget.php';
+
 /**
  * XHTML 1.1 Target Module, defines target attribute in link elements.
  */
 class HTMLPurifier_HTMLModule_Target extends HTMLPurifier_HTMLModule
 {
     
-    public $name = 'Target';
+    var $name = 'Target';
     
-    public function __construct() {
+    function HTMLPurifier_HTMLModule_Target() {
         $elements = array('a');
         foreach ($elements as $name) {
-            $e = $this->addBlankElement($name);
+            $e =& $this->addBlankElement($name);
             $e->attr = array(
                 'target' => new HTMLPurifier_AttrDef_HTML_FrameTarget()
             );

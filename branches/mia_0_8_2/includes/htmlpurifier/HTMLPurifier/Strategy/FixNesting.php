@@ -1,5 +1,8 @@
 <?php
 
+require_once 'HTMLPurifier/Strategy.php';
+require_once 'HTMLPurifier/HTMLDefinition.php';
+
 /**
  * Takes a well formed list of tokens and fixes their nesting.
  * 
@@ -31,7 +34,7 @@
 class HTMLPurifier_Strategy_FixNesting extends HTMLPurifier_Strategy
 {
     
-    public function execute($tokens, $config, $context) {
+    function execute($tokens, $config, &$context) {
         //####################################################################//
         // Pre-processing
         
@@ -88,12 +91,12 @@ class HTMLPurifier_Strategy_FixNesting extends HTMLPurifier_Strategy
             // scroll to the end of this node, report number, and collect
             // all children
             for ($j = $i, $depth = 0; ; $j++) {
-                if ($tokens[$j] instanceof HTMLPurifier_Token_Start) {
+                if ($tokens[$j]->type == 'start') {
                     $depth++;
                     // skip token assignment on first iteration, this is the
                     // token we currently are on
                     if ($depth == 1) continue;
-                } elseif ($tokens[$j] instanceof HTMLPurifier_Token_End) {
+                } elseif ($tokens[$j]->type == 'end') {
                     $depth--;
                     // skip token assignment on last iteration, this is the
                     // end token of the token we're currently on
@@ -284,8 +287,8 @@ class HTMLPurifier_Strategy_FixNesting extends HTMLPurifier_Strategy
             // Test if the token indeed is a start tag, if not, move forward
             // and test again.
             $size = count($tokens);
-            while ($i < $size and !$tokens[$i] instanceof HTMLPurifier_Token_Start) {
-                if ($tokens[$i] instanceof HTMLPurifier_Token_End) {
+            while ($i < $size and $tokens[$i]->type != 'start') {
+                if ($tokens[$i]->type == 'end') {
                     // pop a token index off the stack if we ended a node
                     array_pop($stack);
                     // pop an exclusion lookup off exclusion stack if

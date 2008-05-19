@@ -1,5 +1,7 @@
 <?php
 
+require_once 'HTMLPurifier/Generator.php';
+
 /**
  * Error collection class that enables HTML Purifier to report HTML
  * problems back to the user
@@ -7,15 +9,15 @@
 class HTMLPurifier_ErrorCollector
 {
     
-    protected $errors = array();
-    protected $locale;
-    protected $generator;
-    protected $context;
+    var $errors = array();
+    var $locale;
+    var $generator;
+    var $context;
     
-    public function __construct($context) {
-        $this->locale    =& $context->get('Locale');
+    function HTMLPurifier_ErrorCollector(&$context) {
+        $this->locale  =& $context->get('Locale');
         $this->generator =& $context->get('Generator');
-        $this->context   = $context;
+        $this->context =& $context;
     }
     
     /**
@@ -24,7 +26,7 @@ class HTMLPurifier_ErrorCollector
      * @param $severity int Error severity, PHP error style (don't use E_USER_)
      * @param $msg string Error message text
      */
-    public function send($severity, $msg) {
+    function send($severity, $msg) {
         
         $args = array();
         if (func_num_args() > 2) {
@@ -63,7 +65,7 @@ class HTMLPurifier_ErrorCollector
      * @param List of arrays in format of array(Error message text,
      *        token that caused error, tokens surrounding token)
      */
-    public function getRaw() {
+    function getRaw() {
         return $this->errors;
     }
     
@@ -71,7 +73,7 @@ class HTMLPurifier_ErrorCollector
      * Default HTML formatting implementation for error messages
      * @param $config Configuration array, vital for HTML output nature
      */
-    public function getHTMLFormatted($config) {
+    function getHTMLFormatted($config) {
         $ret = array();
         
         $errors = $this->errors;

@@ -1,10 +1,12 @@
 <?php
 
+require_once 'HTMLPurifier/HTMLModule.php';
+
 class HTMLPurifier_HTMLModule_CommonAttributes extends HTMLPurifier_HTMLModule
 {
-    public $name = 'CommonAttributes';
+    var $name = 'CommonAttributes';
     
-    public $attr_collections = array(
+    var $attr_collections = array(
         'Core' => array(
             0 => array('Style'),
             // 'xml:space' => false,

@@ -1,5 +1,7 @@
 <?php
 
+require_once 'HTMLPurifier/ChildDef.php';
+
 /**
  * Custom validation class, accepts DTD child definitions
  * 
@@ -10,28 +12,28 @@
  */
 class HTMLPurifier_ChildDef_Custom extends HTMLPurifier_ChildDef
 {
-    public $type = 'custom';
-    public $allow_empty = false;
+    var $type = 'custom';
+    var $allow_empty = false;
     /**
      * Allowed child pattern as defined by the DTD
      */
-    public $dtd_regex;
+    var $dtd_regex;
     /**
      * PCRE regex derived from $dtd_regex
      * @private
      */
-    private $_pcre_regex;
+    var $_pcre_regex;
     /**
      * @param $dtd_regex Allowed child pattern from the DTD
      */
-    public function __construct($dtd_regex) {
+    function HTMLPurifier_ChildDef_Custom($dtd_regex) {
         $this->dtd_regex = $dtd_regex;
         $this->_compileRegex();
     }
     /**
      * Compiles the PCRE regex from a DTD regex ($dtd_regex to $_pcre_regex)
      */
-    protected function _compileRegex() {
+    function _compileRegex() {
         $raw = str_replace(' ', '', $this->dtd_regex);
         if ($raw{0} != '(') {
             $raw = "($raw)";
@@ -59,7 +61,7 @@ class HTMLPurifier_ChildDef_Custom extends HTMLPurifier_ChildDef
         
         $this->_pcre_regex = $reg;
     }
-    public function validateChildren($tokens_of_children, $config, $context) {
+    function validateChildren($tokens_of_children, $config, &$context) {
         $list_of_children = '';
         $nesting = 0; // depth into the nest
         foreach ($tokens_of_children as $token) {
@@ -67,9 +69,9 @@ class HTMLPurifier_ChildDef_Custom extends HTMLPurifier_ChildDef
             
             $is_child = ($nesting == 0); // direct
             
-            if ($token instanceof HTMLPurifier_Token_Start) {
+            if ($token->type == 'start') {
                 $nesting++;
-            } elseif ($token instanceof HTMLPurifier_Token_End) {
+            } elseif ($token->type == 'end') {
                 $nesting--;
             }
             

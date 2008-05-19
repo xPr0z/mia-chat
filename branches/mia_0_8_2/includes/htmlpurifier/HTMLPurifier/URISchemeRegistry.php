@@ -1,5 +1,35 @@
 <?php
 
+require_once 'HTMLPurifier/URIScheme/http.php';
+require_once 'HTMLPurifier/URIScheme/https.php';
+require_once 'HTMLPurifier/URIScheme/mailto.php';
+require_once 'HTMLPurifier/URIScheme/ftp.php';
+require_once 'HTMLPurifier/URIScheme/nntp.php';
+require_once 'HTMLPurifier/URIScheme/news.php';
+
+HTMLPurifier_ConfigSchema::define(
+    'URI', 'AllowedSchemes', array(
+        'http'  => true, // "Hypertext Transfer Protocol", nuf' said
+        'https' => true, // HTTP over SSL (Secure Socket Layer)
+        // quite useful, but not necessary
+        'mailto' => true,// Email
+        'ftp'   => true, // "File Transfer Protocol"
+        // for Usenet, these two are similar, but distinct
+        'nntp'  => true, // individual Netnews articles
+        'news'  => true  // newsgroup or individual Netnews articles
+    ), 'lookup',
+    'Whitelist that defines the schemes that a URI is allowed to have.  This '.
+    'prevents XSS attacks from using pseudo-schemes like javascript or mocha.'
+);
+
+HTMLPurifier_ConfigSchema::define(
+    'URI', 'OverrideAllowedSchemes', true, 'bool',
+    'If this is set to true (which it is by default), you can override '.
+    '%URI.AllowedSchemes by simply registering a HTMLPurifier_URIScheme '.
+    'to the registry.  If false, you will also have to update that directive '.
+    'in order to add more schemes.'
+);
+
 /**
  * Registry for retrieving specific URI scheme validator objects.
  */
@@ -8,12 +38,13 @@ class HTMLPurifier_URISchemeRegistry
     
     /**
      * Retrieve sole instance of the registry.
+     * @static
      * @param $prototype Optional prototype to overload sole instance with,
      *                   or bool true to reset to default registry.
      * @note Pass a registry object $prototype with a compatible interface and
      *       the function will copy it and return it all further times.
      */
-    public static function instance($prototype = null) {
+    static function &instance($prototype = null) {
         static $instance = null;
         if ($prototype !== null) {
             $instance = $prototype;
@@ -25,8 +56,9 @@ class HTMLPurifier_URISchemeRegistry
     
     /**
      * Cache of retrieved schemes.
+     * @protected
      */
-    protected $schemes = array();
+    var $schemes = array();
     
     /**
      * Retrieves a scheme validator object
@@ -34,7 +66,7 @@ class HTMLPurifier_URISchemeRegistry
      * @param $config HTMLPurifier_Config object
      * @param $config HTMLPurifier_Context object
      */
-    public function getScheme($scheme, $config, $context) {
+    function &getScheme($scheme, $config, &$context) {
         if (!$config) $config = HTMLPurifier_Config::createDefault();
         $null = null; // for the sake of passing by reference
         
@@ -60,8 +92,8 @@ class HTMLPurifier_URISchemeRegistry
      * @param $scheme Scheme name
      * @param $scheme_obj HTMLPurifier_URIScheme object
      */
-    public function register($scheme, $scheme_obj) {
-        $this->schemes[$scheme] = $scheme_obj;
+    function register($scheme, &$scheme_obj) {
+        $this->schemes[$scheme] =& $scheme_obj;
     }
     
 }

@@ -1,19 +1,24 @@
 <?php
 
+require_once 'HTMLPurifier/Strategy.php';
+require_once 'HTMLPurifier/Config.php';
+
 /**
  * Composite strategy that runs multiple strategies on tokens.
  */
-abstract class HTMLPurifier_Strategy_Composite extends HTMLPurifier_Strategy
+class HTMLPurifier_Strategy_Composite extends HTMLPurifier_Strategy
 {
     
     /**
      * List of strategies to run tokens through.
      */
-    protected $strategies = array();
+    var $strategies = array();
     
-    abstract public function __construct();
+    function HTMLPurifier_Strategy_Composite() {
+        trigger_error('Attempt to instantiate abstract object', E_USER_ERROR);
+    }
     
-    public function execute($tokens, $config, $context) {
+    function execute($tokens, $config, &$context) {
         foreach ($this->strategies as $strategy) {
             $tokens = $strategy->execute($tokens, $config, $context);
         }

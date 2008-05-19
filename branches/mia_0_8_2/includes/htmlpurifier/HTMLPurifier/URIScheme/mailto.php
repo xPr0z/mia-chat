@@ -1,5 +1,7 @@
 <?php
 
+require_once 'HTMLPurifier/URIScheme.php';
+
 // VERY RELAXED! Shouldn't cause problems, not even Firefox checks if the
 // email is valid, but be careful!
 
@@ -11,9 +13,9 @@
 
 class HTMLPurifier_URIScheme_mailto extends HTMLPurifier_URIScheme {
     
-    public $browsable = false;
+    var $browsable = false;
     
-    public function validate(&$uri, $config, $context) {
+    function validate(&$uri, $config, &$context) {
         parent::validate($uri, $config, $context);
         $uri->userinfo = null;
         $uri->host     = null;

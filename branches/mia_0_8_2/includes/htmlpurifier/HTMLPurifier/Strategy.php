@@ -8,8 +8,13 @@
  * features, such as custom tags, custom parsing of text, etc.
  */
 
+HTMLPurifier_ConfigSchema::define(
+    'Core', 'EscapeInvalidTags', false, 'bool',
+    'When true, invalid tags will be written back to the document as plain '.
+    'text.  Otherwise, they are silently dropped.'
+);
  
-abstract class HTMLPurifier_Strategy
+class HTMLPurifier_Strategy
 {
     
     /**
@@ -19,7 +24,9 @@ abstract class HTMLPurifier_Strategy
      * @param $config Configuration options
      * @returns Processed array of token objects.
      */
-    abstract public function execute($tokens, $config, $context);
+    function execute($tokens, $config, &$context) {
+        trigger_error('Cannot call abstract function', E_USER_ERROR);
+    }
     
 }
 

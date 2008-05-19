@@ -1,17 +1,19 @@
 <?php
 
+require_once 'HTMLPurifier/AttrDef.php';
+
 /**
  * Validates a boolean attribute
  */
 class HTMLPurifier_AttrDef_HTML_Bool extends HTMLPurifier_AttrDef
 {
     
-    protected $name;
-    public $minimized = true;
+    var $name;
+    var $minimized = true;
     
-    public function __construct($name = false) {$this->name = $name;}
+    function HTMLPurifier_AttrDef_HTML_Bool($name = false) {$this->name = $name;}
     
-    public function validate($string, $config, $context) {
+    function validate($string, $config, &$context) {
         if (empty($string)) return false;
         return $this->name;
     }
@@ -19,7 +21,7 @@ class HTMLPurifier_AttrDef_HTML_Bool extends HTMLPurifier_AttrDef
     /**
      * @param $string Name of attribute
      */
-    public function make($string) {
+    function make($string) {
         return new HTMLPurifier_AttrDef_HTML_Bool($string);
     }
     

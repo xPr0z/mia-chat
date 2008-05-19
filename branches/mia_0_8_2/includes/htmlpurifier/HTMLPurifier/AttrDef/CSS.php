@@ -1,5 +1,8 @@
 <?php
 
+require_once 'HTMLPurifier/AttrDef.php';
+require_once 'HTMLPurifier/CSSDefinition.php';
+
 /**
  * Validates the HTML attribute style, otherwise known as CSS.
  * @note We don't implement the whole CSS specification, so it might be
@@ -14,7 +17,7 @@
 class HTMLPurifier_AttrDef_CSS extends HTMLPurifier_AttrDef
 {
     
-    public function validate($css, $config, $context) {
+    function validate($css, $config, &$context) {
         
         $css = $this->parseCDATA($css);
         
@@ -35,20 +38,7 @@ class HTMLPurifier_AttrDef_CSS extends HTMLPurifier_AttrDef
             list($property, $value) = explode(':', $declaration, 2);
             $property = trim($property);
             $value    = trim($value);
-            $ok = false;
-            do {
-                if (isset($definition->info[$property])) {
-                    $ok = true;
-                    break;
-                }
-                if (ctype_lower($property)) break;
-                $property = strtolower($property);
-                if (isset($definition->info[$property])) {
-                    $ok = true;
-                    break;
-                }
-            } while(0);
-            if (!$ok) continue;
+            if (!isset($definition->info[$property])) continue;
             // inefficient call, since the validator will do this again
             if (strtolower(trim($value)) !== 'inherit') {
                 // inherit works for everything (but only on the base property)

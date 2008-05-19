@@ -1,15 +1,17 @@
 <?php
 
+require_once 'HTMLPurifier/URIScheme.php';
+
 /**
  * Validates ftp (File Transfer Protocol) URIs as defined by generic RFC 1738.
  */
 class HTMLPurifier_URIScheme_ftp extends HTMLPurifier_URIScheme {
     
-    public $default_port = 21;
-    public $browsable = true; // usually
-    public $hierarchical = true;
+    var $default_port = 21;
+    var $browsable = true; // usually
+    var $hierarchical = true;
     
-    public function validate(&$uri, $config, $context) {
+    function validate(&$uri, $config, &$context) {
         parent::validate($uri, $config, $context);
         $uri->query    = null;
         

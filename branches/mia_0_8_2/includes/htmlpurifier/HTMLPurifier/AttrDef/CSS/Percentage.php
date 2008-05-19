@@ -1,5 +1,8 @@
 <?php
 
+require_once 'HTMLPurifier/AttrDef.php';
+require_once 'HTMLPurifier/AttrDef/CSS/Number.php';
+
 /**
  * Validates a Percentage as defined by the CSS spec.
  */
@@ -9,16 +12,16 @@ class HTMLPurifier_AttrDef_CSS_Percentage extends HTMLPurifier_AttrDef
     /**
      * Instance of HTMLPurifier_AttrDef_CSS_Number to defer number validation
      */
-    protected $number_def;
+    var $number_def;
     
     /**
      * @param Bool indicating whether to forbid negative values
      */
-    public function __construct($non_negative = false) {
+    function HTMLPurifier_AttrDef_CSS_Percentage($non_negative = false) {
         $this->number_def = new HTMLPurifier_AttrDef_CSS_Number($non_negative);
     }
     
-    public function validate($string, $config, $context) {
+    function validate($string, $config, &$context) {
         
         $string = $this->parseCDATA($string);
         

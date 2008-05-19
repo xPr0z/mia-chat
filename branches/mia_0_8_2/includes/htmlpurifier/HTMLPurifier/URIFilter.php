@@ -11,28 +11,30 @@
  *          you check that it exists. This allows filters to convert
  *          proprietary URI schemes into regular ones.
  */
-abstract class HTMLPurifier_URIFilter
+class HTMLPurifier_URIFilter
 {
     
     /**
      * Unique identifier of filter
      */
-    public $name;
+    var $name;
     
     /**
      * Performs initialization for the filter
      */
-    public function prepare($config) {}
+    function prepare($config) {}
     
     /**
      * Filter a URI object
-     * @param $uri Reference to URI object variable
+     * @param &$uri Reference to URI object
      * @param $config Instance of HTMLPurifier_Config
-     * @param $context Instance of HTMLPurifier_Context
+     * @param &$context Instance of HTMLPurifier_Context
      * @return bool Whether or not to continue processing: false indicates
      *         URL is no good, true indicates continue processing. Note that
      *         all changes are committed directly on the URI object
      */
-    abstract public function filter(&$uri, $config, $context);
+    function filter(&$uri, $config, &$context) {
+        trigger_error('Cannot call abstract function', E_USER_ERROR);
+    }
     
 }

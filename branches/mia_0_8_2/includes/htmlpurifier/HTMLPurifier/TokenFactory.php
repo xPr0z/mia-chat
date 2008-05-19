@@ -1,15 +1,17 @@
 <?php
 
+require_once 'HTMLPurifier/Token.php';
+
 /**
- * Factory for token generation.
+ * Factory for token generation (PHP 5 only).
  * 
  * @note Doing some benchmarking indicates that the new operator is much
  *       slower than the clone operator (even discounting the cost of the
- *       constructor).  This class is for that optimization.
- *       Other then that, there's not much point as we don't
+ *       constructor).  This class is for that optimization.  We may want to
+ *       consider porting this to PHP 4 by virtue of the fact it makes the code
+ *       easier to read.  Other then that, there's not much point as we don't
  *       maintain parallel HTMLPurifier_Token hierarchies (the main reason why
  *       you'd want to use an abstract factory).
- * @todo Port DirectLex to use this
  */
 class HTMLPurifier_TokenFactory
 {
@@ -40,7 +42,7 @@ class HTMLPurifier_TokenFactory
      */
     public function createStart($name, $attr = array()) {
         $p = clone $this->p_start;
-        $p->__construct($name, $attr);
+        $p->HTMLPurifier_Token_Tag($name, $attr);
         return $p;
     }
     
@@ -51,7 +53,7 @@ class HTMLPurifier_TokenFactory
      */
     public function createEnd($name) {
         $p = clone $this->p_end;
-        $p->__construct($name);
+        $p->HTMLPurifier_Token_Tag($name);
         return $p;
     }
     
@@ -63,7 +65,7 @@ class HTMLPurifier_TokenFactory
      */
     public function createEmpty($name, $attr = array()) {
         $p = clone $this->p_empty;
-        $p->__construct($name, $attr);
+        $p->HTMLPurifier_Token_Tag($name, $attr);
         return $p;
     }
     
@@ -74,7 +76,7 @@ class HTMLPurifier_TokenFactory
      */
     public function createText($data) {
         $p = clone $this->p_text;
-        $p->__construct($data);
+        $p->HTMLPurifier_Token_Text($data);
         return $p;
     }
     
@@ -85,7 +87,7 @@ class HTMLPurifier_TokenFactory
      */
     public function createComment($data) {
         $p = clone $this->p_comment;
-        $p->__construct($data);
+        $p->HTMLPurifier_Token_Comment($data);
         return $p;
     }
     

@@ -1,22 +1,24 @@
 <?php
 
+require_once 'HTMLPurifier/ConfigDef.php';
+
 /**
  * Structure object describing a directive alias
  */
 class HTMLPurifier_ConfigDef_DirectiveAlias extends HTMLPurifier_ConfigDef
 {
-    public $class = 'alias';
+    var $class = 'alias';
     
     /**
      * Namespace being aliased to
      */
-    public $namespace;
+    var $namespace;
     /**
      * Directive being aliased to
      */
-    public $name;
+    var $name;
     
-    public function __construct($namespace, $name) {
+    function HTMLPurifier_ConfigDef_DirectiveAlias($namespace, $name) {
         $this->namespace = $namespace;
         $this->name = $name;
     }

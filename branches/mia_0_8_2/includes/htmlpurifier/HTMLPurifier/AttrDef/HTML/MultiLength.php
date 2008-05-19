@@ -1,5 +1,8 @@
 <?php
 
+require_once 'HTMLPurifier/AttrDef.php';
+require_once 'HTMLPurifier/AttrDef/HTML/Length.php';
+
 /**
  * Validates a MultiLength as defined by the HTML spec.
  * 
@@ -9,7 +12,7 @@
 class HTMLPurifier_AttrDef_HTML_MultiLength extends HTMLPurifier_AttrDef_HTML_Length
 {
     
-    public function validate($string, $config, $context) {
+    function validate($string, $config, &$context) {
         
         $string = trim($string);
         if ($string === '') return false;

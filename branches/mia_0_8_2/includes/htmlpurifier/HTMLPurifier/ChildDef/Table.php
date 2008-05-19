@@ -1,16 +1,18 @@
 <?php
 
+require_once 'HTMLPurifier/ChildDef.php';
+
 /**
  * Definition for tables
  */
 class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
 {
-    public $allow_empty = false;
-    public $type = 'table';
-    public $elements = array('tr' => true, 'tbody' => true, 'thead' => true,
+    var $allow_empty = false;
+    var $type = 'table';
+    var $elements = array('tr' => true, 'tbody' => true, 'thead' => true,
         'tfoot' => true, 'caption' => true, 'colgroup' => true, 'col' => true);
-    public function __construct() {}
-    public function validateChildren($tokens_of_children, $config, $context) {
+    function HTMLPurifier_ChildDef_Table() {}
+    function validateChildren($tokens_of_children, $config, &$context) {
         if (empty($tokens_of_children)) return false;
         
         // this ensures that the loop gets run one last time before closing
@@ -39,9 +41,9 @@ class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
             
             if ($token === false) {
                 // terminating sequence started
-            } elseif ($token instanceof HTMLPurifier_Token_Start) {
+            } elseif ($token->type == 'start') {
                 $nesting++;
-            } elseif ($token instanceof HTMLPurifier_Token_End) {
+            } elseif ($token->type == 'end') {
                 $nesting--;
             }
             
@@ -110,7 +112,7 @@ class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
                         $collection[] = $token;
                         continue;
                     default:
-                        if ($token instanceof HTMLPurifier_Token_Text && $token->is_whitespace) {
+                        if ($token->type == 'text' && $token->is_whitespace) {
                             $collection[] = $token;
                             $tag_index++;
                         }

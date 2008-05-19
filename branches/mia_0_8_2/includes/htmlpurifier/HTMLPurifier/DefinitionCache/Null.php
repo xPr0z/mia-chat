@@ -1,36 +1,34 @@
 <?php
 
+require_once 'HTMLPurifier/DefinitionCache.php';
+
 /**
  * Null cache object to use when no caching is on.
  */
 class HTMLPurifier_DefinitionCache_Null extends HTMLPurifier_DefinitionCache
 {
     
-    public function add($def, $config) {
+    function add($def, $config) {
         return false;
     }
     
-    public function set($def, $config) {
+    function set($def, $config) {
         return false;
     }
     
-    public function replace($def, $config) {
+    function replace($def, $config) {
         return false;
     }
     
-    public function remove($config) {
+    function get($config) {
         return false;
     }
     
-    public function get($config) {
+    function flush($config) {
         return false;
     }
     
-    public function flush($config) {
-        return false;
-    }
-    
-    public function cleanup($config) {
+    function cleanup($config) {
         return false;
     }
     

@@ -1,23 +1,34 @@
 <?php
 
+require_once 'HTMLPurifier/DefinitionCache/Serializer.php';
+require_once 'HTMLPurifier/DefinitionCache/Null.php';
+
+require_once 'HTMLPurifier/DefinitionCache/Decorator.php';
+require_once 'HTMLPurifier/DefinitionCache/Decorator/Memory.php';
+require_once 'HTMLPurifier/DefinitionCache/Decorator/Cleanup.php';
+
 /**
  * Abstract class representing Definition cache managers that implements
  * useful common methods and is a factory.
+ * @todo Get some sort of versioning variable so the library can easily
+ *       invalidate the cache with a new version
+ * @todo Make the test runner cache aware and allow the user to easily
+ *       flush the cache
  * @todo Create a separate maintenance file advanced users can use to
  *       cache their custom HTMLDefinition, which can be loaded
  *       via a configuration directive
  * @todo Implement memcached
  */
-abstract class HTMLPurifier_DefinitionCache
+class HTMLPurifier_DefinitionCache
 {
     
-    public $type;
+    var $type;
     
     /**
      * @param $name Type of definition objects this instance of the
      *      cache will handle.
      */
-    public function __construct($type) {
+    function HTMLPurifier_DefinitionCache($type) {
         $this->type = $type;
     }
     
@@ -25,9 +36,9 @@ abstract class HTMLPurifier_DefinitionCache
      * Generates a unique identifier for a particular configuration
      * @param Instance of HTMLPurifier_Config
      */
-    public function generateKey($config) {
-        return $config->version . ',' . // possibly replace with function calls
-               $config->getBatchSerial($this->type) . ',' .
+    function generateKey($config) {
+        return $config->version . '-' . // possibly replace with function calls
+               $config->getBatchSerial($this->type) . '-' .
                $config->get($this->type, 'DefinitionRev');
     }
     
@@ -37,9 +48,9 @@ abstract class HTMLPurifier_DefinitionCache
      * @param $key Key to test
      * @param $config Instance of HTMLPurifier_Config to test against
      */
-    public function isOld($key, $config) {
-        if (substr_count($key, ',') < 2) return true;
-        list($version, $hash, $revision) = explode(',', $key, 3);
+    function isOld($key, $config) {
+        if (substr_count($key, '-') < 2) return true;
+        list($version, $hash, $revision) = explode('-', $key, 3);
         $compare = version_compare($version, $config->version);
         // version mismatch, is always old
         if ($compare != 0) return true;
@@ -57,7 +68,7 @@ abstract class HTMLPurifier_DefinitionCache
      * @param $def Definition object to check
      * @return Boolean true if good, false if not
      */
-    public function checkDefType($def) {
+    function checkDefType($def) {
         if ($def->type !== $this->type) {
             trigger_error("Cannot use definition of type {$def->type} in cache for {$this->type}");
             return false;
@@ -68,40 +79,50 @@ abstract class HTMLPurifier_DefinitionCache
     /**
      * Adds a definition object to the cache
      */
-    abstract public function add($def, $config);
+    function add($def, $config) {
+        trigger_error('Cannot call abstract method', E_USER_ERROR);
+    }
     
     /**
      * Unconditionally saves a definition object to the cache
      */
-    abstract public function set($def, $config);
+    function set($def, $config) {
+        trigger_error('Cannot call abstract method', E_USER_ERROR);
+    }
     
     /**
      * Replace an object in the cache
      */
-    abstract public function replace($def, $config);
+    function replace($def, $config) {
+        trigger_error('Cannot call abstract method', E_USER_ERROR);
+    }
     
     /**
      * Retrieves a definition object from the cache
      */
-    abstract public function get($config);
+    function get($config) {
+        trigger_error('Cannot call abstract method', E_USER_ERROR);
+    }
     
     /**
      * Removes a definition object to the cache
      */
-    abstract public function remove($config);
+    function remove($config) {
+        trigger_error('Cannot call abstract method', E_USER_ERROR);
+    }
     
     /**
      * Clears all objects from cache
      */
-    abstract public function flush($config);
+    function flush($config) {
+        trigger_error('Cannot call abstract method', E_USER_ERROR);
+    }
     
     /**
      * Clears all expired (older version or revision) objects from cache
-     * @note Be carefuly implementing this method as flush. Flush must
-     *       not interfere with other Definition types, and cleanup()
-     *       should not be repeatedly called by userland code.
      */
-    abstract public function cleanup($config);
-    
+    function cleanup($config) {
+        trigger_error('Cannot call abstract method', E_USER_ERROR);
+    }
 }
 

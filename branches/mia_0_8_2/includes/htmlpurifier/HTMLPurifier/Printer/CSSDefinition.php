@@ -1,11 +1,13 @@
 <?php
 
+require_once 'HTMLPurifier/Printer.php';
+
 class HTMLPurifier_Printer_CSSDefinition extends HTMLPurifier_Printer
 {
     
-    protected $def;
+    var $def;
     
-    public function render($config) {
+    function render($config) {
         $this->def = $config->getCSSDefinition();
         $ret = '';
         

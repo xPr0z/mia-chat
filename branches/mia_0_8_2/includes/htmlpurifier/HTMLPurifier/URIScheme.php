@@ -8,20 +8,22 @@ class HTMLPurifier_URIScheme
     
     /**
      * Scheme's default port (integer)
+     * @public
      */
-    public $default_port = null;
+    var $default_port = null;
     
     /**
      * Whether or not URIs of this schem are locatable by a browser
      * http and ftp are accessible, while mailto and news are not.
+     * @public
      */
-    public $browsable = false;
+    var $browsable = false;
     
     /**
      * Whether or not the URI always uses <hier_part>, resolves edge cases
      * with making relative URIs absolute
      */
-    public $hierarchical = false;
+    var $hierarchical = false;
     
     /**
      * Validates the components of a URI
@@ -32,7 +34,7 @@ class HTMLPurifier_URIScheme
      * @param $context HTMLPurifier_Context object
      * @return Bool success or failure
      */
-    public function validate(&$uri, $config, $context) {
+    function validate(&$uri, $config, &$context) {
         if ($this->default_port == $uri->port) $uri->port = null;
         return true;
     }

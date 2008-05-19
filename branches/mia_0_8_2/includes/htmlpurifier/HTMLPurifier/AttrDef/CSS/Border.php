@@ -1,5 +1,7 @@
 <?php
 
+require_once 'HTMLPurifier/AttrDef.php';
+
 /**
  * Validates the border property as defined by CSS.
  */
@@ -9,18 +11,18 @@ class HTMLPurifier_AttrDef_CSS_Border extends HTMLPurifier_AttrDef
     /**
      * Local copy of properties this property is shorthand for.
      */
-    protected $info = array();
+    var $info = array();
     
-    public function __construct($config) {
+    function HTMLPurifier_AttrDef_CSS_Border($config) {
         $def = $config->getCSSDefinition();
         $this->info['border-width'] = $def->info['border-width'];
         $this->info['border-style'] = $def->info['border-style'];
         $this->info['border-top-color'] = $def->info['border-top-color'];
     }
     
-    public function validate($string, $config, $context) {
+    function validate($string, $config, &$context) {
         $string = $this->parseCDATA($string);
-        $string = $this->mungeRgb($string);
+        // we specifically will not support rgb() syntax with spaces
         $bits = explode(' ', $string);
         $done = array(); // segments we've finished
         $ret = ''; // return value

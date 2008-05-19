@@ -1,24 +1,27 @@
 <?php
 
+require_once 'HTMLPurifier/AttrTransform.php';
+
 /**
  * Pre-transform that changes deprecated hspace and vspace attributes to CSS
  */
-class HTMLPurifier_AttrTransform_ImgSpace extends HTMLPurifier_AttrTransform {
+class HTMLPurifier_AttrTransform_ImgSpace
+extends HTMLPurifier_AttrTransform {
     
-    protected $attr;
-    protected $css = array(
+    var $attr;
+    var $css = array(
         'hspace' => array('left', 'right'),
         'vspace' => array('top', 'bottom')
     );
     
-    public function __construct($attr) {
+    function HTMLPurifier_AttrTransform_ImgSpace($attr) {
         $this->attr = $attr;
         if (!isset($this->css[$attr])) {
             trigger_error(htmlspecialchars($attr) . ' is not valid space attribute');
         }
     }
     
-    public function transform($attr, $config, $context) {
+    function transform($attr, $config, &$context) {
         
         if (!isset($attr[$this->attr])) return $attr;
         

@@ -1,5 +1,7 @@
 <?php
 
+require_once 'HTMLPurifier/HTMLModule.php';
+
 /**
  * XHTML 1.1 Object Module, defines elements for generic object inclusion
  * @warning Users will commonly use <embed> to cater to legacy browsers: this
@@ -8,12 +10,11 @@
 class HTMLPurifier_HTMLModule_Object extends HTMLPurifier_HTMLModule
 {
     
-    public $name = 'Object';
-    public $safe = false;
+    var $name = 'Object';
     
-    public function __construct() {
+    function HTMLPurifier_HTMLModule_Object() {
         
-        $this->addElement('object', 'Inline', 'Optional: #PCDATA | Flow | param', 'Common', 
+        $this->addElement('object', false, 'Inline', 'Optional: #PCDATA | Flow | param', 'Common', 
             array(
                 'archive' => 'URI',
                 'classid' => 'URI',
@@ -30,7 +31,7 @@ class HTMLPurifier_HTMLModule_Object extends HTMLPurifier_HTMLModule
             )
         );
 
-        $this->addElement('param', false, 'Empty', false,
+        $this->addElement('param', false, false, 'Empty', false,
             array(
                 'id' => 'ID',
                 'name*' => 'Text',

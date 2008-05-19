@@ -1,5 +1,7 @@
 <?php
 
+require_once 'HTMLPurifier/AttrDef.php';
+
 /**
  * Validates shorthand CSS property list-style.
  * @warning Does not support url tokens that have internal spaces.
@@ -11,16 +13,16 @@ class HTMLPurifier_AttrDef_CSS_ListStyle extends HTMLPurifier_AttrDef
      * Local copy of component validators.
      * @note See HTMLPurifier_AttrDef_CSS_Font::$info for a similar impl.
      */
-    protected $info;
+    var $info;
     
-    public function __construct($config) {
+    function HTMLPurifier_AttrDef_CSS_ListStyle($config) {
         $def = $config->getCSSDefinition();
         $this->info['list-style-type']     = $def->info['list-style-type'];
         $this->info['list-style-position'] = $def->info['list-style-position'];
         $this->info['list-style-image'] = $def->info['list-style-image'];
     }
     
-    public function validate($string, $config, $context) {
+    function validate($string, $config, &$context) {
         
         // regular pre-processing
         $string = $this->parseCDATA($string);

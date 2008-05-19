@@ -1,14 +1,16 @@
 <?php
 
+require_once 'HTMLPurifier/Printer.php';
+
 class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
 {
     
     /**
      * Instance of HTMLPurifier_HTMLDefinition, for easy access
      */
-    protected $def;
+    var $def;
     
-    public function render($config) {
+    function render($config) {
         $ret = '';
         $this->config =& $config;
         
@@ -29,7 +31,7 @@ class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
     /**
      * Renders the Doctype table
      */
-    protected function renderDoctype() {
+    function renderDoctype() {
         $doctype = $this->def->doctype;
         $ret = '';
         $ret .= $this->start('table');
@@ -46,7 +48,7 @@ class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
     /**
      * Renders environment table, which is miscellaneous info
      */
-    protected function renderEnvironment() {
+    function renderEnvironment() {
         $def = $this->def;
         
         $ret = '';
@@ -90,7 +92,7 @@ class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
     /**
      * Renders the Content Sets table
      */
-    protected function renderContentSets() {
+    function renderContentSets() {
         $ret = '';
         $ret .= $this->start('table');
         $ret .= $this->element('caption', 'Content Sets');
@@ -107,7 +109,7 @@ class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
     /**
      * Renders the Elements ($info) table
      */
-    protected function renderInfo() {
+    function renderInfo() {
         $ret = '';
         $ret .= $this->start('table');
         $ret .= $this->element('caption', 'Elements ($info)');
@@ -118,7 +120,7 @@ class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
         $ret .= $this->end('tr');
         foreach ($this->def->info as $name => $def) {
             $ret .= $this->start('tr');
-                $ret .= $this->element('th', "<$name>", array('class'=>'heavy', 'colspan' => 2));
+                $ret .= $this->element('th', "<$name>" . ($def->safe ? '' : ' (unsafe)'), array('class'=>'heavy' . ($def->safe ? '' : ' unsafe'), 'colspan' => 2));
             $ret .= $this->end('tr');
             $ret .= $this->start('tr');
                 $ret .= $this->element('th', 'Inline content');
@@ -167,7 +169,7 @@ class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
      * Renders a row describing the allowed children of an element
      * @param $def HTMLPurifier_ChildDef of pertinent element
      */
-    protected function renderChildren($def) {
+    function renderChildren($def) {
         $context = new HTMLPurifier_Context();
         $ret = '';
         $ret .= $this->start('tr');
@@ -218,7 +220,7 @@ class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
      * Listifies a tag lookup table.
      * @param $array Tag lookup array in form of array('tagname' => true)
      */
-    protected function listifyTagLookup($array) {
+    function listifyTagLookup($array) {
         ksort($array);
         $list = array();
         foreach ($array as $name => $discard) {
@@ -233,7 +235,7 @@ class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
      * @param $array List of objects
      * @todo Also add information about internal state
      */
-    protected function listifyObjectList($array) {
+    function listifyObjectList($array) {
         ksort($array);
         $list = array();
         foreach ($array as $discard => $obj) {
@@ -246,7 +248,7 @@ class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
      * Listifies a hash of attributes to AttrDef classes
      * @param $array Array hash in form of array('attrname' => HTMLPurifier_AttrDef)
      */
-    protected function listifyAttr($array) {
+    function listifyAttr($array) {
         ksort($array);
         $list = array();
         foreach ($array as $name => $obj) {
@@ -259,7 +261,7 @@ class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
     /**
      * Creates a heavy header row
      */
-    protected function heavyHeader($text, $num = 1) {
+    function heavyHeader($text, $num = 1) {
         $ret = '';
         $ret .= $this->start('tr');
         $ret .= $this->element('th', $text, array('colspan' => $num, 'class' => 'heavy'));

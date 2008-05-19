@@ -1,5 +1,7 @@
 <?php
 
+require_once 'HTMLPurifier/TagTransform.php';
+
 /**
  * Transforms FONT tags to the proper form (SPAN with CSS styling)
  * 
@@ -15,9 +17,9 @@
 class HTMLPurifier_TagTransform_Font extends HTMLPurifier_TagTransform
 {
     
-    public $transform_to = 'span';
+    var $transform_to = 'span';
     
-    protected $_size_lookup = array(
+    var $_size_lookup = array(
         '0' => 'xx-small',
         '1' => 'xx-small',
         '2' => 'small',
@@ -34,10 +36,10 @@ class HTMLPurifier_TagTransform_Font extends HTMLPurifier_TagTransform
         '+4' => '300%'
     );
     
-    public function transform($tag, $config, $context) {
+    function transform($tag, $config, &$context) {
         
-        if ($tag instanceof HTMLPurifier_Token_End) {
-            $new_tag = clone $tag;
+        if ($tag->type == 'end') {
+            $new_tag = $tag->copy();
             $new_tag->name = $this->transform_to;
             return $new_tag;
         }
@@ -81,7 +83,7 @@ class HTMLPurifier_TagTransform_Font extends HTMLPurifier_TagTransform
                 $prepend_style;
         }
         
-        $new_tag = clone $tag;
+        $new_tag = $tag->copy();
         $new_tag->name = $this->transform_to;
         $new_tag->attr = $attr;
         

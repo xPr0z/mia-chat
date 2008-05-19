@@ -7,8 +7,9 @@ class HTMLPurifier_EntityLookup {
     
     /**
      * Assoc array of entity name to character represented.
+     * @public
      */
-    public $table;
+    var $table;
     
     /**
      * Sets up the entity lookup table from the serialized file contents.
@@ -16,7 +17,7 @@ class HTMLPurifier_EntityLookup {
      *       using the maintenance script generate_entity_file.php
      * @warning This is not in constructor to help enforce the Singleton
      */
-    public function setup($file = false) {
+    function setup($file = false) {
         if (!$file) {
             $file = HTMLPURIFIER_PREFIX . '/HTMLPurifier/EntityLookup/entities.ser';
         }
@@ -25,9 +26,10 @@ class HTMLPurifier_EntityLookup {
     
     /**
      * Retrieves sole instance of the object.
+     * @static
      * @param Optional prototype of custom lookup table to overload with.
      */
-    public static function instance($prototype = false) {
+    static function instance($prototype = false) {
         // no references, since PHP doesn't copy unless modified
         static $instance = null;
         if ($prototype) {

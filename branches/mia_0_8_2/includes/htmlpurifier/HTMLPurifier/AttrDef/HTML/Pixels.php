@@ -1,12 +1,14 @@
 <?php
 
+require_once 'HTMLPurifier/AttrDef.php';
+
 /**
  * Validates an integer representation of pixels according to the HTML spec.
  */
 class HTMLPurifier_AttrDef_HTML_Pixels extends HTMLPurifier_AttrDef
 {
     
-    public function validate($string, $config, $context) {
+    function validate($string, $config, &$context) {
         
         $string = trim($string);
         if ($string === '0') return $string;

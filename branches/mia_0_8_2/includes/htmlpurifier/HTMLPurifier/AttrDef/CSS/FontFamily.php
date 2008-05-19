@@ -1,13 +1,16 @@
 <?php
 
+require_once 'HTMLPurifier/AttrDef.php';
+
+// whitelisting allowed fonts would be nice
+
 /**
  * Validates a font family list according to CSS spec
- * @todo whitelisting allowed fonts would be nice
  */
 class HTMLPurifier_AttrDef_CSS_FontFamily extends HTMLPurifier_AttrDef
 {
     
-    public function validate($string, $config, $context) {
+    function validate($string, $config, &$context) {
         static $generic_names = array(
             'serif' => true,
             'sans-serif' => true,
