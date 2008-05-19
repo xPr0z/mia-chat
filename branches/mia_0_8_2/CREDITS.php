@@ -21,5 +21,6 @@
  * Graphics:
  * Tango - http://tango.freedesktop.org/Tango_Desktop_Project
  * famfamfam_silk - http://www.famfamfam.com/lab/icons/silk/
+ * Mia-Chat logo - Neal Dipentino (tdipentino@gmail.com)
  */
 ?>
