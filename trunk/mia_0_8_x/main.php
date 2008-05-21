@@ -97,7 +97,7 @@ if (isset($_SESSION['showoffline'])) {
                     </div>
                 </div>
             </div>
-            <div id="ft">Copyright &copy; 2008 Brilaps, LLC. All rights reserved.</div>
+            <div id="ft">Copyright &copy; 2008 <a href="http://brilaps.com">Brilaps</a>, LLC. All rights reserved.</div>
         </div>
         
         <form action="main.php" method="get">

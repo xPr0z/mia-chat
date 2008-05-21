@@ -142,7 +142,7 @@ if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
 			</form>
 		</div>
 	</div>
-     <div id="ft">Copyright &copy; 2008 Brilaps, LLC. All rights reserved.</div>
+     <div id="ft">Copyright &copy; 2008 <a href="http://brilaps.com">Brilaps</a>, LLC. All rights reserved.</div>
 </div>
 <script type="text/javascript" src="includes/js/jquery/jquery.js"></script>
 <script type="text/javascript" src="includes/js/jquery/plugins/validate/lib/jquery.metadata.js"></script>
