@@ -1,9 +1,9 @@
-#summary Mia is a web based Ajax chat application.
+#summary Mia-Chat is a web based Ajax chat application.
 #labels Featured
 
 = Introduction =
 
-Key intentions and achievements Mia are: 
+Key intentions and achievements Mia-Chat are: 
 
   * Simple setup 
   * Ease of use 
@@ -12,7 +12,7 @@ Key intentions and achievements Mia are:
   * Database platform agnostic
 
 = Requirements =
-Mia will require the following to function:
+Mia-Chat will require the following to function:
 
   * PHP 5
   * Apache Web Server 1.3+
@@ -20,7 +20,7 @@ Mia will require the following to function:
 
 = Browser Compatibility =
 
-Mia aims to support the same browsers as [http://docs.jquery.com/Browser_Compatibility jQuery].
+Mia-Chat aims to support the same browsers as [http://docs.jquery.com/Browser_Compatibility jQuery].
 
 
 = Details =
