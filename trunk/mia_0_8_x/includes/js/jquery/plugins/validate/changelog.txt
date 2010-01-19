@@ -1,7 +1,110 @@
-xxx
+1.6
 ---
+* Added Arabic (AR), Portuguese (PTPT), Persian (FA), Finnish (FI) and Bulgarian (BR) localization
+* Updated Swedish (SE) localization (some missing html iso characters)
+* Fixed $.validator.addMethod to properly handle empty string vs. undefined for the message argument
+* Fixed two accidental global variables
+* Enhanced min/max/rangeWords (in additional-methods.js) to strip html before counting; good when counting words in a richtext editor
+* Added localized methods for DE, NL and PT, removing the dateDE and numberDE methods (use messages_de.js and methods_de.js with date and number methods instead)
+* Fixed remote form submit synchronization, kudos to Matas Petrikas
+* Improved interactive select validation, now validating also on click (via option or select, inconsistent across browsers); doesn't work in Safari, which doesn't trigger a click event at all on select elements; fixes http://plugins.jquery.com/node/11520
+* Updated to latest form plugin (2.36), fixing http://plugins.jquery.com/node/11487
+* Bind to blur event for equalTo target to revalidate when that target changes, fixes http://plugins.jquery.com/node/11450
+* Simplified select validation, delegating to jQuery's val() method to get the select value; should fix http://plugins.jquery.com/node/11239
+* Fixed default message for digits (http://plugins.jquery.com/node/9853)
+* Fixed issue with cached remote message (http://plugins.jquery.com/node/11029 and http://plugins.jquery.com/node/9351)
+* Fixed a missing semicolon in additional-methods.js (http://plugins.jquery.com/node/9233)
+* Added automatic detection of substitution parameters in messages, removing the need to provide format functions (http://plugins.jquery.com/node/11195)
+* Fixed an issue with :filled/:blank somewhat caused by Sizzle (http://plugins.jquery.com/node/11144)
+* Added an integer method to additional-methods.js (http://plugins.jquery.com/node/9612)
+* Fixed errorsFor method where the for-attribute contains characters that need escaping to be valid inside a selector (http://plugins.jquery.com/node/9611)
 
-* Added spanish localization (messages_es.js)
+1.5.5
+---
+* Fix for http://plugins.jquery.com/node/8659
+* Fixed trailing comma in messages_cs.js
+
+1.5.4
+---
+* Fixed remote method bug (http://plugins.jquery.com/node/8658)
+
+1.5.3
+---
+* Fixed a bug related to the wrapper-option, where all ancestor-elements that matched the wrapper-option where selected (http://plugins.jquery.com/node/7624)
+* Updated multipart demo to use latest jQuery UI accordion
+* Added dateNL and time methods to additionalMethods.js
+* Added Traditional Chinese (Taiwan, tw) and Kazakhstan (KK) localization
+* Moved jQuery.format (fomerly String.format) to jQuery.validator.format, jQuery.format is deprecated and will be removed in 1.6 (see http://code.google.com/p/jquery-utils/issues/detail?id=15 for details)
+* Cleaned up messages_pl.js and messages_ptbr.js (still defined messages for max/min/rangeValue, which were removed in 1.4)
+* Fixed flawed boolean logic in valid-plugin-method for multiple elements; now all elements need to be valid for a boolean-true result (http://plugins.jquery.com/node/8481)
+* Enhancement $.validator.addMethod: An undefined third message-argument won't overwrite an existing message (http://plugins.jquery.com/node/8443)
+* Enhancement to submitHandler option: When used, click events on submit buttons are captured and the submitting button is inserted into the form before calling submitHandler, and removed afterwards; keeps submit buttons intact (http://plugins.jquery.com/node/7183#comment-3585)
+* Added option validClass, default "valid", which adds that class to all valid elements, after validation (http://dev.jquery.com/ticket/2205)
+* Added creditcardtypes method to additionalMethods.js, including tests (via http://dev.jquery.com/ticket/3635)
+* Improved remote method to allow serverside message as a string, or true for valid, or false for invalid using the clientside defined message (http://dev.jquery.com/ticket/3807)
+* Improved accept method to also accept a Drupal-style comma-seperated list of values (http://plugins.jquery.com/node/8580)
+
+1.5.2
+---
+* Fixed messages in additional-methods.js for maxWords, minWords, and rangeWords to include call to $.format 
+* Fixed value passed to methods to exclude carriage return (\r), same as jQuery's val() does
+* Added slovak (sk) localization
+* Added demo for intergration with jQuery UI tabs
+* Added selects-grouping example to tabs demo (see second tab, birthdate field)
+
+1.5.1
+---
+* Updated marketo demo to use invalidHandler option instead of binding invalid-form event
+* Added TinyMCE integration example
+* Added ukrainian (ua) localization
+* Fixed length validation to work with trimmed value (regression from 1.5 where general trimming before validation was removed)
+* Various small fixes for compability with both 1.2.6 and 1.3
+
+1.5
+---
+* Improved basic demo, validating confirm-password field after password changed
+* Fixed basic validation to pass the untrimmed input value as the first parameter to validation methods, changed required accordingly; breaks existing custom method that rely on the trimming
+* Added norwegian (no), italian (it), hungarian (hu) and romanian (ro) localization
+* Fixed #3195: Two flaws in swedish localization
+* Fixed #3503: Extended rules("add") to accept messages propery: use to specify add custom messages to an element via rules("add", { messages: { required: "Required! " } }); 
+* Fixed #3356: Regression from #2908 when using meta-option
+* Fixed #3370: Added ignoreTitle option, set to skip reading messages from the title attribute, helps to avoid issues with Google Toolbar; default is false for compability
+* Fixed #3516: Trigger invalid-form event even when remote validation is involved
+* Added invalidHandler option as a shortcut to bind("invalid-form", function() {})
+* Fixed Safari issue for loading indicator in ajaxSubmit-integration-demo (append to body first, then hide)
+* Added test for creditcard validation and improved default message
+* Enhanced remote validation, accepting options to passthrough to $.ajax as paramter (either url string or options, including url property plus everything else that $.ajax supports)
+
+1.4
+---
+* Fixed #2931, validate elements in document order and ignore type=image inputs
+* Fixed usage of $ and jQuery variables, now fully comptible with all variations of noConflict usage
+* Implemented #2908, enabling custom messages via metadata ala class="{required:true,messages:{required:'required field'}}", added demo/custom-messages-metadata-demo.html
+* Removed deprecated methods minValue (min), maxValue (max), rangeValue (rangevalue), minLength (minlength), maxLength (maxlength), rangeLength (rangelength)
+* Fixed #2215 regression: Call unhighlight only for current elements, not everything
+* Implemented #2989, enabling image button to cancel validation
+* Fixed issue where IE incorrectly validates against maxlength=0
+* Added czech (cs) localization
+* Reset validator.submitted on validator.resetForm(), enabling a full reset when necessary
+* Fixed #3035, skipping all falsy attributes when reading rules (0, undefined, empty string), removed part of the maxlength workaround (for 0)
+* Added dutch (nl) localization (#3201)
+
+1.3
+---
+* Fixed invalid-form event, now only triggered when form is invalid
+* Added spanish (es), russian (ru), portuguese brazilian (ptbr), turkish (tr), and polish (pl) localization
+* Added removeAttrs plugin to facilate adding and removing multiple attributes
+* Added groups option to display a single message for multiple elements, via groups: { arbitraryGroupName: "fieldName1 fieldName2[, fieldNameN" }
+* Enhanced rules() for adding and removing (static) rules: rules("add", "method1[, methodN]"/{method1:param[, method_n:param]}) and rules("remove"[, "method1[, method_n]") 
+* Enhanced rules-option, accepts space-seperated string-list of methods, eg. {birthdate: "required date"}  
+* Fixed checkbox group validation with inline rules: As long as the rules are specified on the first element, the group is now properly validated on click
+* Fixed #2473, ignoring all rules with an explicit parameter of boolean-false, eg. required:false is the same as not specifying required at all (it was handled as required:true so far)
+* Fixed #2424, with a modified patch from #2473: Methods returning a dependency-mismatch don't stop other rules from being evaluated anymore; still, success isn't applied for optional fields
+* Fixed url and email validation to not use trimmed values
+* Fixed creditcard validation to accept only digits and dashes ("asdf" is not a valid creditcard number)
+* Allow both button and input elements for cancel buttons (via class="cancel")
+* Fixed #2215: Fixed message display to call unhighlight as part of showing and hiding messages, no more visual side-effects while checking an element and extracted validator.checkForm to validate a form without UI sideeffects
+* Rewrote custom selectors (:blank, :filled, :unchecked) with functions for compability with AIR
 
 1.2.1
 -----

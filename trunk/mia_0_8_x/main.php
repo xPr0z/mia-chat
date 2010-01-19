@@ -28,15 +28,13 @@ if (isset($_SESSION['showoffline'])) {
         <link href="css/ui.tabs.css" rel="stylesheet" type="text/css" media="all" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>Mia</title>
-        <script type="text/javascript" src="includes/js/jquery/jquery.js"></script>
+        <script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
         <script type="text/javascript">var GB_ANIMATION = true;</script>
         <script type="text/javascript" src="includes/js/greybox/greybox.js"></script>
         <link href="includes/js/greybox/greybox.css" rel="stylesheet" type="text/css" media="all" />
         <script type="text/javascript" src="includes/js/methvin/splitter.js"></script>
         <script type="text/javascript" src="includes/js/mia/chatscroll.js"></script>
-        <script type="text/javascript" src="includes/js/jquery/jquery.timer.js"></script>
-        <script type="text/javascript" src="includes/js/jquery/plugins/dimensions/jquery.dimensions.js"></script>
-        <script type="text/javascript" src="includes/js/jquery/ui/ui.tabs.js"></script>
+        <script type="text/javascript" src="includes/js/jquery/plugins/jquery.timer.js"></script>
         <script type="text/javascript" src="includes/js/mia/date.format.js"></script>
         <script type="text/javascript" src="includes/js/mia/mia.js"></script>
     </head>
@@ -51,9 +49,16 @@ if (isset($_SESSION['showoffline'])) {
                 </noscript>             
                 <div class="yui-ge" id="mia-splitter">
                     <div id="gridmaster" class="yui-u first gridmaster">
-                        <ul>
-                            <li class="filler">No Tabs</li>
-                        </ul>
+                        <div id="tabs">
+                        	<ul>
+                        		<li><a href="#tabs-1">Nunc tincidunt</a></li>
+                        		<li><a href="#tabs-2">Proin dolor</a></li>
+                        		<li><a href="#tabs-3">Aenean lacinia</a></li>
+                        	</ul>
+                        	<div id="tabs-1">
+                        		<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+                        	</div>
+                        </div>
                     </div>
                     <div id="split-right" class="yui-u rightnav" >
                         <div id="rightnav-top">
@@ -97,7 +102,7 @@ if (isset($_SESSION['showoffline'])) {
                     </div>
                 </div>
             </div>
-            <div id="ft">Copyright &copy; 2008 <a href="http://brilaps.com">Brilaps</a>, LLC. All rights reserved.</div>
+            <div id="ft">Copyright &copy; 2008-2010 <a href="http://brilaps.com">Brilaps</a>, LLC. All rights reserved.</div>
         </div>
         
         <form action="main.php" method="get">

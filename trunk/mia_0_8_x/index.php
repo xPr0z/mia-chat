@@ -142,11 +142,11 @@ if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
 			</form>
 		</div>
 	</div>
-     <div id="ft">Copyright &copy; 2008 <a href="http://brilaps.com">Brilaps</a>, LLC. All rights reserved.</div>
+     <div id="ft">Copyright &copy; 2008-2010 <a href="http://brilaps.com">Brilaps</a>, LLC. All rights reserved.</div>
 </div>
-<script type="text/javascript" src="includes/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="includes/js/jquery/plugins/validate/lib/jquery.metadata.js"></script>
-<script type="text/javascript" src="includes/js/jquery/plugins/validate/jquery.validate.js"></script>
+<script type="text/javascript" src="includes/js/jquery/plugins/validate/jquery.validate.min.js"></script>
 <script type="text/javascript" src="includes/js/mia/miaLogin.js"></script>
 </body>
 </html>

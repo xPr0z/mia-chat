@@ -75,9 +75,9 @@ if (isset($_GET['user']) && isset($_GET['email']) && isset($_GET['activation_cod
 	    ?>
 	</div>
 </div>
-<script type="text/javascript" src="includes/js/jquery/jquery.js"></script>
-<script type="text/javascript" src="includes/js/jquery/plugins/validate/jquery.metadata.js"></script>
-<script type="text/javascript" src="includes/js/jquery/plugins/validate/jquery.validate.js"></script>
+<script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="includes/js/jquery/plugins/validate/lib/jquery.metadata.js"></script>
+<script type="text/javascript" src="includes/js/jquery/plugins/validate/jquery.validate.min.js"></script>
 <script type="text/javascript" src="includes/js/mia/miaChangePassword.js"></script>
 </body>
 </html>
