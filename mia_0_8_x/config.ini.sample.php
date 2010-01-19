@@ -23,5 +23,5 @@ show_user_emails = "false"
 server_time_offset = "-8"
 
 ;welcome tab custom message
-custom_welcome_message = "Welcome to Mia :)<br /><br />Use Manage Buddies to add a new buddy or 
+custom_welcome_message = "Welcome to Mia-Chat :)<br /><br />Use Manage Buddies to add a new buddy or 
 double-click a buddy to start chatting.<br /><br />We hope you enjoy this application.  Please spread the word."
