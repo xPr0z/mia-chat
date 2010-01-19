@@ -25,16 +25,24 @@ if (isset($_SESSION['showoffline'])) {
     <head>
         <link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" />
         <link rel="stylesheet" href="css/mia.css" type="text/css" media="screen" />
-        <link href="css/ui.tabs.css" rel="stylesheet" type="text/css" media="all" />
+        <link type="text/css" href="includes/js/jquery/ui/css/custom-theme/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>Mia</title>
         <script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="includes/js/jquery/ui/js/jquery-ui-1.7.2.custom.min.js"></script>
+        <script type="text/javascript" src="includes/js/jquery/plugins/jquery.timer.js"></script>
+        
+        
         <script type="text/javascript">var GB_ANIMATION = true;</script>
         <script type="text/javascript" src="includes/js/greybox/greybox.js"></script>
         <link href="includes/js/greybox/greybox.css" rel="stylesheet" type="text/css" media="all" />
+        
+        <!--
         <script type="text/javascript" src="includes/js/methvin/splitter.js"></script>
+        -->
+        
         <script type="text/javascript" src="includes/js/mia/chatscroll.js"></script>
-        <script type="text/javascript" src="includes/js/jquery/plugins/jquery.timer.js"></script>
+        
         <script type="text/javascript" src="includes/js/mia/date.format.js"></script>
         <script type="text/javascript" src="includes/js/mia/mia.js"></script>
     </head>
@@ -50,14 +58,7 @@ if (isset($_SESSION['showoffline'])) {
                 <div class="yui-ge" id="mia-splitter">
                     <div id="gridmaster" class="yui-u first gridmaster">
                         <div id="tabs">
-                        	<ul>
-                        		<li><a href="#tabs-1">Nunc tincidunt</a></li>
-                        		<li><a href="#tabs-2">Proin dolor</a></li>
-                        		<li><a href="#tabs-3">Aenean lacinia</a></li>
-                        	</ul>
-                        	<div id="tabs-1">
-                        		<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
-                        	</div>
+                        	<ul></ul>
                         </div>
                     </div>
                     <div id="split-right" class="yui-u rightnav" >
