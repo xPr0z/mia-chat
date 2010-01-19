@@ -19,7 +19,7 @@ include('mia.gzip.php'); //Compress page if possible
     <title>Mia Manage Profile</title>
     <link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" />
     <link rel="stylesheet" href="css/mia.css" type="text/css" media="screen" />
-    <script type="text/javascript" src="includes/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="includes/js/mia/manageUserProfile.js"></script>
 </head>
 <body>
@@ -40,14 +40,12 @@ include('mia.gzip.php'); //Compress page if possible
     <label for="profTimeZoneOffset">Time Zone:</label>
     <select name="profTimeZoneOffset" id="profTimeZoneOffset">
         <option value="-12">(GMT -12:00) Eniwetok, Kwajalein</option>
-        
         <option value="-11">(GMT -11:00) Midway Island, Samoa</option>
         <option value="-10">(GMT -10:00) Hawaii</option>
         <option value="-9">(GMT -9:00) Alaska</option>
         <option value="-8" selected="selected">(GMT -8:00) Pacific Time (US &amp; Canada)</option>
         <option value="-7">(GMT -7:00) Mountain Time (US &amp; Canada)</option>
         <option value="-6">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</option>
-        
         <option value="-5">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</option>
         <option value="-4">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option>
         <option value="-3.5">(GMT -3:30) Newfoundland</option>
@@ -84,10 +82,10 @@ include('mia.gzip.php'); //Compress page if possible
 </div>
 </div>
 <br />
-<div id="ft">Copyright &copy; 2008 Brilaps, LLC. All rights reserved.</div>
+<div id="ft">Copyright &copy; 2008-2010 Brilaps, LLC. All rights reserved.</div>
 </div>
-<script type="text/javascript" src="includes/js/jquery/jquery.js"></script>
-<script type="text/javascript" src="includes/js/jquery/plugins/validate/jquery.metadata.js"></script>
-<script type="text/javascript" src="includes/js/jquery/plugins/validate/jquery.validate.js"></script>
+<script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="includes/js/jquery/plugins/validate/lib/jquery.metadata.js"></script>
+<script type="text/javascript" src="includes/js/jquery/plugins/validate/jquery.validate.min.js"></script>
 </body>
 </html>

@@ -19,7 +19,7 @@ include('mia.gzip.php'); //Compress page if possible
 	<title>Mia Buddy Finder</title>
 	<link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" />
 	<link rel="stylesheet" href="css/mia.css" type="text/css" media="screen" />
-	<script type="text/javascript" src="includes/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="includes/js/mia/manageBuddy.js"></script>
 </head>
 <body>
@@ -44,7 +44,7 @@ include('mia.gzip.php'); //Compress page if possible
 		</div>
 	</div>
 	<br />
-     <div id="ft">Copyright &copy; 2008 Brilaps, LLC. All rights reserved.</div>
+     <div id="ft">Copyright &copy; 2008-2010 Brilaps, LLC. All rights reserved.</div>
 </div>
 </body>
 </html>

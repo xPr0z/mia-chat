@@ -19,7 +19,7 @@ include('mia.gzip.php'); //Compress page if possible
 	<title>Mia Manage Profile</title>
 	<link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" />
 	<link rel="stylesheet" href="css/mia.css" type="text/css" media="screen" />
-	<script type="text/javascript" src="includes/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="includes/js/mia/manageUserProfile.js"></script>
 </head>
 <body>

@@ -43,32 +43,7 @@ $(document).ready(function() {
         });
 
         //Startup the tabs interface
-      $('.first > ul').tabs()
-        .bind('select.ui-tabs', function(e, ui) {
-            //Nothing here
-        }).bind('show.ui-tabs', function(e, ui) {
-                //Push the scrollbar to the bottom
-                var chatSelected = $('.ui-tabs-selected > a > span').text();
-                //@@TODO It might be better that we try to grab the id of the first tab, instead of text
-                if (chatSelected !== 'Welcome') {
-                    scrollToBottom(chatSelected+'Inner');
-                }
-            }
-        );
-
-        //well, add the first tab for news, updates, etc etc etc...
-        addWelcomeTab();
-        
-        //set the splitter
-        $("#mia-splitter").splitter({
-            type: 'v',
-            initA: true,	// use width of A (#LeftPane) from styles
-            accessKey: '|'
-        });
-        // Firefox doesn't fire resize on page elements
-        $(window).bind("resize", function(){
-            $("#mia-splitter").trigger("resize"); 
-        }).trigger("resize");
+        $("#tabs").tabs();
         
         //Setup the message routines
         $.timer(7500, function() {
@@ -113,11 +88,6 @@ $(document).ready(function() {
 
 }); //end doc ready
 
-function addWelcomeTab() {
-    $('.first > ul').tabs('add', '#welcome', 'Welcome'); 
-    var containerDiv='<div id="welcome-tab">'+$('#welcomeMessage').val()+'</div>';
-    $('div#welcome.ui-tabs-panel').append(containerDiv);   
-}
 
 function getBuddies() {
 	$.getJSON("getBuddies.php", function(buddyData) {
