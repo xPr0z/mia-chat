@@ -244,7 +244,7 @@ var miaChat = function () {
         */
         resetDocumentTitle: function(title) {
             if (title === '') {
-                top.document.title = 'Mia';
+                top.document.title = 'Mia-Chat';
             } else {
                 top.document.title = title; 
             }

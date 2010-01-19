@@ -1,13 +1,13 @@
 <?php
 /**
-* @package Mia
+* @package Mia-Chat
 * @copyright Brilaps, LLC (http://brilaps.com)
 * @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
 session_start();
 include('mia.gzip.php'); //Compress page if possible
 require('includes/mia.classes.php');
-$mia = MiaDb::getInstance();
+$mia = MiaChatDb::getInstance();
 include('includes/utility_functions.php');
 
 //Clean post vars

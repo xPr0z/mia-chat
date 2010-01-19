@@ -1,13 +1,13 @@
 <?php
 /**
-* @package Mia
+* @package Mia-Chat
 * @copyright Brilaps, LLC (http://brilaps.com)
 * @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
 session_start();
 require('includes/utility_functions.php');
 require('includes/mia.classes.php');
-$mia = MiaDb::getInstance();
+$mia = MiaChatDb::getInstance();
 if ($mia->sessionHijackCheck()===false) {
     header('Location: index.php');
 }
@@ -27,7 +27,7 @@ if (isset($_SESSION['showoffline'])) {
         <link rel="stylesheet" href="css/mia.css" type="text/css" media="screen" />
         <link type="text/css" href="includes/js/jquery/ui/css/custom-theme/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Mia</title>
+        <title>Mia-Chat</title>
         <script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="includes/js/jquery/ui/js/jquery-ui-1.7.2.custom.min.js"></script>
         <script type="text/javascript" src="includes/js/jquery/plugins/jquery.timer.js"></script>

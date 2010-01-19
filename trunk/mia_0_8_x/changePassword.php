@@ -1,6 +1,6 @@
 <?php
 /**
-* @package Mia
+* @package Mia-Chat
 * @copyright Brilaps, LLC (http://brilaps.com)
 * @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
@@ -33,11 +33,11 @@ if (isset($_GET['user']) && isset($_GET['email']) && isset($_GET['activation_cod
 	<link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" />
 	<link rel="stylesheet" href="css/mia.css" type="text/css" media="screen" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>Mia Change Password</title>
+	<title>Mia-Chat Change Password</title>
 </head>
 <body>
 <div id="doc3" class="yui-t7">
-	<div id="hd"><img src="images/mia_logo.png" alt="Mia Logo" /></div>
+	<div id="hd"><img src="images/mia_logo.png" alt="Mia-Chat Logo" /></div>
 	<div id="bd">
 	    <?php
 	    if ($resetEmail===false) {
@@ -49,7 +49,7 @@ if (isset($_GET['user']) && isset($_GET['email']) && isset($_GET['activation_cod
 	    } else {
 	        ?>
 	        <div id="login" class="login yui-g">
-    			<h1>Mia: Change Password</h1>
+    			<h1>Mia-Chat: Change Password</h1>
     			<form id="chgPassFrm" method="post" action="doChangePassword.php">
     			<fieldset>
     			    <label for="username">Username:</label>

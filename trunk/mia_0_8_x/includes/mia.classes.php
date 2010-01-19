@@ -1,11 +1,11 @@
 <?php
 /**
-* @package Mia
+* @package Mia-Chat
 * @copyright Brilaps, LLC (http://brilaps.com)
 * @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
 
-class MiaDb {
+class MiaChatDb {
 	
 	private static $instance;
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Mia relies on a number of great open source applications/library's to function.  It's only fair that we give credit where credit is due.
+ * Mia-Chat relies on a number of great open source applications/library's to function.  It's only fair that we give credit where credit is due.
  * So below is a list of other open source tools we are relying on...
  *
  * Code:

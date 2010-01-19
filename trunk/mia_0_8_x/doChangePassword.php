@@ -1,6 +1,6 @@
 <?php
 /**
-* @package Mia
+* @package Mia-Chat
 * @copyright Brilaps, LLC (http://brilaps.com)
 * @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
@@ -34,7 +34,7 @@ if ($error!=='') {
 } else {
 	//Update password
 	require('includes/mia.classes.php');
-    $mia = MiaDb::getInstance();
+    $mia = MiaChatDb::getInstance();
 	if ($mia->updatePassword($clnUsername, $clnEmail, $clnNewPassword, $clnActivationCode)!==false) {
 	    $error = "Successfully changed password!  Please login."; //Not really an error, but we'll reuse the message box
 		$_SESSION["loginError"]=$error;
