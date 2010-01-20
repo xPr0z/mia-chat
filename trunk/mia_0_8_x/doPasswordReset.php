@@ -12,9 +12,9 @@ include('mia.gzip.php'); //Compress page if possible
 $error='';
 if (isset($_POST['resetUsername']) && isset($_POST['resetEmail'])) {
     //Clean vars
-    require('includes/htmlpurifier/HTMLPurifier.auto.php');
+    require('includes/htmlpurifier/library/HTMLPurifier.auto.php');
     $config = HTMLPurifier_Config::createDefault();
-    $config->set('HTML', 'Doctype', 'XHTML 1.0 Strict');
+    $config->set('HTML.Doctype', 'XHTML 1.0 Strict');
     $purifier = new HTMLPurifier($config);
     $clnUsername =  trim($purifier->purify($_POST['resetUsername']));
     $clnEmail =  trim($purifier->purify($_POST['resetEmail']));

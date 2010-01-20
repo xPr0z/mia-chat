@@ -14,9 +14,9 @@ include('mia.gzip.php'); //Compress page if possible
 
 $error='Your profile successully updated.';
 //Clean vars
-require('includes/htmlpurifier/HTMLPurifier.auto.php');
+require('includes/htmlpurifier/library/HTMLPurifier.auto.php');
 $config = HTMLPurifier_Config::createDefault();
-$config->set('HTML', 'Doctype', 'XHTML 1.0 Strict');
+$config->set('HTML.Doctype', 'XHTML 1.0 Strict');
 $purifier = new HTMLPurifier($config);
 $clnUsername =  $purifier->purify($_POST['profUserName']);
 $clnUserId =  intval($purifier->purify($_POST['profUserId']));
