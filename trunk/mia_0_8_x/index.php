@@ -23,17 +23,17 @@ if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
 	<link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" />
 	<link rel="stylesheet" href="css/mia.css" type="text/css" media="screen" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
-	<title>Mia Login Page</title>
+	<title>Mia-Chat Login Page</title>
 </head>
 <body>
 <div id="doc3" class="yui-t7">
-	<div id="hd"><img src="images/mia_logo.png" alt="Mia Logo" /></div>
+	<div id="hd"><img src="images/mia_logo.png" alt="Mia-Chat Logo" /></div>
 	<div id="bd">
 	    <noscript>  
-            <p>Mia requires JavaScript to function. Please turn it on and refresh this page.</p>
+            <p>Mia-Chat requires JavaScript to function. Please turn it on and refresh this page.</p>
         </noscript>
 		<div id="login" class="login yui-g">
-			<h1>Mia: Login</h1>
+			<h1>Mia-Chat: Login</h1>
 			<form id="loginFrm" method="post" action="doLogin.php">
 			<fieldset>
 				<label for="username">Username:</label>
@@ -52,7 +52,7 @@ if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
 			?>
 		</div>
 		<div id="registration" class="login hideme yui-g">
-			<h1>Mia: Registration</h1>
+			<h1>Mia-Chat: Registration</h1>
 			<form id="regFrm" method="post" action="doRegistration.php">
 			<fieldset>
 				<label for="regUsername">Username:</label>
@@ -128,7 +128,7 @@ if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
 			</form>
 		</div>
 		<div id="passwordReset" class="login hideme yui-g">
-			<h1>Mia: Password Reset</h1>
+			<h1>Mia-Chat: Password Reset</h1>
 			<p>Enter your username and password below.  An email will be sent to start the reset process.</p>
 			<form id="resetFrm" method="post" action="doPasswordReset.php">
 			<fieldset>

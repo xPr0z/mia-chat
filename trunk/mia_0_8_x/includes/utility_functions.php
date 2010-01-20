@@ -53,7 +53,7 @@ function swapEmoticon($message) {
 }
 
 function doCaptcha() {
-    // Parse the Mia config file
+    // Parse the Mia-Chat config file
 	$ini_array = parse_ini_file("config.ini.php", true);
 	$captchaSetting = intval($ini_array['global_info']['enable_captcha']);
 	$secret = $ini_array['global_info']['secret'];
@@ -66,7 +66,7 @@ function doCaptcha() {
 }
 
 function getServerTimeOffset() {
-    // Parse the Mia config file
+    // Parse the Mia-Chat config file
 	$ini_array = parse_ini_file("config.ini.php", true);
 	$server_time_offset = floatval($ini_array['global_info']['server_time_offset']);
 	//default to PST for no good reason ;)
@@ -74,7 +74,7 @@ function getServerTimeOffset() {
 }
 
 function getWelcomeMessage() {
-    // Parse the Mia config file
+    // Parse the Mia-Chat config file
 	$ini_array = parse_ini_file("config.ini.php", true);
 	$custom_welcome_message = $ini_array['global_info']['custom_welcome_message'];
     return $custom_welcome_message;
@@ -89,7 +89,7 @@ function installationCheck() {
         die('ERROR: Installation not complete.  Please remove the "installation" directory and refresh. You can also visit us at http://brilaps.com and request support in our support forum.');
     } else if (@is_dir('installer')) {
         die('ERROR: Installation not complete.  Please remove the "installer" directory and refresh. You can also visit us at http://brilaps.com and request support in our support forum.');
-    } else if (!is_writable('includes/htmlpurifier/HTMLPurifier/DefinitionCache/Serializer')) {
+    } else if (!is_writable('includes/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer')) {
         $message = 'ERROR: Installation not complete.  Please review the HTMLPurifier section of the installation instructions found in';
         $message .= ' the "/installation/installation_notes.php" file for assistance with proper server permission configurations.';
         $message .= ' You can also visit us at http://brilaps.com and request support in our support forum.';

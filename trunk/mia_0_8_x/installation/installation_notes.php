@@ -12,11 +12,11 @@ MIA Installation Notes:
 2) Make sure the new database user has the permissions needed to create and manage the database
 3) Run the SQL statements contained in the mia.sql file against your MySQL database (if you are 
     not using MySQL find more information below)
-4) Create a Mia configuration file called config.ini.php in the root of your Mia installation.  Use
+4) Create a Mia-Chat configuration file called config.ini.php in the root of your Mia-Chat installation.  Use
     the included config.ini.sample.php file as your guide.
 5) After setting up the configuration file make sure it is no longer writeable by the server (ex) chmod 444 config.ini.php
 6) Remove the installation folder from your server
-7) Mia uses HTMLPurifier (http://htmlpurifier.org) to help with input filtering and security issues like xss 
+7) Mia-Chat uses HTMLPurifier (http://htmlpurifier.org) to help with input filtering and security issues like xss 
     attacks, etc.  HTMLPurifier uses caching an its cache folder needs special permission to function properly.  Below
     you will find the documentation on setting this up.
 
@@ -59,7 +59,7 @@ MIA Installation Notes:
 
 Wait, what about non-MySQL databases?
 
-Mia includes the SQL file needed to create the proper MySQL database. However, Mia has been built with database portability 
+Mia-Chat includes the SQL file needed to create the proper MySQL database. However, Mia-Chat has been built with database portability 
 in mind. The underlying structure uses ADOdb PHP (http://phplens.com/adodb/) for portability and as a result can communicate with most of the popular 
 database management systems in use today (ex) IBM DB2, Oracle 8+, MySQL 4 or 5, MS SQL Server 2000+, SQLite 2+, PostgreSQL 7+. 
 The code to setup non-MySQL databases is not distributed with Mia. With a bit a work on your end it can be setup since the 

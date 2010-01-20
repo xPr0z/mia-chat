@@ -16,7 +16,7 @@ include('mia.gzip.php'); //Compress page if possible
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Mia Manage Profile</title>
+    <title>Mia-Chat Manage Profile</title>
     <link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" />
     <link rel="stylesheet" href="css/mia.css" type="text/css" media="screen" />
     <script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
@@ -24,7 +24,7 @@ include('mia.gzip.php'); //Compress page if possible
 </head>
 <body>
 <div id="doc3" class="yui-t7">
-<div id="hd"><h1>Mia Manage Profile</h1></div>
+<div id="hd"><h1>Mia-Chat Manage Profile</h1></div>
 <div id="bd">
 <div id="manageProfileFrm" class="yui-g">
 <h2>Update your profile</h2>
