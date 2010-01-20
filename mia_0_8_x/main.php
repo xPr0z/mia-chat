@@ -107,7 +107,7 @@ if (isset($_SESSION['showoffline'])) {
     
     <script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="includes/js/jquery/ui/js/jquery-ui-1.7.2.custom.min.js"></script>
-    <script type="text/javascript" src="includes/js/jquery/plugins/jquery.timer.js"></script>
+    <script type="text/javascript" src="includes/js/jquery/plugins/timer/jquery.timer.js"></script>
     <script type="text/javascript" src="includes/js/jquery/plugins/cookie/jquery.cookie.js"></script>
     <script type="text/javascript" src="includes/js/jquery/plugins/splitter/splitter.js"></script>
     <script type="text/javascript">var GB_ANIMATION = true;</script>
