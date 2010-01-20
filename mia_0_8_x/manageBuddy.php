@@ -16,7 +16,7 @@ include('mia.gzip.php'); //Compress page if possible
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>Mia Buddy Finder</title>
+	<title>Mia-Chat Buddy Finder</title>
 	<link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" />
 	<link rel="stylesheet" href="css/mia.css" type="text/css" media="screen" />
 	<script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
@@ -24,7 +24,7 @@ include('mia.gzip.php'); //Compress page if possible
 </head>
 <body>
 <div id="doc3" class="yui-t7">
-	<div id="hd"><h1>Mia Buddy Finder</h1></div>
+	<div id="hd"><h1>Mia-Chat Buddy Finder</h1></div>
 	<div id="bd">
 		<div id="addBuddyFrm" class="yui-g">
 			<h2>Find A New Buddy</h2>

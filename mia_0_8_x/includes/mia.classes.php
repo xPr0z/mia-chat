@@ -21,10 +21,10 @@ class MiaChatDb {
 	}
 	
 	/**
-	* Used to build a connection to the Mia database
+	* Used to build a connection to the Mia-Chat database
 	*/
 	private function getConnection() {
-		// Parse the Mia config file
+		// Parse the Mia-Chat config file
 		$ini_array = parse_ini_file("config.ini.php", true);
 		$host = $ini_array['database_info']['host'];
 		$vendor = $ini_array['database_info']['vendor'];
@@ -54,7 +54,7 @@ class MiaChatDb {
 	}
 	
 	/**
-	* Performs the actual Mia login, updates the password salt, and calls session setup
+	* Performs the actual Mia-Chat login, updates the password salt, and calls session setup
 	* @param username
 	* @param password
 	*/
@@ -330,7 +330,7 @@ class MiaChatDb {
 			$clnEmail = $this->escapeForDb($email);
 		}
 		
-        //Parse the Mia config file
+        //Parse the Mia-Chat config file
         $ini_array = parse_ini_file("config.ini.php", true);
         //Do we want to show the user emails or not ?
         $show_user_emails = $ini_array['global_info']['show_user_emails'];
@@ -504,7 +504,7 @@ class MiaChatDb {
 	}
 	
 	function emailPassword($username, $passwordResetKey, $email) {   
-	    //Parse the Mia config file
+	    //Parse the Mia-Chat config file
 		$ini_array = parse_ini_file("config.ini.php", true);
 		$adminEmail = $ini_array['global_info']['admin_email'];
 		$siteUrl = $ini_array['global_info']['live_site_url'];
@@ -519,7 +519,7 @@ class MiaChatDb {
 		$siteResetUrl .= "changePassword.php?user=$username&email=$email&activation_code=$passwordResetKey";
 		
         //The message
-        $message = "A Mia password reset request has been requested for this email address at $siteUrl. ";
+        $message = "A Mia-Chat password reset request has been requested for this email address at $siteUrl. ";
         $message .= "If this was not you then simply ignore this request.  If you did make this request ";
         $message .= "then click the link below to finish the reset of this process:\n\n ";
         $message .= $siteUrl.$siteResetUrl;
@@ -529,7 +529,7 @@ class MiaChatDb {
                     "Reply-To:". $adminEmail . "\n" .
                     "X-Mailer: PHP/" . phpversion();
         //Send email
-        if (mail($email, 'Mia Password Reset Request', $message, $headers)===false) {
+        if (mail($email, 'Mia-Chat Password Reset Request', $message, $headers)===false) {
            return false;
         }
 	}

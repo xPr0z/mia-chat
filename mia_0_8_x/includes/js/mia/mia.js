@@ -259,21 +259,24 @@ $(document).ready(function() {
     
     //Startup the tabs interface
      miaChat.init();
-
+     
+     //Setup chat splitter
+     $("#chat-splitter").splitter({
+     		type: "v",
+     		outline: false,
+     		minLeft: 300,
+     		minRight: 200,
+     		resizeToWidth: true,
+     		cookie: "vsplitter",
+     		accessKey: 'I'
+     	});
+     
     //Setup the Manage Buddies greybox effect
     $("a.greybox").click(function(){
         var t = this.title || $(this).text() || this.href;
-        GB_show(t,this.href,600,800);
+        GB_show(t,this.href,400,600);
         return false;
     });
-    
-    $("a.greybox").click(function(){
-        var t = this.title || $(this).text() || this.href;
-        GB_show(t,this.href,600,800);
-        return false;
-    });
-    
-    //$("#tabs").resizable();
 
     $("#uStatus").change(function () {
         var selectedStatus = $("#uStatus option:selected").val();
@@ -298,11 +301,6 @@ $(document).ready(function() {
         $('#buddylist').empty(function() {
             miaChat.getBuddies();
         });
-    });
-
-    //Allow the budy list to be minimized and maximized
-    $('#minmax').bind("click", {}, function(){
-        $('#nav').slideToggle("slow");
     });
 
     //Hide user preferences by default and allow user to toggle as needed
