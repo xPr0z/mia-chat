@@ -6,6 +6,7 @@ var miaChat = function () {
         init: function() {
             this.setupTabs();
             this.addWelcomeTab();
+            this.getBuddies();
         },
 
         /**
@@ -63,6 +64,7 @@ var miaChat = function () {
         				buddyListItem = '<li class="'+buddyStatus+'" id="buddy'+userID+'"><a href="#" title="'+buddyName+'">'+userName+'</a></li>';
         				$('#buddylist').append(buddyListItem); //Add the buddy
         				$('#buddy'+userID).bind("dblclick", {username: userName}, function(event) {
+        				    event.preventDefault();
         				    //reset the document title back to mia. 
                             miaChat.resetDocumentTitle.call(miaChat, '');
                         	miaChat.startChat.call(miaChat, event.data.username, true);
@@ -278,7 +280,7 @@ $(document).ready(function() {
            type: "POST",
            url: "updateStatus.php",
            data: 'ustatus='+selectedStatus
-        }); //end ajax
+        });
     });
 
     $(".showoffline").change(function () {
@@ -288,7 +290,7 @@ $(document).ready(function() {
            type: "POST",
            url: "updatePreferences.php",
            data: 'showoffline='+showoffline
-        }); //end ajax
+        });
 
         //Clear and run full buddylist refresh
         $('#buddylist').empty(function() {
@@ -334,20 +336,18 @@ $(document).ready(function() {
 				$('#'+usernameFrom+'Inner ul li.messageBodyFriend a').attr("target", "_blank"); //Make any urls open in a new window
 			
 				miaChat.scrollToBottom(usernameFrom+'Inner'); //Push the scrollbar to the bottom
-			}); //end each
-        }); //end getJSON
-    }); //end timer
+			});
+        });
+    });
 	
 	//Update buddy list
 	$.timer(15000, function() {
 		miaChat.getBuddies();
-	}); //end timer
+	});
 	
 	//Checkin to confirm online status
 	$.timer(10000, function() {
 		$.post("doHeartbeat.php");
 	});
-         
-    miaChat.getBuddies(); //Run buddy check at login
 
 });
