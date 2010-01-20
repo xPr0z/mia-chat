@@ -158,12 +158,12 @@ a:active {
     color: #F00;
 }
 
-#searchResults {
-	margin-top: 10px;
+#activeBuddyList table, #searchResults table {
+	width: 100%;
 }
 
-#searchResults table {
-	width: 100%;
+#searchResults table{
+	margin-bottom: 10px;
 }
 
 #searchResults table th {

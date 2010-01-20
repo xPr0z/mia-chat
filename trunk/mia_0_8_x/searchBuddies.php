@@ -12,9 +12,9 @@ if ($mia->sessionHijackCheck()===false) {
 }
 include('mia.gzip.php'); //Compress page if possible
 
-require('includes/htmlpurifier/HTMLPurifier.auto.php');
+require('includes/htmlpurifier/library/HTMLPurifier.auto.php');
 $config = HTMLPurifier_Config::createDefault();
-$config->set('HTML', 'Doctype', 'XHTML 1.0 Strict');
+$config->set('HTML.Doctype', 'XHTML 1.0 Strict');
 $purifier = new HTMLPurifier($config);
 
 $clnFullname =  $purifier->purify($_GET['fullname']);

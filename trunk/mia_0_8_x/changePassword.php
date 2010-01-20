@@ -17,9 +17,9 @@ if (isset($_GET['user']) && isset($_GET['email']) && isset($_GET['activation_cod
     }
 
     //Clean GET vars
-    require('includes/htmlpurifier/HTMLPurifier.auto.php');
+    require('includes/htmlpurifier/library/HTMLPurifier.auto.php');
     $config = HTMLPurifier_Config::createDefault();
-    $config->set('HTML', 'Doctype', 'XHTML 1.0 Strict');
+    $config->set('HTML.Doctype', 'XHTML 1.0 Strict');
     $purifier = new HTMLPurifier($config);
     $clnUsername = $purifier->purify($_GET['user']); 
     $clnEmail = $purifier->purify($_GET['email']); 
