@@ -10,9 +10,9 @@ $mia = MiaChatDb::getInstance();
 include('mia.gzip.php'); //Compress page if possible
 
 //Clean post vars
-require('includes/htmlpurifier/HTMLPurifier.auto.php');
+require('includes/htmlpurifier/library/HTMLPurifier.auto.php');
 $config = HTMLPurifier_Config::createDefault();
-$config->set('HTML', 'Doctype', 'XHTML 1.0 Strict');
+$config->set('HTML.Doctype', 'XHTML 1.0 Strict');
 $purifier = new HTMLPurifier($config);
 $clnUsername =  $purifier->purify($_POST['username']);
 $clnPassword =  $purifier->purify($_POST['password']);

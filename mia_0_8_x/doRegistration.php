@@ -11,9 +11,9 @@ $mia = MiaChatDb::getInstance();
 include('includes/utility_functions.php');
 
 //Clean post vars
-require('includes/htmlpurifier/HTMLPurifier.auto.php');
+require('includes/htmlpurifier/library/HTMLPurifier.auto.php');
 $config = HTMLPurifier_Config::createDefault();
-$config->set('HTML', 'Doctype', 'XHTML 1.0 Strict');
+$config->set('HTML.Doctype', 'XHTML 1.0 Strict');
 $purifier = new HTMLPurifier($config);
 $clnFullName =  $purifier->purify($_POST['regFullname']);
 $clnUsername =  $purifier->purify($_POST['regUsername']);
