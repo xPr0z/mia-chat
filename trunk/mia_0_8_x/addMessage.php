@@ -17,9 +17,9 @@ require('includes/utility_functions.php');
 $uncleanMessage = $_POST['message'];
 
 //Clean post vars
-require('includes/htmlpurifier/HTMLPurifier.auto.php');
+require('includes/htmlpurifier/library/HTMLPurifier.auto.php');
 $config = HTMLPurifier_Config::createDefault();
-$config->set('HTML', 'Doctype', 'XHTML 1.0 Strict');
+$config->set('HTML.Doctype', 'XHTML 1.0 Strict');
 $purifier = new HTMLPurifier($config);
 $clnUsernameTo = $purifier->purify($_POST['userto']);
 $clnMessage = $purifier->purify($uncleanMessage);
