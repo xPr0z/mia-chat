@@ -272,6 +272,8 @@ $(document).ready(function() {
         GB_show(t,this.href,600,800);
         return false;
     });
+    
+    //$("#tabs").resizable();
 
     $("#uStatus").change(function () {
         var selectedStatus = $("#uStatus option:selected").val();
