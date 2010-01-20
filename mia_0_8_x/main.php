@@ -23,28 +23,12 @@ if (isset($_SESSION['showoffline'])) {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Mia-Chat</title>
         <link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" />
         <link rel="stylesheet" href="css/mia.css" type="text/css" media="screen" />
         <link type="text/css" href="includes/js/jquery/ui/css/custom-theme/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Mia-Chat</title>
-        <script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="includes/js/jquery/ui/js/jquery-ui-1.7.2.custom.min.js"></script>
-        <script type="text/javascript" src="includes/js/jquery/plugins/jquery.timer.js"></script>
-        
-        
-        <script type="text/javascript">var GB_ANIMATION = true;</script>
-        <script type="text/javascript" src="includes/js/greybox/greybox.js"></script>
         <link href="includes/js/greybox/greybox.css" rel="stylesheet" type="text/css" media="all" />
-        
-        <!--
-        <script type="text/javascript" src="includes/js/methvin/splitter.js"></script>
-        -->
-        
-        <script type="text/javascript" src="includes/js/mia/chatscroll.js"></script>
-        
-        <script type="text/javascript" src="includes/js/mia/date.format.js"></script>
-        <script type="text/javascript" src="includes/js/mia/mia.js"></script>
     </head>
     <body>
         <div id="doc3" class="yui-t7">
@@ -110,5 +94,21 @@ if (isset($_SESSION['showoffline'])) {
             <p><input type="hidden" id="activeChat" value="" /></p>
             <p><input type="hidden" id="welcomeMessage" value="<?php echo stripslashes(getWelcomeMessage()); ?>" /></p>
         </form>
+        
+        <script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="includes/js/jquery/ui/js/jquery-ui-1.7.2.custom.min.js"></script>
+        <script type="text/javascript" src="includes/js/jquery/plugins/jquery.timer.js"></script>
+        <script type="text/javascript">var GB_ANIMATION = true;</script>
+        <script type="text/javascript" src="includes/js/greybox/greybox.js"></script>
+        
+
+        <!--
+        <script type="text/javascript" src="includes/js/methvin/splitter.js"></script>
+        -->
+
+        <script type="text/javascript" src="includes/js/mia/chatscroll.js"></script>
+
+        <script type="text/javascript" src="includes/js/mia/date.format.js"></script>
+        <script type="text/javascript" src="includes/js/mia/mia.js"></script>
     </body>
 </html>
