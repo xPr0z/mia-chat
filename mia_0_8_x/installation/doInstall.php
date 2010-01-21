@@ -29,26 +29,18 @@ $jsonReturn          = array('created'=>'', 'message'=>''); //used to send back 
 
 //These check are handled on the frontend as well, but just in case JS was disabled
 if (empty($clnAdminEmail) || empty($clnMiaWebPath) || empty($clnDbVendor) || empty($clnCaptcha) || empty($clnDbName)) {
-    
-    echo 'here';
-    exit;
-    
     //This are required by all
     $jsonReturn['created']='false';
     $jsonReturn['message']='Invalid form submission.  All fields are required!';
     echo $json->encode($jsonReturn);
     exit;
 } else if ($clnDbVendor!='sqlite' && (empty($clnDbUsername) || empty($clnDbHostname))) {
-    
-    echo 'here2';
-    exit;
-    
     //This are required for all vendors except sqlite
     $jsonReturn['created']='false';
     $jsonReturn['message']='Invalid form submission.  All fields are required!';
     echo $json->encode($jsonReturn);
     exit;
-} else if (empty($clnDbPassword) || ($clnDbPassword!==$clnVerifyDbPassword)) {
+} else if ($clnDbVendor!='sqlite' && (empty($clnDbPassword) || ($clnDbPassword!==$clnVerifyDbPassword))) {
     //This are required for all vendors except sqlite
     $jsonReturn['created']='false';
     $jsonReturn['message']='Passwords do not match!';
