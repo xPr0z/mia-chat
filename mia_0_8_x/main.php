@@ -24,6 +24,7 @@ if (isset($_SESSION['showoffline'])) {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Mia-Chat</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" />
     <link rel="stylesheet" href="css/mia.css" type="text/css" media="screen" />
     <link type="text/css" href="includes/js/jquery/ui/css/custom-theme/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
@@ -100,7 +101,7 @@ if (isset($_SESSION['showoffline'])) {
             </div>
         </div>
         <div id="ft" role="contentinfo">
-            <p>Copyright &copy; 2008-2010 <a href="http://brilaps.com">Brilaps</a>, LLC. All rights reserved.</p>
+            <p><?php include 'footer.html'; ?></p>
         </div>
     </div>
     

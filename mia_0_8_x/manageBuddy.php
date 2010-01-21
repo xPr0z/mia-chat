@@ -43,7 +43,7 @@ if ($mia->sessionHijackCheck()===false) {
 		</div>
 	</div>
 	<br />
-     <div id="ft">Copyright &copy; 2008-2010 Brilaps, LLC. All rights reserved.</div>
+     <div id="ft"><?php include 'footer.html'; ?></div>
 </div>
 </body>
 </html>

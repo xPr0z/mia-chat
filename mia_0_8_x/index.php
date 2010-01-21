@@ -18,6 +18,7 @@ if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 	<link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" />
 	<link rel="stylesheet" href="css/mia.css" type="text/css" media="screen" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
@@ -140,7 +141,7 @@ if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
 			</form>
 		</div>
 	</div>
-     <div id="ft">Copyright &copy; 2008-2010 <a href="http://brilaps.com">Brilaps</a>, LLC. All rights reserved.</div>
+     <div id="ft"><?php include 'footer.html'; ?></div>
 </div>
 <script type="text/javascript" src="includes/js/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="includes/js/jquery/plugins/validate/lib/jquery.metadata.js"></script>
