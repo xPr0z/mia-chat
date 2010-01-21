@@ -10,7 +10,6 @@ $mia = MiaChatDb::getInstance();
 if ($mia->sessionHijackCheck()===false) {
     die('Invalid session, operation not permitted! Please <a href="index.php" target="_parent">login</a>.');
 }
-include('mia.gzip.php'); //Compress page if possible
 
 $clnSelectedBuddy =  intval($_POST['buddyid']);
 if ($clnSelectedBuddy<1) {

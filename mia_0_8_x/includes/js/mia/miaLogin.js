@@ -25,11 +25,7 @@ $(document).ready(function() {
 	//Validate login form on keyup and submit
 	$("#loginFrm").validate({
 		rules: {
-			username: {
-				required: true,
-                minLength: 5,
-                maxLength:50 
-			},
+			username: "required",
 			password: "required"
 		}
 	}); //end login form validation
@@ -38,36 +34,27 @@ $(document).ready(function() {
 	$("#regFrm").validate({
 		rules: {
 			regFullname: {
-				required: true,
-                maxLength:100 
+				required: true
 			},
 			regUsername: {
 				required: true,
-				minLength: 5,
-                maxLength:50 
+				minlength: 5
 			},
 			regPassword: {
 				required: true,
-				minLength: 6
+				minlength: 6
 			},
 			verifyPassword: {
 				required: true,
-				minLength: 6,
+				minlength: 6,
 				equalTo: "#regPassword"
 			},
 			regEmail: {
 				required: true,
-				email: true,
-                maxLength: 100
+				email: true
 			}, 
-			spamcode: {
-				required: true,
-				minLength: 4,
-				maxLength: 4
-			},
-            regAcceptTermsConditions: {
-				required: true
-			}
+			spamcode: "required",
+            regAcceptTermsConditions: "required"
 		}
      });
 	
@@ -76,12 +63,10 @@ $(document).ready(function() {
 		rules: {
 			resetUsername:  {
 				required: true,
-				minLength: 5,
-                maxLength:50 
+				minlength: 5 
 			},
 			resetEmail: {
 				required: true,
-				maxLength: 100,
                 email: true
 			}
 		}

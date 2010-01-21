@@ -10,8 +10,6 @@ $mia = MiaChatDb::getInstance();
 if ($mia->sessionHijackCheck()===false) {
     die('Invalid session, operation not permitted! Please <a href="index.php">login</a>.');
 }
-include('mia.gzip.php'); //Compress page if possible
-
 
 $userProfile = $mia->getUserProfile($mia->getCrtUserID());
 if ($userProfile !== false) {	

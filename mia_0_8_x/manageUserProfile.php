@@ -10,7 +10,6 @@ $mia = MiaChatDb::getInstance();
 if ($mia->sessionHijackCheck()===false) {
     die('Invalid session, operation not permitted! Please <a href="index.php" target="_parent">login</a>.');
 }
-include('mia.gzip.php'); //Compress page if possible
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -33,9 +32,9 @@ include('mia.gzip.php'); //Compress page if possible
     <label for="profUserNameLabel">Username:</label>
     <span id="profUserNameLabel"><?php echo $_SESSION['username'];?></span>
     <label for="profFullName">Full Name:</label>
-    <input id="profFullName" name="profFullName" type="text" size="25" value="" />
+    <input id="profFullName" name="profFullName" type="text" size="25" maxlength="100" value="" />
     <label for="profEmail">Email Address:</label>
-    <input id="profEmail" name="profEmail" type="text" size="25" />
+    <input id="profEmail" name="profEmail" type="text" size="25" maxlength="100" />
     
     <label for="profTimeZoneOffset">Time Zone:</label>
     <select name="profTimeZoneOffset" id="profTimeZoneOffset">

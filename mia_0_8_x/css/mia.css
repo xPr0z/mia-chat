@@ -271,10 +271,10 @@ textarea.chatInput {
 	border: medium dashed #007600;
 	background-color: #e6e6e6;
 	color: black;
-	width: 265px;
-	padding: 5px;
-	margin-top: 10px;
-	text-align: left;
+	width: 90%;
+	padding: 10px;
+	margin-top: 15px;
+	text-align: center;
 }
 
 #regFrm fieldset img {
@@ -308,7 +308,7 @@ textarea.chatInput {
 	margin-top: 8px;
 }
 
-.error {
+label.error {
 	color: red;
 	font-weight: bold;
 }

@@ -7,7 +7,6 @@
 session_start();
 require('includes/mia.classes.php');
 $mia = MiaChatDb::getInstance();
-include('mia.gzip.php'); //Compress page if possible
 
 //Clean post vars
 require('includes/htmlpurifier/library/HTMLPurifier.auto.php');

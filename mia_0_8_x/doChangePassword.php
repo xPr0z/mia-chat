@@ -5,7 +5,6 @@
 * @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
 session_start();
-include('mia.gzip.php'); //Compress page if possible
 
 //Clean post vars
 require('includes/htmlpurifier/library/HTMLPurifier.auto.php');

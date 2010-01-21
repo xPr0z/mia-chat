@@ -5,7 +5,6 @@
 * @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
 session_start();
-include('mia.gzip.php'); //Compress page if possible
 require('includes/mia.classes.php');
 $mia = MiaChatDb::getInstance();
 include('includes/utility_functions.php');
