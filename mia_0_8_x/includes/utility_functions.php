@@ -83,15 +83,13 @@ function getWelcomeMessage() {
 //Sanity check for a secure installation
 function installationCheck() {
     //file path is relative to the index.php that includes this
-    if (@file_exists('config.ini.php')===false) {
-        die('ERROR: Installation not complete. Please follow the installation instructions found in the "/installation/installation_notes.php" file. You can also visit us at http://brilaps.com and request support in our support forum.');
-    } else if (@is_dir('installation')) {
+    if (@file_exists('config.ini.php')===false && @is_dir('installation')) {
+        header("Location: installation/index.php"); //Do new install
+    } else if (@file_exists('config.ini.php')===true && @is_dir('installation')) {
         die('ERROR: Installation not complete.  Please remove the "installation" directory and refresh. You can also visit us at http://brilaps.com and request support in our support forum.');
-    } else if (@is_dir('installer')) {
-        die('ERROR: Installation not complete.  Please remove the "installer" directory and refresh. You can also visit us at http://brilaps.com and request support in our support forum.');
     } else if (!is_writable('includes/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer')) {
-        $message = 'ERROR: Installation not complete.  Please review the HTMLPurifier section of the installation instructions found in';
-        $message .= ' the "/installation/installation_notes.php" file for assistance with proper server permission configurations.';
+        $message = 'ERROR: Installation not complete.  Please review the HTMLPurifier section of the manual installation instructions found in';
+        $message .= ' the "/installation/manual_install/INSTALL.txt" file for assistance with proper server permission configurations.';
         $message .= ' You can also visit us at http://brilaps.com and request support in our support forum.';
         die($message);
     }

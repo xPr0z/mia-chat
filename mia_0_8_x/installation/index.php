@@ -5,12 +5,13 @@
 * @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
 
-$phpVersion      = phpversion();
-$configExists    = @file_exists('../config.ini.php');
-$configWriteable = @is_writable('../config.ini.php');
-$continueAllowed = true;
+$phpVersion            = phpversion();
+$configExists          = @file_exists('../config.ini.php');
+$configWriteable       = @is_writable('../config.ini.php');
+$htmlPurifierWriteable = @is_writable('../includes/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer');
+$continueAllowed       = true;
 
-if ($phpVersion<'5.0' || $configWriteable===false) {
+if ($phpVersion<'5.0' || $configWriteable===false || $htmlPurifierWriteable===false) {
     $continueAllowed = false;
 }
 
@@ -34,10 +35,43 @@ $MiaChatUrl = 'http://'.str_replace('installation/index.php','',$currentFilePath
    <div id="bd">
         <div id="messages">
         <?php
-        if ($continueAllowed===false) {
+        if ($htmlPurifierWriteable===false) {
             ?>
                 <div id="errorMessages" class="yui-g message">
-        	        <h2>Installation Error</h2>
+        	        <h2>Installation Warning</h2>
+                	<p>
+                	Mia-Chat uses <a target="_blank" href="http://htmlpurifier.org">HTMLPurifier</a> to help with input filtering and security issues like xss 
+                    attacks, etc.  HTMLPurifier uses caching an its cache folder needs special permission to function properly.  Below
+                    you will find the documentation on setting this up.</p>
+                    
+                    <p>Caching:<br />
+                    HTML Purifier generates some cache files (generally one or two) to speed up
+                    its execution. For maximum performance, make sure that
+                    includes/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer is writeable by the webserver.
+                    <br /><br />
+                    If you are in the root Mia-Chat folder you can set the appropriate permissions using:
+                    <br /><br />
+                    <span style="font-style: italic; font-weight: bold;">chmod -R 0755 includes/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer</span></p>
+                    
+                    <p>If the above command doesn't work, you may need to assign write permissions
+                    to all. This may be necessary if your webserver runs as nobody, but is
+                    not recommended since it means any other user can write files in the
+                    directory. Use:
+                    <br /><br />
+                    <span style="font-style: italic; font-weight: bold;">chmod -R 0777 includes/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer</span></p>
+
+                    <p>You can also chmod files via your FTP client; this option
+                    is usually accessible by right clicking the corresponding directory and
+                    then selecting "chmod" or "file permissions".
+                	</p>
+                	<br />
+                	<p><span class="note">Note</span>: You must correct these issues before continuing with the installation of Mia-Chat!</p>
+            	</div>
+            <?php
+        } else if ($continueAllowed===false) {
+            ?>
+                <div id="errorMessages" class="yui-g message">
+        	        <h2>Installation Warning</h2>
                 	<?php 
                 	if ($phpVersion<'5.0') {
                 	    echo '<p>* Mia-Chat requires PHP versions >= 5.0.  This server is running '.$phpVersion.'.</p>';
@@ -47,16 +81,16 @@ $MiaChatUrl = 'http://'.str_replace('installation/index.php','',$currentFilePath
                 	}
                 	?>
                 	<br />
-                	<p>Note: You must correct these issues before continuing with the installation of Mia-Chat!</p>
+                	<p><span class="note">Note</span>: You must correct these issues before continuing with the installation of Mia-Chat!</p>
             	</div>
             <?php
         } else if ($configExists===true && filesize('../config.ini.php')>0 && $continueAllowed===true) {
         ?>
             <div id="errorMessages" class="yui-g message">
-    	        <h2>Installation Warnings</h2>
+    	        <h2>Installation Warning</h2>
         	    <?php echo '<p>* There is already a Mia-Chat config.ini.php file present in the Mia-Chat root directory: '.realpath('../config.ini.php').'</p>'; ?>
             	<br />
-            	<p>Note: You can continue with the Mia-Chat installation, but the existing configuration file will be replaced!</p>
+            	<p><span class="note">Note</span>: You can continue with the Mia-Chat installation, but the existing configuration file will be replaced!</p>
         	</div>
         <?php 
         }
@@ -64,7 +98,7 @@ $MiaChatUrl = 'http://'.str_replace('installation/index.php','',$currentFilePath
         </div>
         <noscript>
             <div class="yui-g message">
-    	        <h2>Installation Error</h2>
+    	        <h2>Installation Warning</h2>
         	    <p>* The Mia-Chat installer requires JavaScript which your browser does not have enabled!</p>
         	</div>
         </noscript>

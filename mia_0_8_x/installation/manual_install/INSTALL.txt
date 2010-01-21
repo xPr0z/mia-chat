@@ -15,19 +15,18 @@ Mia-Chat Installation Notes:
 	Caching:
 	HTML Purifier generates some cache files (generally one or two) to speed up
 	its execution. For maximum performance, make sure that
-	includes/htmlpurifier/HTMLPurifier/DefinitionCache/Serializer is writeable by the webserver.
+	includes/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer is writeable by the webserver.
 
-	If you are in the library/ folder of HTML Purifier, you can set the
-	appropriate permissions using:
+	If you are in the root Mia-Chat folder you can set the appropriate permissions using:
 
-	    chmod -R 0755 includes/htmlpurifier/HTMLPurifier/DefinitionCache/Serializer
+	    chmod -R 0755 includes/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
 
 	If the above command doesn't work, you may need to assign write permissions
 	to all. This may be necessary if your webserver runs as nobody, but is
 	not recommended since it means any other user can write files in the
 	directory. Use:
 
-	    chmod -R 0777 includes/htmlpurifier/HTMLPurifier/DefinitionCache/Serializer
+	    chmod -R 0777 includes/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
 
 	You can also chmod files via your FTP client; this option
 	is usually accessible by right clicking the corresponding directory and
@@ -41,13 +40,13 @@ Mia-Chat Installation Notes:
 	directory, you can either disable the cache (and suffer a performance
 	hit):
 
-	    $config->set('Core', 'DefinitionCache', null);
+	    $config->set('Core.DefinitionCache', null);
 
 	Or move the cache directory somewhere else (no trailing slash):
 
-	    $config->set('Cache', 'SerializerPath', '/home/user/absolute/path');
+	    $config->set('Cache.SerializerPath', '/home/user/absolute/path');
 	    
-8) That's it.  Browse to http://path_to_mia/index.php.  Enjoy :)
+8) That's it.  Browse to http://path_to_miachat/index.php.  Enjoy :)
 
 Wait, what about non-MySQL databases?
 

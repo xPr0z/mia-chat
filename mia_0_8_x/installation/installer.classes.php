@@ -75,23 +75,23 @@ class MiaInstaller {
 		    return  $this->returnStatus;
 		}
 		
-		//Write out the Mia configuration file
+		//Write out the Mia-Chat configuration file
 		if ($this->writeMiaConfig()===false) {
 		    $errorMsg = 'Failed to open the %s file for writing!';
 	        $this->setReturn('false', $errorMsg);
 	        return  $this->returnStatus;
 		}
 		
-		$successMsg = 'The Mia database has been created sucessfully!';
+		$successMsg = 'The Mia-Chat database has been created sucessfully!';
         $this->setReturn('true', $successMsg);
 		return $this->returnStatus;
 	}
     
     /**
-     * Lands the Mia configuration file
+     * Lands the Mia-Chat configuration file
      */
     function writeMiaConfig() {
-		//Output the new Mia config.inc.php configuration file
+		//Output the new Mia-Chat config.inc.php configuration file
 		$config_file = "../config.ini.php";
 		if (($handle = @fopen($config_file, 'w'))===false) {
 	        return false;
@@ -121,7 +121,10 @@ class MiaInstaller {
 	    	if ($handle) {
 				fwrite($handle, $configText);
 				fclose($handle);
-			}				
+			}
+			
+			//Attempt to lock down the new file
+			@chmod("../config.ini.php", 444);			
     	}
 	}
     

@@ -6,6 +6,8 @@
 */
 session_start();
 require('includes/utility_functions.php');
+installationCheck();  //Do secure installation check
+
 require('includes/mia.classes.php');
 $mia = MiaChatDb::getInstance();
 if ($mia->sessionHijackCheck()===false) {
