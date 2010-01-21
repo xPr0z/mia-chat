@@ -10,7 +10,7 @@ $(document).ready(function() {
 			verifyPassword: {
 				required: true,
 				equalTo: "#newPassword"
-			},
+			}
 		},
 		messages: {
 			newPassword: {
@@ -24,4 +24,4 @@ $(document).ready(function() {
 		}
 	});
 	
-}); //end doc ready
+});

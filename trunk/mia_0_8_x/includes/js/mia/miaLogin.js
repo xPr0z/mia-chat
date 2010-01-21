@@ -78,4 +78,4 @@ $(document).ready(function() {
         $("#spamimage").attr({"src" : "getCaptchaImage.php?rndmixzer=" + rndmixzer.getTime()});
     });
 	
-}); //end doc ready
+});
