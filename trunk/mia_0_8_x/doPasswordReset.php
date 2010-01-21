@@ -7,7 +7,6 @@
 session_start();
 require('includes/mia.classes.php');
 $mia = MiaChatDb::getInstance();
-include('mia.gzip.php'); //Compress page if possible
 
 $error='';
 if (isset($_POST['resetUsername']) && isset($_POST['resetEmail'])) {

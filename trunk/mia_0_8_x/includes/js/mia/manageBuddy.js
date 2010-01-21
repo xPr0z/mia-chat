@@ -1,20 +1,28 @@
-$(document).ready(function() {
-	$('#addBuddyButton').bind("click", {}, buddySearch);	
-	getBuddies(); //Load list of curent buddies
-    $('#username').focus(); //DOM give focus
-});
+function buddyRemoved(event) {
+	var buddyid = event.data.buddyid;
+	
+	$.ajax({
+	   type: "POST",
+	   url: "doRemoveBuddy.php",
+	   data: 'buddyid='+buddyid
+	});
+	
+	//Now fade out the selected buddy
+	$('#buddyremove_'+buddyid).fadeOut("slow");
+	window.parent.miaChat.removeBuddyFromList(buddyid); //Remove this buddy on the parent page as well
+}
 
 function getBuddies() {
 	$.getJSON("getBuddies.php", function(buddyData) {
 		//Since we have results append a table to hold them
 		var activeBuddyListTableHeader='<h2>Active Buddy List</h2>' +
-		'<table id="activeBuddyListTable" border="1">' +
-		'<thead><tr>' +
-		'<th>Fullname</th>' +
-		'<th>Username</th>' +
-		'<th>Email</th>' +
-		'<th>Remove</th>' +
-		'</tr></thead>';
+		                                '<table id="activeBuddyListTable" border="1">' +
+                                		'<thead><tr>' +
+                                		'<th>Fullname</th>' +
+                                		'<th>Username</th>' +
+                                		'<th>Email</th>' +
+                                		'<th>Remove</th>' +
+                                		'</tr></thead>';
 		
 		//Remove any previous results and start outputting the new table
 		$('#activeBuddyList h2').remove();
@@ -22,16 +30,18 @@ function getBuddies() {
 		$('#activeBuddyList').append(activeBuddyListTableHeader);
 					
 		$.each(buddyData,function(i,item) {
-			var buddyid=buddyData[i].bid;
-			var fullname=buddyData[i].full_name;
-			var username=buddyData[i].username;
-			var email=buddyData[i].email;
-			var buddyTableRow='<tr id="buddyremove_'+buddyid+'">' + 
-			'<td>'+fullname+'</td>' +
-			'<td>'+username+'</td>' +
-			'<td>'+email+'</td>' +
-			'<td class="removeContact"><img id="rmbuddyid_'+buddyid+'" src="images/famfamfam_silk_icons/user_delete.png" alt="Remove buddy" /></td>' +
-			'</tr>';
+			var buddyid  = buddyData[i].bid,
+			    fullname = buddyData[i].full_name,
+			    username = buddyData[i].username,
+			    email    = buddyData[i].email,
+			    buddyTableRow;
+			    
+			buddyTableRow = '<tr id="buddyremove_'+buddyid+'">' + 
+			                '<td>'+fullname+'</td>' +
+                			'<td>'+username+'</td>' +
+                			'<td>'+email+'</td>' +
+                			'<td class="removeContact"><img id="rmbuddyid_'+buddyid+'" src="images/famfamfam_silk_icons/user_delete.png" alt="Remove buddy" /></td>' +
+                			'</tr>';
 			
 			//append table row
 			$('#activeBuddyListTable').append(buddyTableRow);
@@ -45,24 +55,39 @@ function getBuddies() {
 	}); //end getJSON
 }
 
-function buddySearch(event) {
-	var username=$('#username').val();
-	var fullname=$('#fullname').val();
-	var email=$('#email').val();
+function buddyAdded(event) {
+	var buddyid = event.data.buddyid;
 	
-	if (username=='' && fullname=='' && email=='') {
+	$.ajax({
+	   type: "POST",
+	   url: "doAddBuddy.php",
+	   data: 'buddyid='+buddyid
+	});
+	
+	//Now fade out the selected buddy
+	$('#buddyrow_'+buddyid).fadeOut("slow");
+	getBuddies(); //Now refresh the active buddy list
+	window.parent.miaChat.getBuddies(); //Refresh buddies on parent
+}
+
+function buddySearch(event) {
+	var username = $('#username').val(),
+	    fullname = $('#fullname').val(),
+	    email    = $('#email').val();
+	
+	if (username === '' && fullname === '' && email === '') {
 		return false;
 	} else {
 		$.getJSON("searchBuddies.php", {username: username, fullname: fullname, email: email}, function(json) {
 			//Since we have results append a table to hold them
-			var buddyTableHeader='<p>Search Results</p>' +
-			'<table id="searchResultsTable" border="1">' +
-			'<thead><tr>' +
-			'<th>Fullname</th>' +
-			'<th>Username</th>' +
-			'<th>Email</th>' +
-			'<th>Add</th>' +
-			'</tr></thead>';
+			var buddyTableHeader = '<p>Search Results</p>' +
+			                        '<table id="searchResultsTable" border="1">' +
+                        			'<thead><tr>' +
+                        			'<th>Fullname</th>' +
+                        			'<th>Username</th>' +
+                        			'<th>Email</th>' +
+                        			'<th>Add</th>' +
+                        			'</tr></thead>';
 			
 			//Remove any previous results and start outputting the new table
 			$('p').remove();
@@ -70,17 +95,19 @@ function buddySearch(event) {
 			$('#searchResults').append(buddyTableHeader);
 						
 			$.each(json,function(i,item) {
-				var buddyid=json[i].bid;
-				var fullname=json[i].full_name;
-				var username=json[i].username;
-				var email=json[i].email;
+				var buddyid  = json[i].bid,
+				    fullname = json[i].full_name,
+				    username = json[i].username,
+				    email    = json[i].email,
+				    buddyTableRow,
+				    buddyTableFooter;
 
-				var buddyTableRow='<tr id="buddyrow_'+buddyid+'">' + 
-				'<td>'+fullname+'</td>' +
-				'<td>'+username+'</td>' +
-				'<td>'+email+'</td>' +
-				'<td class="addContact"><img id="buddyid_'+buddyid+'" src="images/famfamfam_silk_icons/user_add.png" alt="Add buddy" /></td>' +
-				'</tr>';
+				buddyTableRow = '<tr id="buddyrow_'+buddyid+'">' + 
+				                '<td>'+fullname+'</td>' +
+                				'<td>'+username+'</td>' +
+                				'<td>'+email+'</td>' +
+                				'<td class="addContact"><img id="buddyid_'+buddyid+'" src="images/famfamfam_silk_icons/user_add.png" alt="Add buddy" /></td>' +
+                				'</tr>';
 				
 				//append table row
 				$('#searchResultsTable').append(buddyTableRow);
@@ -88,34 +115,15 @@ function buddySearch(event) {
 				$('#buddyid_'+buddyid).bind("click", {buddyid: buddyid}, buddyAdded);
 			}); //end each
 			
-			var buddyTableFooter='</table>';
+			buddyTableFooter='</table>';
 			//append table footer
 			$('#searchResults').append(buddyTableFooter);
 		}); //end getJSON
-	} //end if
-} //end submit
-
-function buddyAdded(event) {
-	var buddyid=event.data.buddyid;
-	$.ajax({
-	   type: "POST",
-	   url: "doAddBuddy.php",
-	   data: 'buddyid='+buddyid
-	});
-	//Now fade out the selected buddy
-	$('#buddyrow_'+buddyid).fadeOut("slow");
-	getBuddies(); //Now refresh the active buddy list
-	window.parent.getBuddies(); //Refresh buddies on parent
+	}
 }
 
-function buddyRemoved(event) {
-	var buddyid=event.data.buddyid;
-	$.ajax({
-	   type: "POST",
-	   url: "doRemoveBuddy.php",
-	   data: 'buddyid='+buddyid
-	});
-	//Now fade out the selected buddy
-	$('#buddyremove_'+buddyid).fadeOut("slow");
-	window.parent.removeBuddyFromList(buddyid); //Remove this buddy on the parent page as well
-}
+$(document).ready(function() {
+	$('#addBuddyButton').bind("click", {}, buddySearch);	
+	getBuddies(); //Load list of curent buddies
+    $('#username').focus(); //DOM give focus
+});

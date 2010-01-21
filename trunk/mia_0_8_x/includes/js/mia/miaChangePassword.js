@@ -5,7 +5,7 @@ $(document).ready(function() {
 		rules: {
 			newPassword: {
 				required: true,
-				minLength: 6
+				minlength: 6
 			},
 			verifyPassword: {
 				required: true,
@@ -15,7 +15,7 @@ $(document).ready(function() {
 		messages: {
 			newPassword: {
 				required: "Please provide a new password",
-				minLength: "Your password must be at least 6 characters long"
+				minlength: "Your password must be at least 6 characters long"
 			},
 			verifyPassword: {
 				required: "Please verify the password",

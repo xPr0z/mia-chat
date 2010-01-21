@@ -10,7 +10,6 @@ $mia = MiaChatDb::getInstance();
 if ($mia->sessionHijackCheck()===false) {
     header('Location: index.php');
 }
-include('mia.gzip.php'); //Compress page if possible
 
 //Process the new message
 require('includes/utility_functions.php');

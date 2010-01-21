@@ -5,7 +5,6 @@
 * @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
 session_start(); 
-include('mia.gzip.php'); //Compress page if possible
 
 $resetEmail = false;
 if (isset($_GET['user']) && isset($_GET['email']) && isset($_GET['activation_code'])) {

@@ -5,10 +5,8 @@
 * @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
 session_start(); 
-include('mia.gzip.php'); //Compress page if possible
 include('includes/utility_functions.php');
-//Do secure installation check
-installationCheck();
+installationCheck();  //Do secure installation check
 
 $errorMessage = '';
 if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
@@ -35,32 +33,32 @@ if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
 		<div id="login" class="login yui-g">
 			<h1>Mia-Chat: Login</h1>
 			<form id="loginFrm" method="post" action="doLogin.php">
-			<fieldset>
-				<label for="username">Username:</label>
-				<input id="username" name="username" type="text" size="25" />
-				<label for="password">Password:</label>
-				<input id="password" name="password" type="password" size="25" />
-				<input class="loginButton" type="submit" value="Login" />
-				<p>New user? <a id="newUser" href="#registration">Register here</a></p>
-				<p>Forgot password? <a id="reset" href="#passwordreset">Reset here</a></p>
-			</fieldset>
+			    <fieldset>
+    				<label for="username">Username:</label>
+    				<input id="username" name="username" type="text" size="25" />
+    				<label for="password">Password:</label>
+    				<input id="password" name="password" type="password" size="25" />
+    				<input class="loginButton" type="submit" value="Login" />
+    				<p>New user? <a id="newUser" href="#registration">Register here</a></p>
+    				<p>Forgot password? <a id="reset" href="#passwordreset">Reset here</a></p>
+    				<?php
+        			if ($errorMessage) {
+        				echo '<p class="errorMessage">' . $errorMessage . '</p>';
+        			}
+        			?>
+    			</fieldset>
 			</form>
-			<?php
-			if ($errorMessage) {
-				echo "<div class=\"errorMessage\">$errorMessage</div>";
-			}
-			?>
 		</div>
 		<div id="registration" class="login hideme yui-g">
 			<h1>Mia-Chat: Registration</h1>
 			<form id="regFrm" method="post" action="doRegistration.php">
 			<fieldset>
 				<label for="regUsername">Username:</label>
-				<input id="regUsername" name="regUsername" type="text" size="25" />
+				<input id="regUsername" name="regUsername" type="text" size="25" maxlength="50" />
                  <label for="regFullname">Full Name:</label>
-				<input id="regFullname" name="regFullname" type="text" size="25" />
+				<input id="regFullname" name="regFullname" type="text" size="25" maxlength="100" />
 				<label for="regEmail">Email Address:</label>
-				<input id="regEmail" name="regEmail" type="text" size="25" />
+				<input id="regEmail" name="regEmail" type="text" size="25" maxlength="100" />
                 <label for="regTimeZoneOffset">Time Zone:</label>
                 <select name="regTimeZoneOffset" id="regTimeZoneOffset">
                     <option value="-12">(GMT -12:00) Eniwetok, Kwajalein</option>
@@ -133,9 +131,9 @@ if (isset($_SESSION["loginError"]) && !empty($_SESSION["loginError"])) {
 			<form id="resetFrm" method="post" action="doPasswordReset.php">
 			<fieldset>
 				<label for="resetUsername">Username:</label>
-				<input id="resetUsername" name="resetUsername" type="text" size="25" />
+				<input id="resetUsername" name="resetUsername" type="text" size="25" maxlength="50" />
 				<label for="resetEmail">Email Address:</label>
-				<input id="resetEmail" name="resetEmail" type="text" size="25" />
+				<input id="resetEmail" name="resetEmail" type="text" size="25" maxlength="100" />
 				<input class="resetButton" type="submit" value="Send Password" />
 				<p>Return to <a id="login-user-reset" class="loginUser" href="#login">Login</a></p>
 			</fieldset>

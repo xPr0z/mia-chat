@@ -11,6 +11,5 @@ if ($mia->sessionHijackCheck()===false) {
     die('Invalid session, operation not permitted! Please <a href="index.php">login</a>.');
 }
 
-include('mia.gzip.php'); //Compress page if possible
 $mia->heartbeat(); //Update login status
 ?>
