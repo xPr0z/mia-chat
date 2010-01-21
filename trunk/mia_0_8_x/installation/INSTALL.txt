@@ -1,12 +1,4 @@
-<?php
-/**
-* @package Mia
-* @copyright Brilaps, LLC (http://brilaps.com)
-* @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
-*/
-
-/*
-MIA Installation Notes:
+Mia-Chat Installation Notes:
 
 1) Create a new database and database user for Mia
 2) Make sure the new database user has the permissions needed to create and manage the database
@@ -60,14 +52,4 @@ MIA Installation Notes:
 Wait, what about non-MySQL databases?
 
 Mia-Chat includes the SQL file needed to create the proper MySQL database. However, Mia-Chat has been built with database portability 
-in mind. The underlying structure uses ADOdb PHP (http://phplens.com/adodb/) for portability and as a result can communicate with most of the popular 
-database management systems in use today (ex) IBM DB2, Oracle 8+, MySQL 4 or 5, MS SQL Server 2000+, SQLite 2+, PostgreSQL 7+. 
-The code to setup non-MySQL databases is not distributed with Mia. With a bit a work on your end it can be setup since the 
-commication layer is in place. However, if you don't have the in house talent or time to do this work Brilaps, LLC does 
-have an affordable commercial installer which makes setting up non-MySQL database structures and communication a snap. The 
-installer requires you to fill out 1 short form and the rest is done for you automatically.  For more information on this 
-please first the following url - http://brilaps.com/index.php?content=mia.
-
-*/
-
-?>
+in mind. See the new automated installer for other options.
