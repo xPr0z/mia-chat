@@ -7,7 +7,7 @@
 
 $phpVersion            = phpversion();
 $configExists          = @file_exists('../config.ini.php');
-$configWriteable       = @is_writable('../config.ini.php');
+$configWriteable       = @fopen('../config.ini.php', 'w+');
 $htmlPurifierWriteable = @is_writable('../includes/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer');
 $continueAllowed       = true;
 
@@ -76,7 +76,7 @@ $MiaChatUrl = 'http://'.str_replace('installation/index.php','',$currentFilePath
                 	if ($phpVersion<'5.0') {
                 	    echo '<p>* Mia-Chat requires PHP versions >= 5.0.  This server is running '.$phpVersion.'.</p>';
                 	}
-                	if ($configWriteable===false && fopen('../config.ini.php', 'w')===false) {
+                	if ($configWriteable===false) {
                 	    echo '<p>* The installer is unable to create or write to the Mia-Chat configuration file: '.realpath('../config.ini.php').'</p>';
                 	}
                 	?>
@@ -167,6 +167,7 @@ $MiaChatUrl = 'http://'.str_replace('installation/index.php','',$currentFilePath
                             <option value="sqlite">SQLite 2 (Not 3)</option>
                             <option value="oracle">Oracle 8 or higher</option>
                             -->
+			    <option value="mssql">Microsoft SQL Server 2000 and higher</option>
                             <option value="mysql">MySQL 4 or 5</option>
                             <option value="postgres">PostgreSQL 7 or 8</option>
                             
