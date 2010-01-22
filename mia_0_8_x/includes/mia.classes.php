@@ -248,16 +248,45 @@ class MiaChatDb {
 	*/
 	function getBuddies($showoffline) {
 		$userid=$this->getCrtUserID();
+		
+		/*
 		$buddySQL = "SELECT u.id as bid, u.username, u.full_name, u.email, time_to_sec(timediff(now(), heartbeat)) as heartbeat, status
 						FROM mia_buddies b, mia_users u
 						WHERE b.buddy_userid = u.id
 						AND b.userid={$userid}";
+		*/
+		
+		$buddySQL = "SELECT u.id as bid, u.username, u.full_name, u.email, heartbeat, status
+						FROM mia_buddies b, mia_users u
+						WHERE b.buddy_userid = u.id
+						AND b.userid={$userid}";
+						
 		if ($showoffline==0) {
-				$buddySQL .= " AND status not in ('offline')
-								AND time_to_sec(timediff(now(), heartbeat)) <= 120";
+				$buddySQL .= " AND status not in ('offline')";
 		}
 		
 		$buddies = $this->executeGetAssocSQL($buddySQL);
+		
+		/**
+		* We need to do some date math and turn the heartbeat into seconds. If not set as offline
+		* specifically, but has not had a heartbeat within the last 120 seconds then consider them offline.
+		*
+		* Note: Easier to do in PHP than try to pull of in a portable way accross different database platforms.
+		*/
+		if(function_exists("date_default_timezone_set") and function_exists("date_default_timezone_get")) {
+		   @date_default_timezone_set(@date_default_timezone_get());
+		}
+        
+		$now = strtotime(date("Y-m-d H:i:s"));
+		foreach($buddies as $buddy) {
+		    $secsSinceHeartbeat = $now - strtotime(date("Y-m-d H:i:s", strtotime($buddy["heartbeat"])));
+		    if ($secsSinceHeartbeat >=120 && $showoffline==0) {
+		        unset($buddies[$buddy["bid"]]);
+		    } else {
+		        $buddies[$buddy["bid"]]["heartbeat"] = $secsSinceHeartbeat;
+		    }
+		}
+		
 		return $buddies;
 	}
 	
