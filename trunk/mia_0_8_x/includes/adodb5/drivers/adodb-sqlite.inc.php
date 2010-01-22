@@ -295,8 +295,8 @@ class ADODB_sqlite extends ADOConnection {
 			  * in cols[1] between parentheses
 			  * e.g CREATE UNIQUE INDEX ware_0 ON warehouse (org,warehouse)
 			  */
-			$cols = explode("(",$row[1]);
-			$cols = explode(")",$cols[1]);
+			$cols = @explode("(",$row[1]);
+			$cols = @explode(")",$cols[1]);
 			array_pop($cols);
 			$indexes[$row[0]]['columns'] = $cols;
 		}
