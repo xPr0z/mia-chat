@@ -249,13 +249,6 @@ class MiaChatDb {
 	function getBuddies($showoffline) {
 		$userid=$this->getCrtUserID();
 		
-		/*
-		$buddySQL = "SELECT u.id as bid, u.username, u.full_name, u.email, time_to_sec(timediff(now(), heartbeat)) as heartbeat, status
-						FROM mia_buddies b, mia_users u
-						WHERE b.buddy_userid = u.id
-						AND b.userid={$userid}";
-		*/
-		
 		$buddySQL = "SELECT u.id as bid, u.username, u.full_name, u.email, heartbeat, status
 						FROM mia_buddies b, mia_users u
 						WHERE b.buddy_userid = u.id
