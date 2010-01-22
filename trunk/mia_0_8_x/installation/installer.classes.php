@@ -62,12 +62,14 @@ class MiaInstaller {
 		
 		//Use the database connection to create a new adoSchema object.
 		$schema = new adoSchema($this->db);
+		
 		//Build DML SQL statements
 		if ($schema->ParseSchema($schemaFile)===false) {
 		    $errorMsg = 'Failed to construct DML statements!';
 	        $this->setReturn('false', $errorMsg);
 		    return  $this->returnStatus;
 		}
+		
 		//Execute DML SQL statements
 		if ($schema->ExecuteSchema()===false) {
 		    $errorMsg = 'Failed to execute DML statements!';
@@ -136,13 +138,12 @@ class MiaInstaller {
      */
 	private function setupConnection() {
 		/* Valid ADOdb platform options include: mysql, postgres, sqlite, oracle, firebird, db2, mssql 
-	   Note: The setup process has been built with all of the platforms listed above in mind.  Some testing has occurred in each
-	   and the setup code can actually be used to install on all except for db2 without major modifications.  However, at the moment
-	   Mia itself is only setup to work with Mysql 4/5, postgres, & sqlite3. More should be added in time... */
+	   Note: The setup process has been built with all of the platforms listed above in mind.  Some dev/testing 
+	   has occurred for each, but Mia-Chat is only heavily tested with Mysql 5 & Postgres 8. */
 	
 		//Include the ADOdb library files
 		include('../includes/adodb5/adodb.inc.php');
-		include('../includes/adodb5/adodb-xmlschema.inc.php');
+		include('../includes/adodb5/adodb-xmlschema03.inc.php');
 		
 		/*/////////////////////////////////////////////////////////////////////
 		          MySQL / PostgreSQL connection Parameters
@@ -167,7 +168,7 @@ class MiaInstaller {
 			$db = ADONewConnection('sqlite');
 			//Debug set to 1 for verbose output
 			$db->debug = 0;
-			//Try to connect (the db will actually be created if it does not exist and OS file permissions allow it.
+			//Try to connect (the db will actually be created if it does not exist and OS file permissions allow it)
 		    if (!@$db->Connect($this->dbName)) {
 		    	$this->setReturn('false', $db->ErrorMsg());
 		    	return false;

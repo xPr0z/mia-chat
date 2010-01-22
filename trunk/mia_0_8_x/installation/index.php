@@ -158,15 +158,18 @@ $MiaChatUrl = 'http://'.str_replace('installation/index.php','',$currentFilePath
                         </select>
                     </p>
 		            <p>
-		                <label for="dbHostname">Select a Database Vendor:</label>
+		                <label for="dbVendor">Select a Database Vendor:</label>
                         <select class="dbVendor" name="dbVendor">
                             <option value="none">Select One</option>
+                            <!--
                             <option value="db2">IBM DB2</option>
                             <option value="mssql">Microsoft SQL Server 2000 and higher</option>
-                            <option value="mysql">MySQL 4 or 5</option>
-                            <option value="oracle">Oracle 8 or higher</option>
-                            <option value="postgres">PostgreSQL 7 or higher</option>
                             <option value="sqlite">SQLite 2 (Not 3)</option>
+                            <option value="oracle">Oracle 8 or higher</option>
+                            -->
+                            <option value="mysql">MySQL 4 or 5</option>
+                            <option value="postgres">PostgreSQL 7 or 8</option>
+                            
                         </select>
                     </p>
                     <div id="database-fields">
@@ -174,7 +177,8 @@ $MiaChatUrl = 'http://'.str_replace('installation/index.php','',$currentFilePath
             			<input type="text" id="dbName" name="dbName" size="25" value="" />
             			<div id="just-sqlite">
             			    <p class="note">Note: For SQLite make sure to include the full path to your database including the file extension if your 
-            			    database has one (ex) /path/to/miachat.db, c:\path\to\miachat.db, etc</p>
+            			    database has one (ex) /path/to/miachat.db, c:\path\to\miachat.db, etc.  The database will be created if it does not exist 
+            			    and OS file permissions allow it.</p>
             			</div>
             			<div id="no-sqlite">
             			    <label for="dbHostname">Database Hostname:</label>
