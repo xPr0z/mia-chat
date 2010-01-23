@@ -1,3 +1,3 @@
 <?php
-$mia_chat_version = "0.8.4";
+$mia_chat_version = "1.0";
 ?>
