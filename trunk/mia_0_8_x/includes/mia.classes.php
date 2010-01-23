@@ -10,6 +10,10 @@ class MiaChatDb {
 	private static $instance;
 
 	private function __construct() {
+		if(function_exists("date_default_timezone_set") and function_exists("date_default_timezone_get")) {
+		   @date_default_timezone_set(@date_default_timezone_get());
+		}
+		
 		$this->db = $this->getConnection();
 	}
 	
@@ -79,10 +83,11 @@ class MiaChatDb {
 			$newPasswordArray = $this->buildPassword($password);
 			$newSalt = $this->escapeForDb($newPasswordArray['salt']);
 			$newPasswordHash = $this->escapeForDb($newPasswordArray['password']);
+			$now = $this->escapeForDb(date("Y-m-d H:i:s"));
 			$updateSQL = "UPDATE mia_users 
 							SET password = {$newPasswordHash},
 							salt = {$newSalt}, 
-							heartbeat = now(),
+							heartbeat = {$now},
 							status = 'online',
 							password_reset_key = ''
 							WHERE username={$clnUsername}";
@@ -114,9 +119,10 @@ class MiaChatDb {
 		$passwordArray = $this->buildPassword($password);
 		$clnSalt = $this->escapeForDb($passwordArray['salt']);
 		$clnPasswordHash = $this->escapeForDb($passwordArray['password']);
+		$now = $this->escapeForDb(date("Y-m-d H:i:s"));
 		
 		$userSQL = "INSERT INTO mia_users (full_name, username, password, salt, email, usergroup, time_offset, create_date)
-             VALUES ({$clnFullname}, {$clnUsername}, {$clnPasswordHash}, {$clnSalt}, {$clnEmail}, 1, {$timeoffset}, now())";
+             VALUES ({$clnFullname}, {$clnUsername}, {$clnPasswordHash}, {$clnSalt}, {$clnEmail}, 1, {$timeoffset}, {$now})";
 		$result = $this->executeSQL($userSQL);
 		if (!$result) {
 			return false;
@@ -211,8 +217,9 @@ class MiaChatDb {
 		$toId = $this->getUserIDFromUsername($recipientUsername);
 		$clnMessage = $this->escapeForDb($message);
 		$clnRand = $this->escapeForDb($rand);
+		$now = $this->escapeForDb(date("Y-m-d H:i:s"));
 		$messageSQL = "INSERT INTO mia_messages (userid_from, userid_to, message, rand_insert_key, sent_date_time) 
-		VALUES ({$fromId}, {$toId}, {$clnMessage}, {$clnRand}, now())";
+		VALUES ({$fromId}, {$toId}, {$clnMessage}, {$clnRand}, {$now})";
 		
 		$result = $this->executeSQL($messageSQL);
 		if ($result) {
@@ -247,7 +254,7 @@ class MiaChatDb {
 	* @param showoffline - effects what uses are returned
 	*/
 	function getBuddies($showoffline) {
-		$userid=$this->getCrtUserID();
+		$userid = $this->getCrtUserID();
 		
 		$buddySQL = "SELECT u.id as bid, u.username, u.full_name, u.email, heartbeat, status
 						FROM mia_buddies b, mia_users u
@@ -266,10 +273,6 @@ class MiaChatDb {
 		*
 		* Note: Easier to do in PHP than try to pull of in a portable way accross different database platforms.
 		*/
-		if(function_exists("date_default_timezone_set") and function_exists("date_default_timezone_get")) {
-		   @date_default_timezone_set(@date_default_timezone_get());
-		}
-        
 		$now = strtotime(date("Y-m-d H:i:s"));
 		foreach($buddies as $buddy) {
 		    $secsSinceHeartbeat = $now - strtotime(date("Y-m-d H:i:s", strtotime($buddy["heartbeat"])));
@@ -561,9 +564,10 @@ class MiaChatDb {
 	* tell the app a user is still alive/online
 	*/
 	function heartbeat() {
-		$userid=$this->getCrtUserID();
+		$userid = $this->getCrtUserID();
+		$now = $this->escapeForDb(date("Y-m-d H:i:s"));
 		$heartbeatSQL = "UPDATE mia_users 
-							SET heartbeat = now()
+							SET heartbeat = {$now}
 							WHERE id={$userid}";
 		if ($this->executeSQL($heartbeatSQL)===false) {
             return false;
