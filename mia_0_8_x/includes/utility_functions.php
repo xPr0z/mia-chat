@@ -21,10 +21,8 @@ function stripslashes_deep($value) {
 * @param message
 **/
 function swapHyperlink($message) {
-    $message = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",
-							"<a href=\"\\0\">\\0</a>", $message);
-
-    return $message;
+    return preg_replace("/((\S)+:\/\/(\S)+)/i",
+							"<a href=\"$1\">$1</a>", $message);
 }
 
 /**
