@@ -265,9 +265,10 @@ $(document).ready(function() {
      		type: "v",
      		outline: false,
      		minLeft: 300,
-     		minRight: 200,
+     		minRight: 250,
+			sizeRight: 250,
      		resizeToWidth: true,
-     		cookie: "vsplitter",
+     		cookie: "miachat-vsplitter",
      		accessKey: 'I'
      	});
      
