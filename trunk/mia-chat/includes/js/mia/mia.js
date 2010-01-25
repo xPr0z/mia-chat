@@ -296,13 +296,14 @@ $(document).ready(function() {
         $.ajax({
            type: "POST",
            url: "updatePreferences.php",
-           data: 'showoffline='+showoffline
+           data: 'showoffline='+showoffline,
+           success: function(){
+               //Clear and run full buddylist refresh
+               $('#buddylist').empty();
+               miaChat.getBuddies();
+           }
         });
 
-        //Clear and run full buddylist refresh
-        $('#buddylist').empty(function() {
-            miaChat.getBuddies();
-        });
     });
 
     //Hide user preferences by default and allow user to toggle as needed
