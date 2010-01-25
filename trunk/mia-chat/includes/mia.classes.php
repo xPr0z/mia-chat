@@ -5,9 +5,18 @@
 * @license The MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
 
+/**
+* Mia-Chat database class.  Helps support Mia-chat specific database interactions
+* via the adodb portability layer.
+*
+* Notes: 
+* 1) MS SQL Server - Not currently support do to a adodb bug with executeGetAssocSQL (different output format).
+* 2) Postgres - Had to modify the adodb postgres driver to support Last insert ID: http://phplens.com/lens/lensforum/msgs.php?id=16767
+*/
 class MiaChatDb {
 	
 	private static $instance;
+	private $dbvendor;
 
 	private function __construct() {
 		if(function_exists("date_default_timezone_set") and function_exists("date_default_timezone_get")) {
@@ -31,13 +40,14 @@ class MiaChatDb {
 		// Parse the Mia-Chat config file
 		$ini_array = parse_ini_file("config.ini.php", true);
 		$host = $ini_array['database_info']['host'];
-		$vendor = $ini_array['database_info']['vendor'];
 		$user = $ini_array['database_info']['user'];
 		$password = $ini_array['database_info']['password'];
 		$database = $ini_array['database_info']['database'];
+		
+		$this->dbvendor = $ini_array['database_info']['vendor'];
 
 		include('includes/adodb5/adodb.inc.php');
-		$db = ADONewConnection($vendor);
+		$db = ADONewConnection($this->dbvendor);
 		$db->PConnect($host, $user, $password, $database);
 		//$db->debug = true;
 		return $db;
@@ -223,7 +233,7 @@ class MiaChatDb {
 		
 		$result = $this->executeSQL($messageSQL);
 		if ($result) {
-			$insertID = $this->db->Insert_ID();
+			$insertID = $this->db->Insert_ID("mia_messages", "id");
 			$lastMessage = "SELECT id as mid, userid_from, userid_to, message, rand_insert_key, sent_date_time
 							FROM mia_messages 
 							WHERE id = {$insertID}";
@@ -396,7 +406,7 @@ class MiaChatDb {
 	* @param sql string
 	*/
 	function executeGetAssocSQL($sql) {
-		$results = $this->db->GetAssoc($sql, false, false, false);
+		$results = $this->db->GetAssoc($sql, false, true, false);
 		return $results; //False on failure
 	}
 	
