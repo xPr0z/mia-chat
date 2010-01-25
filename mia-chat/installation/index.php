@@ -167,7 +167,6 @@ $MiaChatUrl = 'http://'.str_replace('installation/index.php','',$currentFilePath
                             <option value="sqlite">SQLite 2 (Not 3)</option>
                             <option value="oracle">Oracle 8 or higher</option>
                             -->
-			    <option value="mssql">Microsoft SQL Server 2000 and higher</option>
                             <option value="mysql">MySQL 4 or 5</option>
                             <option value="postgres">PostgreSQL 7 or 8</option>
                             
