@@ -144,7 +144,7 @@ var miaChat = function () {
         chatClose: function(event) {
             event.preventDefault();
             $('ul.ui-tabs-nav > li > a').each(function(index) {
-                if ((index !== 0) && ($(this).text().trim() === event.data.username)) {
+                if ((index !== 0) && ($.trim($(this).text()) === event.data.username)) {
                     //Remove event listeners no longer required
                     $('#'+event.data.username+'Input').unbind('keyup');
                     $('#'+event.data.username+'-close').unbind('click');
