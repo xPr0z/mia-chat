@@ -142,9 +142,10 @@ var miaChat = function () {
         * Close/remove an existing chat tab
         */
         chatClose: function(event) {
+            event.preventDefault();
             $('ul.ui-tabs-nav > li > a').each(function(index) {
                 if ((index !== 0) && ($(this).text().trim() === event.data.username)) {
-                    //Remove event listeners nio longer required
+                    //Remove event listeners no longer required
                     $('#'+event.data.username+'Input').unbind('keyup');
                     $('#'+event.data.username+'-close').unbind('click');
                     //Remove the tab
