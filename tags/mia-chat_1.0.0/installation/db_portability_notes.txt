@@ -1,0 +1,6 @@
+DB Portability notes""
+# DEFAULT DATE values (0000-00-00 doesn't work in many DBs, Out of Range error)
+# Use type="I" in place of the better boolean type="L" (Postgres doesn't like)
+# Oracle doesn't like the use of column names 'ordering', 'access', and 'count'.  
+# Don't name the indexes and tables the sames (Postgres doesn't like)
+# Oracle has a 30 char limit on length of object names
