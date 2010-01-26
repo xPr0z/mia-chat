@@ -19,9 +19,7 @@ Mia-Chat will require the following to function:
   * One of the following databases; MySQL 4 or 5 , PostgreSQL 7 or 8.
 
 
-= Details =
-
-Some screen shots of Mia-Chat. You can see more at http://brilaps.com/index.php?content=mia
+= Screenshots =
 
 [http://brilaps.com/tempimages/mia-login.png]
 
