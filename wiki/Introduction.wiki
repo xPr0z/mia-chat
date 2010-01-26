@@ -3,20 +3,19 @@
 
 = Introduction =
 
-Key intentions and achievements Mia-Chat are: 
+Key intentions and achievements of Mia-Chat are: 
 
   * Simple setup 
-  * Ease of use 
-  * Secure (in addition to our own auditing we scan with [http://www.fortify.com/security-resources/rats.jsp RATS] and the  [http://www.acunetix.com/vulnerability-scanner/ Acunetix (XSS) Web Vulnerability Scanner])
+  * Ease of use
   * Platform independent 
-  * Database platform agnostic
+  * Support for multiple database platforms
 
 = Requirements =
 Mia-Chat will require the following to function:
 
   * PHP 5
   * Apache Web Server 1.3+
-  * One of the following databases; MySQL 4, MySQL 5 IBM DB2, Oracle 8+, MS SQL Server 2000+, SQLite 2+, PostgreSQL 7+ . Please [http://brilaps.com/contact_us.php contact us] for non-MySQL databases.
+  * One of the following databases; MySQL 4 or 5 , PostgreSQL 7 or 8.
 
 = Browser Compatibility =
 
@@ -25,7 +24,7 @@ Mia-Chat aims to support the same browsers as [http://docs.jquery.com/Browser_Co
 
 = Details =
 
-Some screen shots of Mia. You can see more at http://brilaps.com/index.php?content=mia
+Some screen shots of Mia-Chat. You can see more at http://brilaps.com/index.php?content=mia
 
 [http://brilaps.com/tempimages/mia-login.png]
 
