@@ -10,7 +10,7 @@
 * via the adodb portability layer.
 *
 * Notes: 
-* 1) MS SQL Server - Not currently support do to a adodb bug with executeGetAssocSQL (different output format).
+* 1) MS SQL Server - Not currently support do to a adodb bug with GetAssoc (different output format).
 * 2) Postgres - Had to modify the adodb postgres driver to support Last insert ID: http://phplens.com/lens/lensforum/msgs.php?id=16767
 */
 class MiaChatDb {
@@ -406,7 +406,7 @@ class MiaChatDb {
 	* @param sql string
 	*/
 	function executeGetAssocSQL($sql) {
-		$results = $this->db->GetAssoc($sql, false, true, false);
+		$results = $this->db->GetAssoc($sql, false, false, false);
 		return $results; //False on failure
 	}
 	
