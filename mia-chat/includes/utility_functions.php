@@ -81,9 +81,9 @@ function getWelcomeMessage() {
 //Sanity check for a secure installation
 function installationCheck() {
     //file path is relative to the index.php that includes this
-    if (@file_exists('config.ini.php')===false && @is_dir('installation')) {
+    if ((@file_exists('config.ini.php')===false || @filesize('../config.ini.php')==0) && @is_dir('installation')) {
         header("Location: installation/index.php"); //Do new install
-    } else if (@file_exists('config.ini.php')===true && @filesize('../config.ini.php')>0 && @is_dir('installation')) {
+    } else if (@file_exists('config.ini.php')===true && @is_dir('installation')) {
         die('ERROR: Installation not complete.  Please remove the "installation" directory and refresh. You can also visit us at http://brilaps.com and request support in our support forum.');
     } else if (!is_writable('includes/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer')) {
         $message = 'ERROR: Installation not complete.  Please review the HTMLPurifier section of the manual installation instructions found in';
